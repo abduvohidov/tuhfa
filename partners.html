@@ -59,7 +59,6 @@ h3{font-size:var(--fs-h3);line-height:1.2}
 p{margin:0}
 .mono{font-family:var(--f-mono)}
 .eyebrow{display:inline-flex;align-items:center;gap:.7em;margin:0 0 1.25rem;font:600 .74rem/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--saffron)}
-.eyebrow::before{content:"";width:9px;height:9px;rotate:45deg;border-radius:2px;background:var(--anor) var(--ikat-rich) center/24px auto}
 .lead{font-size:var(--fs-lead);color:var(--muted);max-width:36em;margin-top:1.25rem;text-wrap:pretty}
 
 /* split words */
@@ -130,9 +129,6 @@ p{margin:0}
 .has-ikat .ikat-text{color:transparent;background:var(--saffron) var(--ikat-bright) 0 0/58px auto repeat;-webkit-background-clip:text;background-clip:text;animation:ikatRun 40s linear infinite}
 @keyframes ikatRun{to{background-position:-580px 0}}
 .hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:2rem}
-.hero__facts{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;padding:0;margin:2.2rem 0 0;color:var(--muted);font-size:.86rem}
-.hero__facts li{display:inline-flex;align-items:center;gap:9px}
-.hero__facts li::before{content:"";width:7px;height:7px;rotate:45deg;background:var(--saffron);border-radius:1px}
 
 .hero__stage{position:relative;height:600px;--pw:262px;min-width:0}
 .layer{position:absolute}
@@ -310,7 +306,7 @@ p{margin:0}
 .gcard__body p{color:var(--muted)}
 .ticks{list-style:none;display:grid;gap:8px;padding:0;margin:6px 0 0}
 .ticks li{display:flex;align-items:baseline;gap:12px;font-size:.94rem}
-.ticks li::before{content:"";width:7px;height:7px;rotate:45deg;border-radius:1px;background:var(--anor);flex:none;translate:0 -2px}
+.ticks li::before{content:"";width:10px;height:5px;flex:none;border-left:2px solid var(--mint);border-bottom:2px solid var(--mint);rotate:-45deg;translate:0 -3px}
 .cert-stage{max-width:420px;width:100%;margin-inline:auto}
 .picker{display:grid;gap:10px;max-width:420px;width:100%;margin-inline:auto}
 .picker__label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
@@ -332,17 +328,17 @@ p{margin:0}
 @media (max-width:420px){.box-zone{font-size:16px}}
 
 /* journey */
-.journey__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px)}
+.journey__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:center}
 .journey__phone{position:relative;min-width:0}
-.journey__sticky{position:sticky;top:max(96px,calc(50vh - 300px));display:flex;flex-direction:column;align-items:center;--pw:min(282px,calc((100vh - 170px) * 9 / 19))}
+.journey__sticky{position:relative;display:flex;flex-direction:column;align-items:center;--pw:min(282px,calc((100vh - 170px) * 9 / 19))}
 .jdots{display:flex;gap:8px;justify-content:center;margin-top:20px}
 .jdots i{width:8px;height:8px;border-radius:99px;background:var(--ink-4);transition:width .45s var(--ease),background-color .45s}
 .jdots i.is-on{width:28px;background:var(--saffron)}
-.steps{list-style:none;margin:0;padding:0}
-.step{min-height:clamp(240px,34vh,340px);display:flex;flex-direction:column;justify-content:center;gap:12px;max-width:540px;transition:opacity .5s var(--ease)}
-.step__n{font:600 .78rem/1 var(--f-mono);letter-spacing:.12em;color:var(--saffron)}
-.step h3{font-size:clamp(1.45rem,2.7vw,2.25rem);line-height:1.1}
-.step p{color:var(--muted);font-size:var(--fs-lead);max-width:30em}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{position:relative;overflow:hidden;display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:12px;row-gap:6px;align-content:start;padding:18px 20px;border-radius:18px;border:1px solid var(--line);cursor:pointer;transition:background-color .35s,border-color .35s}
+.step__n{grid-row:1 / span 2;padding-top:5px;font:600 .78rem/1 var(--f-mono);letter-spacing:.12em;color:var(--muted);transition:color .3s}
+.step h3{font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.25;color:var(--muted);transition:color .3s}
+.step p{color:var(--muted);font-size:.95rem;max-width:34em}
 .journey-live .step{opacity:.3}
 .journey-live .step.is-active{opacity:1}
 .step__phone{display:none;justify-content:center;margin-bottom:8px}
@@ -352,8 +348,11 @@ p{margin:0}
 @media (max-width:880px){
   .journey__grid{grid-template-columns:minmax(0,1fr)}
   .journey__phone{display:none}
-  .steps{display:grid;gap:64px}
-  .step{min-height:0;max-width:none}
+  .steps{display:grid;gap:56px}
+  .step{display:flex;flex-direction:column;gap:10px;padding:0;border:0;background:none!important;cursor:default}
+  .step::after{display:none}
+  .step h3{color:var(--text)}
+  .step .step__n{color:var(--saffron)}
   .step__phone{display:flex}
 }
 
@@ -609,6 +608,90 @@ p{margin:0}
 .pdetail__note{color:var(--paper-muted);font-size:.92rem;margin-bottom:28px}
 @media (max-width:880px){.pdetail{grid-template-columns:minmax(0,1fr)}}
 
+/* факты в hero: ровная полоса с иконками */
+.facts{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:580px;margin:2.2rem 0 0;padding:0;border:1px solid var(--line);border-radius:18px;background:rgba(28,22,48,.55)}
+.facts li{display:flex;align-items:center;gap:12px;min-width:0;padding:14px 16px}
+.facts li + li{border-left:1px solid var(--line)}
+.facts__ico{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:10px;background:rgba(255,182,72,.12);color:var(--saffron)}
+.facts__ico svg{width:18px;height:18px}
+.facts b{display:block;font:700 .9rem/1.2 var(--f-body);color:var(--text);white-space:nowrap}
+.facts small{display:block;margin-top:2px;font-size:.76rem;line-height:1.3;color:var(--muted)}
+@media (max-width:560px){.facts li{flex-direction:column;align-items:flex-start;gap:8px;padding:12px}.facts b{white-space:normal;font-size:.84rem}}
+
+/* путь подарка: шаги-карточки с автопереключением */
+.step:hover{border-color:var(--ink-4)}
+.step.is-active{background:var(--ink-2);border-color:var(--ink-4)}
+.step.is-active h3{color:var(--text)}
+.step.is-active .step__n{color:var(--saffron)}
+.step::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--saffron);transform:scaleX(0);transform-origin:left}
+.journey-play .step.is-active::after{animation:stepbar 5s linear forwards}
+.journey__grid:hover .step.is-active::after{animation-play-state:paused}
+@keyframes stepbar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* упрощённая BPMN-схема */
+.bp-legend{list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px;margin:0;padding:0;font-size:.8rem;color:var(--paper-muted)}
+.bp-legend li{display:inline-flex;align-items:center;gap:8px}
+.bp-legend .bp__ev{width:18px;height:18px}
+.bp-legend .bp__ev--end{border-width:3.5px}
+.bp-legend .bp__gw{width:24px;height:24px}
+.bp-legend .bp__gw::before{inset:4px}
+.bp-legend .bp__gw::after{font-size:.7rem}
+.bp-legend .bp__task{width:30px;height:18px;padding:0;border-radius:6px;box-shadow:none}
+.bpx{margin-top:30px}
+.bpx__head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.bpx__n{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--paper-ink);color:var(--saffron);font:700 .78rem/1 var(--f-mono)}
+.bpx__head h3{font-size:1.12rem}
+.bp{position:relative;display:grid;column-gap:16px;overflow:hidden;border-radius:18px;background:var(--white);border:1px solid var(--paper-line);color:var(--paper-ink)}
+.bp--d1{grid-template-columns:116px 72px 100px repeat(4,minmax(0,1fr)) 100px 120px;grid-template-rows:minmax(132px,auto) minmax(132px,auto) 128px}
+.bp--d2{grid-template-columns:116px 72px repeat(3,minmax(0,1fr)) 100px minmax(0,1fr) 120px;grid-template-rows:minmax(124px,auto) minmax(124px,auto) minmax(132px,auto) 136px}
+.bp__lane{grid-column:1 / -1;border-top:1px solid var(--paper-line)}
+.bp__lane--first{border-top:0}
+.bp__lane--alt{background:var(--paper)}
+.bp__role{grid-column:1;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 8px;text-align:center;border-right:1px solid var(--paper-line);line-height:1.2}
+.bp__role b{font-size:.82rem}
+.bp__role small{display:block;margin-top:2px;font-size:.6rem;color:var(--paper-muted)}
+.bp__cell{position:relative;z-index:2;display:grid;place-items:center;min-width:0;padding:8px 0}
+.bp__task{width:100%;padding:11px 10px;border-radius:12px;background:var(--white);border:1.5px solid var(--paper-ink);font-size:.78rem;font-weight:500;line-height:1.35;text-align:center;box-shadow:0 8px 18px -14px rgba(26,20,48,.5)}
+.bp__ev{display:block;width:30px;height:30px;border-radius:50%;background:var(--white);border:2px solid var(--paper-ink)}
+.bp__ev--end{border-width:4.5px}
+.bp__ev--ok{border-color:var(--live-fg)}
+.bp__ev--no{border-color:var(--anor-deep)}
+.bp__gw{position:relative;display:block;width:40px;height:40px}
+.bp__gw::before{content:"";position:absolute;inset:6px;rotate:45deg;border-radius:4px;background:var(--white);border:2px solid var(--paper-ink)}
+.bp__gw::after{content:"×";position:absolute;inset:0;display:grid;place-items:center;font:700 1.05rem/1 var(--f-body);color:var(--paper-ink)}
+.bp__evl{position:absolute;top:calc(50% + 21px);left:50%;translate:-50% 0;width:max-content;max-width:96px;text-align:center;font-size:.7rem;font-weight:600;line-height:1.25}
+.bp__gwl{position:absolute;right:calc(50% + 10px);bottom:calc(50% + 22px);width:max-content;max-width:128px;text-align:right;font-size:.7rem;font-weight:700;line-height:1.25}
+.bp__wires{position:absolute;left:0;top:0;z-index:1;overflow:visible;pointer-events:none;color:var(--paper-ink)}
+.bp__wires path{fill:none;stroke:currentColor;stroke-width:1.6}
+.bp__wires marker path{fill:currentColor;stroke:none}
+.bp__flab{position:absolute;z-index:3;padding:2px 5px;border-radius:5px;background:var(--white);font:600 .58rem/1.2 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--paper-muted);white-space:nowrap}
+.bp__flab--yes{color:var(--live-fg)}
+.bp__flab--no{color:var(--anor-deep)}
+.bpm{display:none;list-style:none;gap:24px;margin:0;padding:18px 16px;border-radius:18px;background:var(--white);border:1px solid var(--paper-line);color:var(--paper-ink)}
+.bpm > li{position:relative}
+.bpm > li + li::before{content:"";position:absolute;left:21px;top:-24px;width:2px;height:22px;background:var(--paper-ink)}
+.bpm > li + li::after{content:"";position:absolute;left:17px;top:-7px;border:5px solid transparent;border-top:7px solid var(--paper-ink);border-bottom:0}
+.bpm__row{display:flex;align-items:center;gap:12px}
+.bpm__sym{width:44px;flex:none;display:grid;place-items:center}
+.bpm__row b{font-size:.92rem}
+.bpm__row > span:last-child{font-size:.9rem;font-weight:600}
+.bpm__task{display:grid;gap:6px;padding:12px 14px;border-radius:14px;background:var(--white);border:1.5px solid var(--paper-ink);font-size:.9rem;line-height:1.4}
+.bpm__br{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.bpm__br > div{display:grid;gap:8px;align-content:start;padding:10px;border-radius:14px;background:var(--paper);border:1px dashed var(--paper-line)}
+.bpm__end{display:flex;align-items:center;gap:10px;font-size:.86rem;font-weight:600}
+.bpm .bp__flab{position:static;justify-self:start;padding:0;background:transparent}
+.rchip{justify-self:start;display:inline-block;padding:.45em .6em;border-radius:99px;font:600 .58rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.rchip--shop{background:var(--wait-bg);color:var(--wait-fg)}
+.rchip--tuhfa{background:#FDE2E7;color:var(--anor-deep)}
+.rchip--buyer{background:#DDF1FB;color:#0E6E99}
+@media (max-width:1179px){
+  .bp{display:none}
+  .bpm{display:grid}
+  .bpxs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+}
+@media (max-width:760px){.bpxs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.bpm__br{grid-template-columns:minmax(0,1fr)}}
+
 /* плашка для бизнеса внизу главной */
 .cta--tight{padding-bottom:28px}
 .hero--biz .l-cert{top:55%}
@@ -631,7 +714,6 @@ p{margin:0}
 </head>
 <body>
 <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
-<div class="cursor" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="wrap nav__in">
@@ -672,11 +754,7 @@ p{margin:0}
           <a class="btn btn--partner btn--lg magnetic" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="pp.apply">Подать заявку</span></a>
           <a class="btn btn--ghost btn--lg" href="#connect"><span data-i18n="pp.how">Как подключиться</span></a>
         </div>
-        <ul class="hero__facts">
-          <li data-i18n="pp.f1">Проверка каждого сертификата</li>
-          <li data-i18n="pp.f2">Скан камерой или кассовым сканером</li>
-          <li data-i18n="hero.f3">Работает 24/7</li>
-        </ul>
+        <ul class="facts"><li><span class="facts__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><span><b data-i18n="fx.modT">Модерация</b><small data-i18n="fx.modS">каждого сертификата</small></span></li><li><span class="facts__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M7 12h10"/></svg></span><span><b data-i18n="fx.scanT">Камера или сканер</b><small data-i18n="fx.scanS">для погашения QR</small></span></li><li><span class="facts__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><b>24/7</b><small data-i18n="fx.time">без выходных</small></span></li></ul>
       </div>
 
       <div class="hero__stage" aria-hidden="true">
@@ -761,49 +839,58 @@ p{margin:0}
       <header class="sec-head">
         <p class="eyebrow" data-i18n="p.eyebrow">Подключение</p>
         <h2 data-i18n="p.title" data-split>Как проходит подключение</h2>
-        <p class="lead" data-i18n="p.lead">Шесть этапов от заявки до первого погашения. Для каждого шага видно, кто за него отвечает и какой статус получается на выходе.</p>
+        <p class="lead" data-i18n="p.lead">Упрощённая BPMN-схема: кто выполняет каждый шаг, где принимается решение и чем заканчивается процесс.</p>
       </header>
 
-      <div class="pmap">
-        <div class="pmap__lane r-shop" aria-hidden="true"></div>
-        <div class="pmap__lane r-tuhfa" aria-hidden="true"></div>
-        <div class="pmap__lane r-buyer" aria-hidden="true"></div>
-        <div class="pmap__role r-shop" aria-hidden="true"><span class="pmap__ico pmap__ico--shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg></span><span><b data-i18n="pm.roleShop">Магазин</b></span></div>
-        <div class="pmap__role r-tuhfa" aria-hidden="true"><span class="pmap__ico pmap__ico--tuhfa"></span><span><b>Tuhfa</b><small data-i18n="pm.roleTuhfaSub">администратор и система</small></span></div>
-        <div class="pmap__role r-buyer" aria-hidden="true"><span class="pmap__ico pmap__ico--buyer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12"/><path d="M12 8C10.5 5 7 4.5 7 6.5S10 8 12 8zM12 8c1.5-3 5-3.5 5-1.5S14 8 12 8z"/></svg></span><span><b data-i18n="pm.roleBuyer">Покупатель</b></span></div>
-        <div class="pmap__role r-res" aria-hidden="true" data-i18n="pm.res">Результат</div>
-        <div class="stage">
-          <div class="stage__head" style="grid-column:2"><span class="stage__n">01</span><span data-i18n="pm.s1">Заявка</span></div>
-          <div class="act r-shop" style="grid-column:2"><span class="act__role act__role--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="pm.a1">Подаёт заявку через форму</span></div>
-          <div class="act r-tuhfa act--alt" style="grid-column:2"><span class="act__role act__role--tuhfa">Tuhfa</span><span class="act__or" data-i18n="pm.or">или</span><span data-i18n="pm.a1b">Администратор создаёт аккаунт сам</span></div>
-          <div class="stage__res" style="grid-column:2"><span class="pill pill--muted" data-i18n="pm.r1">Заявка получена</span></div>
+      <ul class="bp-legend" aria-hidden="true"><li><span class="bp__ev bp__ev--start"></span><span data-i18n="bp.lgStart">Начало</span></li><li><span class="bp__task"></span><span data-i18n="bp.lgTask">Действие</span></li><li><span class="bp__gw"></span><span data-i18n="bp.lgGw">Решение</span></li><li><span class="bp__ev bp__ev--end"></span><span data-i18n="bp.lgEnd">Завершение</span></li></ul>
+      <div class="bpxs">
+        <div class="bpx">
+          <div class="bpx__head"><span class="bpx__n">1</span><h3 data-i18n="bp.t1">Подключение и публикация сертификата</h3></div>
+          <div class="bp bp--d1" data-key="d1" data-flows="s1>g1:h;g1>a1:h;g1>a2:vh;a1>a3:hv;a2>a3:h;a3>a4:hv;a4>a5:hv;a5>g2:h;g2>e1:h;g2>e2:v">
+            <div class="bp__lane bp__lane--first" style="grid-row:1" aria-hidden="true"></div>
+            <div class="bp__role" style="grid-row:1"><span class="pmap__ico pmap__ico--shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg></span><span><b data-i18n="pm.roleShop">Магазин</b></span></div>
+            <div class="bp__lane bp__lane--alt" style="grid-row:2 / 4" aria-hidden="true"></div>
+            <div class="bp__role" style="grid-row:2 / 4"><span class="pmap__ico pmap__ico--tuhfa"></span><span><b>Tuhfa</b><small data-i18n="pm.roleTuhfaSub">администратор и система</small></span></div>
+            <div class="bp__cell" style="grid-column:2;grid-row:1"><span class="bp__ev bp__ev--start" data-id="s1"></span><span class="bp__evl" data-i18n="bp.start">Старт</span></div>
+            <div class="bp__cell" style="grid-column:3;grid-row:1"><span class="bp__gwl" data-i18n="bp.g1">Способ подключения</span><span class="bp__gw" data-id="g1"></span></div>
+            <div class="bp__cell" style="grid-column:4;grid-row:1"><div class="bp__task" data-id="a1" data-i18n="bp.a1">Подать заявку через форму</div></div>
+            <div class="bp__cell" style="grid-column:4;grid-row:2"><div class="bp__task" data-id="a2" data-i18n="bp.a2">Создать аккаунт партнёру</div></div>
+            <div class="bp__cell" style="grid-column:5;grid-row:2"><div class="bp__task" data-id="a3" data-i18n="bp.a3">Проверить и подтвердить партнёра</div></div>
+            <div class="bp__cell" style="grid-column:6;grid-row:1"><div class="bp__task" data-id="a4" data-i18n="bp.a4">Создать сертификат: сумма, описание, срок</div></div>
+            <div class="bp__cell" style="grid-column:7;grid-row:2"><div class="bp__task" data-id="a5" data-i18n="bp.a5">Проверить сертификат</div></div>
+            <div class="bp__cell" style="grid-column:8;grid-row:2"><span class="bp__gwl" data-i18n="bp.g2">Одобрен?</span><span class="bp__gw" data-id="g2"></span></div>
+            <div class="bp__cell" style="grid-column:9;grid-row:2"><span class="bp__ev bp__ev--end bp__ev--ok" data-id="e1"></span><span class="bp__evl" data-i18n="pm.r4">Опубликован в каталоге</span></div>
+            <div class="bp__cell" style="grid-column:8;grid-row:3"><span class="bp__ev bp__ev--end bp__ev--no" data-id="e2"></span><span class="bp__evl" data-i18n="bp.e2">Не опубликован</span></div>
+            <svg class="bp__wires" aria-hidden="true"></svg>
+            <span class="bp__flab" data-flow="g1>a1" data-i18n="bp.lForm">Заявка</span>
+            <span class="bp__flab" data-flow="g1>a2" data-i18n="bp.lManual">Вручную</span>
+            <span class="bp__flab bp__flab--yes" data-flow="g2>e1" data-i18n="bp.yes">Да</span>
+            <span class="bp__flab bp__flab--no" data-flow="g2>e2" data-i18n="bp.no">Нет</span>
+          </div>
+          <ol class="bpm"><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__ev bp__ev--start"></span></span><span data-i18n="bp.start">Старт</span></div></li><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__gw"></span></span><b data-i18n="bp.g1">Способ подключения</b></div><div class="bpm__br"><div><span class="bp__flab" data-i18n="bp.lForm">Заявка</span><div class="bpm__task"><span class="rchip rchip--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="bp.a1">Подать заявку через форму</span></div></div><div><span class="bp__flab" data-i18n="bp.lManual">Вручную</span><div class="bpm__task"><span class="rchip rchip--tuhfa">Tuhfa</span><span data-i18n="bp.a2">Создать аккаунт партнёру</span></div></div></div></li><li><div class="bpm__task"><span class="rchip rchip--tuhfa">Tuhfa</span><span data-i18n="bp.a3">Проверить и подтвердить партнёра</span></div></li><li><div class="bpm__task"><span class="rchip rchip--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="bp.a4">Создать сертификат: сумма, описание, срок</span></div></li><li><div class="bpm__task"><span class="rchip rchip--tuhfa">Tuhfa</span><span data-i18n="bp.a5">Проверить сертификат</span></div></li><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__gw"></span></span><b data-i18n="bp.g2">Одобрен?</b></div><div class="bpm__br"><div><span class="bp__flab bp__flab--yes" data-i18n="bp.yes">Да</span><div class="bpm__end"><span class="bp__ev bp__ev--end bp__ev--ok"></span><span data-i18n="pm.r4">Опубликован в каталоге</span></div></div><div><span class="bp__flab bp__flab--no" data-i18n="bp.no">Нет</span><div class="bpm__end"><span class="bp__ev bp__ev--end bp__ev--no"></span><span data-i18n="bp.e2">Не опубликован</span></div></div></div></li></ol>
         </div>
-        <div class="stage">
-          <div class="stage__head" style="grid-column:3"><span class="stage__n">02</span><span data-i18n="pm.s2">Проверка</span></div>
-          <div class="act r-tuhfa" style="grid-column:3"><span class="act__role act__role--tuhfa">Tuhfa</span><span data-i18n="pm.a2">Проверяет и подтверждает партнёра</span></div>
-          <div class="stage__res" style="grid-column:3"><span class="pill pill--sky" data-i18n="pm.r2">Кабинет открыт</span></div>
-        </div>
-        <div class="stage">
-          <div class="stage__head" style="grid-column:4"><span class="stage__n">03</span><span data-i18n="pm.s3">Сертификат</span></div>
-          <div class="act r-shop" style="grid-column:4"><span class="act__role act__role--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="pm.a3">Создаёт сертификат: сумма, описание, срок</span></div>
-          <div class="stage__res" style="grid-column:4"><span class="pill pill--wait" data-i18n="pm.r3">На проверке</span></div>
-        </div>
-        <div class="stage">
-          <div class="stage__head" style="grid-column:5"><span class="stage__n">04</span><span data-i18n="pm.s4">Модерация</span></div>
-          <div class="act r-tuhfa" style="grid-column:5"><span class="act__role act__role--tuhfa">Tuhfa</span><span data-i18n="pm.a4">Проверяет и одобряет сертификат</span></div>
-          <div class="stage__res" style="grid-column:5"><span class="pill pill--live" data-i18n="pm.r4">Опубликован в каталоге</span></div>
-        </div>
-        <div class="stage">
-          <div class="stage__head" style="grid-column:6"><span class="stage__n">05</span><span data-i18n="pm.s5">Продажа</span></div>
-          <div class="act r-buyer" style="grid-column:6"><span class="act__role act__role--buyer" data-i18n="pm.roleBuyer">Покупатель</span><span data-i18n="pm.a5">Покупает через Click или Payme и дарит другу</span></div>
-          <div class="stage__res" style="grid-column:6"><span class="pill pill--sky" data-i18n="pm.r5">Продан</span></div>
-        </div>
-        <div class="stage">
-          <div class="stage__head" style="grid-column:7"><span class="stage__n">06</span><span data-i18n="pm.s6">Погашение</span></div>
-          <div class="act r-buyer" style="grid-column:7"><span class="act__role act__role--buyer" data-i18n="pm.roleBuyer">Покупатель</span><span data-i18n="pm.a6a">Показывает QR-код на кассе</span></div>
-          <div class="act r-shop" style="grid-column:7"><span class="act__role act__role--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="pm.a6b">Сканирует QR камерой или сканером</span></div>
-          <div class="act r-tuhfa" style="grid-column:7"><span class="act__role act__role--tuhfa">Tuhfa</span><span data-i18n="pm.a6c">Подтверждает погашение и блокирует повтор</span></div>
-          <div class="stage__res" style="grid-column:7"><span class="pill pill--live" data-i18n="pm.r6">Погашен</span></div>
+        <div class="bpx">
+          <div class="bpx__head"><span class="bpx__n">2</span><h3 data-i18n="bp.t2">Продажа и погашение</h3></div>
+          <div class="bp bp--d2" data-key="d2" data-flows="s2>b1:h;b1>b2:h;b2>c1:hv;c1>g3:hv;g3>c2:h;c2>e3:h;g3>e4:v">
+            <div class="bp__lane bp__lane--first" style="grid-row:1" aria-hidden="true"></div>
+            <div class="bp__role" style="grid-row:1"><span class="pmap__ico pmap__ico--buyer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12"/><path d="M12 8C10.5 5 7 4.5 7 6.5S10 8 12 8zM12 8c1.5-3 5-3.5 5-1.5S14 8 12 8z"/></svg></span><span><b data-i18n="pm.roleBuyer">Покупатель</b></span></div>
+            <div class="bp__lane bp__lane--alt" style="grid-row:2" aria-hidden="true"></div>
+            <div class="bp__role" style="grid-row:2"><span class="pmap__ico pmap__ico--shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg></span><span><b data-i18n="pm.roleShop">Магазин</b></span></div>
+            <div class="bp__lane" style="grid-row:3 / 5" aria-hidden="true"></div>
+            <div class="bp__role" style="grid-row:3 / 5"><span class="pmap__ico pmap__ico--tuhfa"></span><span><b>Tuhfa</b><small data-i18n="pm.roleTuhfaSub">администратор и система</small></span></div>
+            <div class="bp__cell" style="grid-column:2;grid-row:1"><span class="bp__ev bp__ev--start" data-id="s2"></span><span class="bp__evl" data-i18n="bp.s2">Сертификат в каталоге</span></div>
+            <div class="bp__cell" style="grid-column:3;grid-row:1"><div class="bp__task" data-id="b1" data-i18n="bp.b1">Купить через Click или Payme и подарить</div></div>
+            <div class="bp__cell" style="grid-column:4;grid-row:1"><div class="bp__task" data-id="b2" data-i18n="bp.b2">Показать QR-код на кассе</div></div>
+            <div class="bp__cell" style="grid-column:5;grid-row:2"><div class="bp__task" data-id="c1" data-i18n="bp.c1">Отсканировать QR-код</div></div>
+            <div class="bp__cell" style="grid-column:6;grid-row:3"><span class="bp__gwl" data-i18n="bp.g3">Сертификат действителен?</span><span class="bp__gw" data-id="g3"></span></div>
+            <div class="bp__cell" style="grid-column:7;grid-row:3"><div class="bp__task" data-id="c2" data-i18n="bp.c2">Подтвердить погашение</div></div>
+            <div class="bp__cell" style="grid-column:8;grid-row:3"><span class="bp__ev bp__ev--end bp__ev--ok" data-id="e3"></span><span class="bp__evl" data-i18n="pm.r6">Погашен</span></div>
+            <div class="bp__cell" style="grid-column:6;grid-row:4"><span class="bp__ev bp__ev--end bp__ev--no" data-id="e4"></span><span class="bp__evl" data-i18n="bp.e4">Отказ: срок истёк или уже погашен</span></div>
+            <svg class="bp__wires" aria-hidden="true"></svg>
+            <span class="bp__flab bp__flab--yes" data-flow="g3>c2" data-i18n="bp.yes">Да</span>
+            <span class="bp__flab bp__flab--no" data-flow="g3>e4" data-i18n="bp.no">Нет</span>
+          </div>
+          <ol class="bpm"><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__ev bp__ev--start"></span></span><span data-i18n="bp.s2">Сертификат в каталоге</span></div></li><li><div class="bpm__task"><span class="rchip rchip--buyer" data-i18n="pm.roleBuyer">Покупатель</span><span data-i18n="bp.b1">Купить через Click или Payme и подарить</span></div></li><li><div class="bpm__task"><span class="rchip rchip--buyer" data-i18n="pm.roleBuyer">Покупатель</span><span data-i18n="bp.b2">Показать QR-код на кассе</span></div></li><li><div class="bpm__task"><span class="rchip rchip--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="bp.c1">Отсканировать QR-код</span></div></li><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__gw"></span></span><b data-i18n="bp.g3">Сертификат действителен?</b></div><div class="bpm__br"><div><span class="bp__flab bp__flab--yes" data-i18n="bp.yes">Да</span><div class="bpm__task"><span class="rchip rchip--tuhfa">Tuhfa</span><span data-i18n="bp.c2">Подтвердить погашение</span></div><div class="bpm__end"><span class="bp__ev bp__ev--end bp__ev--ok"></span><span data-i18n="pm.r6">Погашен</span></div></div><div><span class="bp__flab bp__flab--no" data-i18n="bp.no">Нет</span><div class="bpm__end"><span class="bp__ev bp__ev--end bp__ev--no"></span><span data-i18n="bp.e4">Отказ: срок истёк или уже погашен</span></div></div></div></li></ol>
         </div>
       </div>
 
@@ -1040,9 +1127,6 @@ p{margin:0}
     'hero.title': 'Telegramda <em class="ikat-text">quvonch</em> hadya qiling',
     'hero.lead': 'O‘zbekiston do‘konlarining sovg‘a sertifikatlari va animatsion sovg‘alar. Sovg‘ani tanlang, Click yoki Payme orqali to‘lang va do‘stingizga yuboring. Hammasi Telegram ichida.',
     'hero.cta1': 'Sovg‘a tanlash',
-    'hero.f1': 'Click va Payme orqali to‘lov',
-    'hero.f2': 'O‘zbek va rus tillarida',
-    'hero.f3': '24/7 ishlaydi',
     'hero.chipPay': 'Payme orqali to‘landi',
     'hero.chipFwd': 'Azizaga yuborildi',
     'cur': 'so‘m',
@@ -1136,7 +1220,7 @@ p{margin:0}
     'r.n2': 'Amal qilish muddati o‘tgan sertifikatni ishlatib bo‘lmaydi.',
     'p.eyebrow': 'Ulanish',
     'p.title': 'Ulanish qanday o‘tadi',
-    'p.lead': 'Arizadan birinchi ishlatishgacha olti bosqich. Har bir qadamda kim mas’ul ekani va natijada qanday holat paydo bo‘lishi ko‘rinadi.',
+    'p.lead': 'Soddalashtirilgan BPMN-sxema: har bir qadamni kim bajaradi, qaror qayerda qabul qilinadi va jarayon qanday yakunlanadi.',
     'p.cta': 'Hamkor bo‘lish',
     'p.formTitle': 'Yangi sertifikat',
     'p.fShop': 'Do‘kon',
@@ -1178,31 +1262,43 @@ p{margin:0}
     'ft.buyers': 'Xaridorlarga',
     'ft.connect': 'Ulanish',
     'ft.pay': 'To‘lov',
+    'fx.pay': 'to‘lov usullari',
+    'fx.lang': 'ikki til',
+    'fx.time': 'dam olishsiz',
+    'fx.modT': 'Moderatsiya',
+    'fx.modS': 'har bir sertifikat',
+    'fx.scanT': 'Kamera yoki skaner',
+    'fx.scanS': 'QR-kodni ishlatish uchun',
+    'bp.lgStart': 'Boshlanish',
+    'bp.lgTask': 'Harakat',
+    'bp.lgGw': 'Qaror',
+    'bp.lgEnd': 'Yakun',
+    'bp.t1': 'Ulanish va sertifikatni e’lon qilish',
+    'bp.t2': 'Savdo va ishlatish',
+    'bp.start': 'Boshlash',
+    'bp.g1': 'Ulanish usuli',
+    'bp.lForm': 'Ariza',
+    'bp.lManual': 'Qo‘lda',
+    'bp.a1': 'Shakl orqali ariza topshirish',
+    'bp.a2': 'Hamkorga akkaunt yaratish',
+    'bp.a3': 'Hamkorni tekshirish va tasdiqlash',
+    'bp.a4': 'Sertifikat yaratish: summa, tavsif, muddat',
+    'bp.a5': 'Sertifikatni tekshirish',
+    'bp.g2': 'Tasdiqlandimi?',
+    'bp.yes': 'Ha',
+    'bp.no': 'Yo‘q',
+    'bp.e2': 'E’lon qilinmadi',
+    'bp.s2': 'Sertifikat katalogda',
+    'bp.b1': 'Click yoki Payme orqali sotib olish va sovg‘a qilish',
+    'bp.b2': 'Kassada QR-kodni ko‘rsatish',
+    'bp.c1': 'QR-kodni skanerlash',
+    'bp.g3': 'Sertifikat amal qiladimi?',
+    'bp.c2': 'Ishlatishni tasdiqlash',
+    'bp.e4': 'Rad etildi: muddati o‘tgan yoki allaqachon ishlatilgan',
     'pm.roleShop': 'Do‘kon',
     'pm.roleTuhfaSub': 'administrator va tizim',
     'pm.roleBuyer': 'Xaridor',
-    'pm.res': 'Natija',
-    'pm.or': 'yoki',
-    'pm.s1': 'Ariza',
-    'pm.s2': 'Tekshiruv',
-    'pm.s3': 'Sertifikat',
-    'pm.s4': 'Moderatsiya',
-    'pm.s5': 'Savdo',
-    'pm.s6': 'Ishlatish',
-    'pm.a1': 'Shakl orqali ariza topshiradi',
-    'pm.a1b': 'Administrator akkauntni o‘zi yaratadi',
-    'pm.a2': 'Hamkorni tekshiradi va tasdiqlaydi',
-    'pm.a3': 'Sertifikat yaratadi: summa, tavsif, muddat',
-    'pm.a4': 'Sertifikatni tekshiradi va tasdiqlaydi',
-    'pm.a5': 'Click yoki Payme orqali sotib oladi va do‘stiga sovg‘a qiladi',
-    'pm.a6a': 'Kassada QR-kodni ko‘rsatadi',
-    'pm.a6b': 'QR-kodni kamera yoki skaner bilan skanerlaydi',
-    'pm.a6c': 'Ishlatishni tasdiqlaydi va takrorlashni bloklaydi',
-    'pm.r1': 'Ariza qabul qilindi',
-    'pm.r2': 'Kabinet ochildi',
-    'pm.r3': 'Tekshiruvda',
     'pm.r4': 'Katalogda e’lon qilindi',
-    'pm.r5': 'Sotildi',
     'pm.r6': 'Ishlatildi',
     'pm.dTitle': 'Sertifikatda nimani ko‘rsatish kerak',
     'pm.d1': 'Xaridor sertifikatni qayerda ishlatadi',
@@ -1224,8 +1320,6 @@ p{margin:0}
     'pp.eyebrow': 'Biznes uchun Tuhfa',
     'pp.title': 'Telegramda <em class="ikat-text">sovg‘alar</em> soting',
     'pp.lead': 'Do‘koningizni Tuhfaga ulang. Sovg‘a sertifikatlaringiz mini-ilova katalogida paydo bo‘ladi, xaridorlar ularni Click yoki Payme orqali to‘lab, do‘stlariga sovg‘a qiladi. Ishlatish uchun telefon kifoya.',
-    'pp.f1': 'Har bir sertifikat tekshiriladi',
-    'pp.f2': 'Kamera yoki kassa skaneri bilan skanerlash',
     'pp.uiCabinet': 'Hamkor kabineti',
     'pp.uiVerified': 'Akkaunt tasdiqlangan',
     'pp.uiMyCerts': 'Mening sertifikatlarim',
@@ -1349,6 +1443,7 @@ p{margin:0}
     $$('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
     renderBox(); renderP();
     if (!silent) { try { localStorage.setItem('tuhfa-lang', lang); } catch (e) {} }
+    if (window.__bpDraw) requestAnimationFrame(window.__bpDraw);
     if (ST) requestAnimationFrame(function () { ST.refresh(); });
   }
   $$('[data-lang]').forEach(function (b) { b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); }); });
@@ -1430,15 +1525,53 @@ p{margin:0}
     steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
     dots.forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
   }
-  function syncJourney() { root.classList.toggle('journey-live', deskQ.matches); }
-  syncJourney(); deskQ.addEventListener ? deskQ.addEventListener('change', syncJourney) : deskQ.addListener(syncJourney);
+  /* шаги: клик переключает экран, в зоне видимости шаги листаются сами */
+  steps.forEach(function (st, i) {
+    st.setAttribute('tabindex', '0');
+    st.addEventListener('click', function () { setScreen(i); });
+    st.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setScreen(i); } });
+    st.addEventListener('animationend', function (e) { if (e.animationName === 'stepbar' && st.classList.contains('is-active')) setScreen((i + 1) % steps.length); });
+  });
   if ('IntersectionObserver' in window) {
-    var jio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) setScreen(steps.indexOf(e.target)); }); }, { rootMargin: '-50% 0px -50% 0px' });
-    steps.forEach(function (s) { jio.observe(s); });
+    var jgrid = $('.journey__grid');
+    if (jgrid && !reduce) new IntersectionObserver(function (es) { es.forEach(function (e) { root.classList.toggle('journey-play', e.isIntersecting && deskQ.matches); }); }, { threshold: 0.4 }).observe(jgrid);
     var pio = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting && pState === 'wait') { setTimeout(function () { pState = 'live'; renderP(); }, reduce ? 0 : 1500); pio.disconnect(); } });
     }, { threshold: 0.6 });
     if (pform) pio.observe(pform);
+  }
+
+  /* ---------- BPMN: стрелки между элементами схемы ---------- */
+  var bps = $$('.bp');
+  function drawBp(bp) {
+    if (!bp.offsetParent) return;
+    var box = bp.getBoundingClientRect(), svg = bp.querySelector('.bp__wires'), key = bp.getAttribute('data-key');
+    svg.setAttribute('width', box.width); svg.setAttribute('height', box.height);
+    svg.setAttribute('viewBox', '0 0 ' + box.width + ' ' + box.height);
+    function R(id) {
+      var r = bp.querySelector('[data-id="' + id + '"]').getBoundingClientRect();
+      return { x: r.left - box.left, y: r.top - box.top, w: r.width, h: r.height, cx: r.left - box.left + r.width / 2, cy: r.top - box.top + r.height / 2 };
+    }
+    var out = '<defs><marker id="ah-' + key + '" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>';
+    bp.getAttribute('data-flows').split(';').forEach(function (f) {
+      var p = f.split(':'), ids = p[0].split('>'), mode = p[1], a = R(ids[0]), b = R(ids[1]), d, lx, ly, sx, sy, tx, ty, center = false;
+      if (mode === 'h') { sx = a.x + a.w; sy = a.cy; tx = b.x; ty = b.cy; d = Math.abs(sy - ty) < 2 ? 'M' + sx + ' ' + sy + 'H' + tx : 'M' + sx + ' ' + sy + 'H' + (sx + tx) / 2 + 'V' + ty + 'H' + tx; lx = (sx + tx) / 2; ly = sy - 19; center = true; }
+      else if (mode === 'hv') { sx = a.x + a.w; sy = a.cy; tx = b.cx; ty = b.cy > a.cy ? b.y : b.y + b.h; d = 'M' + sx + ' ' + sy + 'H' + tx + 'V' + ty; lx = sx + 6; ly = sy - 19; }
+      else if (mode === 'vh') { sx = a.cx; sy = b.cy > a.cy ? a.y + a.h : a.y; tx = b.x; ty = b.cy; d = 'M' + sx + ' ' + sy + 'V' + ty + 'H' + tx; lx = sx + 7; ly = sy + 4; }
+      else { sx = a.cx; sy = a.y + a.h; ty = b.y; d = 'M' + sx + ' ' + sy + 'V' + ty; lx = sx + 8; ly = sy + 4; }
+      out += '<path d="' + d + '" marker-end="url(#ah-' + key + ')"/>';
+      var lab = bp.querySelector('[data-flow="' + p[0] + '"]');
+      if (lab) { lab.style.left = (center ? lx - lab.offsetWidth / 2 : lx) + 'px'; lab.style.top = ly + 'px'; }
+    });
+    svg.innerHTML = out;
+  }
+  function drawAll() { bps.forEach(drawBp); }
+  if (bps.length) {
+    window.__bpDraw = drawAll;
+    drawAll();
+    if ('ResizeObserver' in window) bps.forEach(function (bp) { new ResizeObserver(function () { drawBp(bp); }).observe(bp); });
+    addEventListener('resize', drawAll);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
   }
 
   /* ---------- Без анимаций: статичные состояния ---------- */
@@ -1479,7 +1612,7 @@ p{margin:0}
     var intro = G.timeline({ defaults: { ease: 'expo.out' } });
     intro.from('.hero__title .wi', { yPercent: 115, rotate: 5, duration: 1.25, stagger: 0.08 })
       .from('.hero .eyebrow', { y: 14, opacity: 0, duration: 0.8 }, 0)
-      .from('.hero .lead, .hero__actions, .hero__facts', { y: 26, opacity: 0, duration: 1, stagger: 0.1 }, 0.35)
+      .from('.hero .lead, .hero__actions, .hero .facts', { y: 26, opacity: 0, duration: 1, stagger: 0.1 }, 0.35)
       .from('.hero__stage .layer', { y: 70, opacity: 0, scale: 0.9, duration: 1.4, stagger: 0.09 }, 0.15)
       .from('.bands', { opacity: 0, duration: 1 }, 0.6);
 
@@ -1556,7 +1689,7 @@ p{margin:0}
     });
 
     /* курсор */
-    if (fine) {
+    if (fine && $('.cursor')) {
       var cur = $('.cursor');
       var cxq = G.quickTo(cur, 'x', { duration: 0.35, ease: 'power3' }), cyq = G.quickTo(cur, 'y', { duration: 0.35, ease: 'power3' });
       addEventListener('pointermove', function (e) { cur.classList.add('is-on'); cxq(e.clientX); cyq(e.clientY); }, { passive: true });
@@ -1623,6 +1756,17 @@ p{margin:0}
           .from(st.querySelector('.stage__res'), { scale: 0.7, opacity: 0, duration: 0.5, ease: 'back.out(2.2)' }, at + 0.22);
       });
     }
+
+    /* BPMN: элементы и связи появляются по ходу процесса */
+    $$('.bp').forEach(function (bp) {
+      var nodes = bp.querySelectorAll('.bp__task, .bp__ev, .bp__gw, .bp__flab');
+      G.set(nodes, { opacity: 0, scale: 0.85 });
+      G.set(bp.querySelector('.bp__wires'), { opacity: 0 });
+      ST.create({ trigger: bp, start: 'top 78%', once: true, onEnter: function () {
+        G.to(nodes, { opacity: 1, scale: 1, duration: 0.5, stagger: 0.07, ease: 'back.out(1.8)' });
+        G.to(bp.querySelector('.bp__wires'), { opacity: 1, duration: 0.9, delay: 0.25, ease: 'power1.out' });
+      } });
+    });
 
     /* счётчики */
     $$('[data-count]').forEach(function (el) {
