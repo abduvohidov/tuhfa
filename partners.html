@@ -556,6 +556,59 @@ p{margin:0}
 @media (max-width:1000px){.prules{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.prules{grid-template-columns:minmax(0,1fr)}}
 
+/* карта процесса подключения: этапы × роли */
+.pmap{display:grid;grid-template-columns:136px repeat(6,minmax(0,1fr));column-gap:6px;row-gap:8px;margin-top:8px}
+.pmap .r-shop{grid-row:2}.pmap .r-tuhfa{grid-row:3}.pmap .r-buyer{grid-row:4}.pmap .r-res,.pmap .stage__res{grid-row:5}
+.stage{display:contents}
+.pmap__lane{grid-column:1 / -1;position:relative;border-radius:16px;background:rgba(255,255,255,.6);border:1px solid var(--paper-line)}
+.pmap__lane::after{content:"";position:absolute;left:150px;right:18px;top:50%;border-top:1.5px dashed var(--paper-line)}
+.pmap__role{grid-column:1;position:relative;z-index:1;align-self:center;display:flex;align-items:center;gap:10px;padding:12px 8px 12px 14px;line-height:1.2}
+.pmap__role b{display:block;font-size:.9rem}
+.pmap__role small{display:block;font-size:.68rem;color:var(--paper-muted);margin-top:2px}
+.pmap__role.r-res{align-self:start;padding-top:6px;font:600 .66rem/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--paper-muted)}
+.pmap__ico{width:32px;height:32px;border-radius:10px;flex:none;display:grid;place-items:center}
+.pmap__ico svg{width:18px;height:18px}
+.pmap__ico--shop{background:var(--saffron);color:var(--paper-ink)}
+.pmap__ico--tuhfa{background:var(--anor) var(--ikat-rich) center/40px auto}
+.pmap__ico--buyer{background:var(--sky);color:var(--paper-ink)}
+.stage__head{grid-row:1;display:flex;align-items:center;gap:8px;min-width:0;padding:13px 20px 13px 24px;background:var(--paper-ink);color:var(--paper);font:700 .9rem/1.15 var(--f-body);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%)}
+.stage:first-of-type .stage__head{padding-left:16px;border-radius:12px 0 0 12px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+.stage__n{font:600 .7rem/1 var(--f-mono);color:var(--saffron)}
+.act{position:relative;z-index:1;align-self:center;margin:10px 4px;padding:12px;border-radius:14px;background:var(--white);border:1px solid var(--paper-line);font-size:.84rem;line-height:1.4;box-shadow:0 10px 22px -16px rgba(26,20,48,.4)}
+.act--alt{background:transparent;border-style:dashed;box-shadow:none;color:var(--paper-muted)}
+.act__or{display:block;margin-bottom:4px;font:600 .6rem/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--anor-deep)}
+.act__role{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.act__role--shop{background:var(--wait-bg);color:var(--wait-fg)}
+.act__role--tuhfa{background:#FDE2E7;color:var(--anor-deep)}
+.act__role--buyer{background:#DDF1FB;color:#0E6E99}
+.stage__res{align-self:start;justify-self:start;margin:4px 4px 0}
+.pmap .pill{font-size:.64rem;white-space:normal;line-height:1.25}
+.pmap .pill--muted{background:var(--paper-2);color:var(--paper-muted)}
+.pmap .pill--sky{background:#DDF1FB;color:#0E6E99}
+@media (max-width:1099px){
+  .pmap{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .pmap__lane,.pmap__role{display:none}
+  .stage{display:grid;gap:8px;align-content:start;padding:14px;border-radius:18px;background:var(--white);border:1px solid var(--paper-line)}
+  .stage > *{grid-column:1 / -1 !important;grid-row:auto !important}
+  .stage__head,.stage:first-of-type .stage__head{clip-path:none;border-radius:12px;padding:11px 14px}
+  .act{margin:0;box-shadow:none;background:var(--paper);display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .act > span:last-child{flex-basis:100%}
+  .act--alt{background:transparent}
+  .act__role{position:static;width:auto;height:auto;overflow:visible;clip:auto;display:inline-block;margin:0;padding:.45em .6em;border-radius:99px;font:600 .58rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+  .act__or{display:inline-block;margin:0}
+  .stage__res{margin:2px 0 0}
+}
+@media (max-width:620px){.pmap{grid-template-columns:minmax(0,1fr)}}
+.pdetail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:clamp(32px,6vw,96px);align-items:center;margin-top:clamp(48px,6vw,84px)}
+.pdetail__copy{min-width:0}
+.pdetail h3{font-size:clamp(1.3rem,2.2vw,1.8rem)}
+.fields{display:grid;margin:22px 0 18px;border-top:1px solid var(--paper-line)}
+.fields > div{display:grid;grid-template-columns:minmax(110px,.45fr) minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--paper-line)}
+.fields dt{font:600 .68rem/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--paper-muted);padding-top:2px}
+.fields dd{margin:0}
+.pdetail__note{color:var(--paper-muted);font-size:.92rem;margin-bottom:28px}
+@media (max-width:880px){.pdetail{grid-template-columns:minmax(0,1fr)}}
+
 /* плашка для бизнеса внизу главной */
 .cta--tight{padding-bottom:28px}
 .hero--biz .l-cert{top:55%}
@@ -704,25 +757,72 @@ p{margin:0}
 
   <!-- CONNECT -->
   <section class="section partners" id="connect">
-    <div class="wrap partners__grid">
-      <div class="partners__copy">
+    <div class="wrap">
+      <header class="sec-head">
         <p class="eyebrow" data-i18n="p.eyebrow">Подключение</p>
-        <h2 data-i18n="p.title" data-split>Пять шагов от заявки до погашения</h2>
-        <p class="lead" data-i18n="p.lead">Каждый сертификат проходит проверку, чтобы покупатели доверяли каталогу. Для погашения хватит телефона.</p>
-        <ol class="psteps">
-          <li class="pstep"><span class="pstep__n">1</span><div><h3 data-i18n="p.s1t">Заявка</h3><p data-i18n="p.s1p">Подайте заявку через форму или получите аккаунт от администратора сервиса.</p></div></li>
-          <li class="pstep"><span class="pstep__n">2</span><div><h3 data-i18n="p.s2t">Подтверждение</h3><p data-i18n="p.s2p">Доступ в кабинет партнёра открывается после проверки администратором.</p></div></li>
-          <li class="pstep"><span class="pstep__n">3</span><div><h3 data-i18n="p.s3t">Сертификат</h3><p data-i18n="p.s3p">Укажите магазин, сумму, описание и срок действия. Сумма бывает фиксированной или на выбор покупателя.</p></div></li>
-          <li class="pstep"><span class="pstep__n">4</span><div><h3 data-i18n="p.s4t">Модерация</h3><p data-i18n="p.s4p">Сертификат проверяет администратор. После одобрения он появляется в каталоге.</p></div></li>
-          <li class="pstep"><span class="pstep__n">5</span><div><h3 data-i18n="p.s5t">Погашение</h3><p data-i18n="p.s5p">Сканируйте QR-код покупателя камерой телефона или кассовым сканером.</p></div></li>
-        </ol>
-        <div class="partners__actions">
-          <a class="btn btn--partner btn--lg magnetic" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="pp.apply">Подать заявку</span></a>
-          <a class="btn btn--ghost btn--lg" href="#redeem"><span data-i18n="p.cta2">Как проходит погашение</span></a>
+        <h2 data-i18n="p.title" data-split>Как проходит подключение</h2>
+        <p class="lead" data-i18n="p.lead">Шесть этапов от заявки до первого погашения. Для каждого шага видно, кто за него отвечает и какой статус получается на выходе.</p>
+      </header>
+
+      <div class="pmap">
+        <div class="pmap__lane r-shop" aria-hidden="true"></div>
+        <div class="pmap__lane r-tuhfa" aria-hidden="true"></div>
+        <div class="pmap__lane r-buyer" aria-hidden="true"></div>
+        <div class="pmap__role r-shop" aria-hidden="true"><span class="pmap__ico pmap__ico--shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg></span><span><b data-i18n="pm.roleShop">Магазин</b></span></div>
+        <div class="pmap__role r-tuhfa" aria-hidden="true"><span class="pmap__ico pmap__ico--tuhfa"></span><span><b>Tuhfa</b><small data-i18n="pm.roleTuhfaSub">администратор и система</small></span></div>
+        <div class="pmap__role r-buyer" aria-hidden="true"><span class="pmap__ico pmap__ico--buyer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12"/><path d="M12 8C10.5 5 7 4.5 7 6.5S10 8 12 8zM12 8c1.5-3 5-3.5 5-1.5S14 8 12 8z"/></svg></span><span><b data-i18n="pm.roleBuyer">Покупатель</b></span></div>
+        <div class="pmap__role r-res" aria-hidden="true" data-i18n="pm.res">Результат</div>
+        <div class="stage">
+          <div class="stage__head" style="grid-column:2"><span class="stage__n">01</span><span data-i18n="pm.s1">Заявка</span></div>
+          <div class="act r-shop" style="grid-column:2"><span class="act__role act__role--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="pm.a1">Подаёт заявку через форму</span></div>
+          <div class="act r-tuhfa act--alt" style="grid-column:2"><span class="act__role act__role--tuhfa">Tuhfa</span><span class="act__or" data-i18n="pm.or">или</span><span data-i18n="pm.a1b">Администратор создаёт аккаунт сам</span></div>
+          <div class="stage__res" style="grid-column:2"><span class="pill pill--muted" data-i18n="pm.r1">Заявка получена</span></div>
+        </div>
+        <div class="stage">
+          <div class="stage__head" style="grid-column:3"><span class="stage__n">02</span><span data-i18n="pm.s2">Проверка</span></div>
+          <div class="act r-tuhfa" style="grid-column:3"><span class="act__role act__role--tuhfa">Tuhfa</span><span data-i18n="pm.a2">Проверяет и подтверждает партнёра</span></div>
+          <div class="stage__res" style="grid-column:3"><span class="pill pill--sky" data-i18n="pm.r2">Кабинет открыт</span></div>
+        </div>
+        <div class="stage">
+          <div class="stage__head" style="grid-column:4"><span class="stage__n">03</span><span data-i18n="pm.s3">Сертификат</span></div>
+          <div class="act r-shop" style="grid-column:4"><span class="act__role act__role--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="pm.a3">Создаёт сертификат: сумма, описание, срок</span></div>
+          <div class="stage__res" style="grid-column:4"><span class="pill pill--wait" data-i18n="pm.r3">На проверке</span></div>
+        </div>
+        <div class="stage">
+          <div class="stage__head" style="grid-column:5"><span class="stage__n">04</span><span data-i18n="pm.s4">Модерация</span></div>
+          <div class="act r-tuhfa" style="grid-column:5"><span class="act__role act__role--tuhfa">Tuhfa</span><span data-i18n="pm.a4">Проверяет и одобряет сертификат</span></div>
+          <div class="stage__res" style="grid-column:5"><span class="pill pill--live" data-i18n="pm.r4">Опубликован в каталоге</span></div>
+        </div>
+        <div class="stage">
+          <div class="stage__head" style="grid-column:6"><span class="stage__n">05</span><span data-i18n="pm.s5">Продажа</span></div>
+          <div class="act r-buyer" style="grid-column:6"><span class="act__role act__role--buyer" data-i18n="pm.roleBuyer">Покупатель</span><span data-i18n="pm.a5">Покупает через Click или Payme и дарит другу</span></div>
+          <div class="stage__res" style="grid-column:6"><span class="pill pill--sky" data-i18n="pm.r5">Продан</span></div>
+        </div>
+        <div class="stage">
+          <div class="stage__head" style="grid-column:7"><span class="stage__n">06</span><span data-i18n="pm.s6">Погашение</span></div>
+          <div class="act r-buyer" style="grid-column:7"><span class="act__role act__role--buyer" data-i18n="pm.roleBuyer">Покупатель</span><span data-i18n="pm.a6a">Показывает QR-код на кассе</span></div>
+          <div class="act r-shop" style="grid-column:7"><span class="act__role act__role--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="pm.a6b">Сканирует QR камерой или сканером</span></div>
+          <div class="act r-tuhfa" style="grid-column:7"><span class="act__role act__role--tuhfa">Tuhfa</span><span data-i18n="pm.a6c">Подтверждает погашение и блокирует повтор</span></div>
+          <div class="stage__res" style="grid-column:7"><span class="pill pill--live" data-i18n="pm.r6">Погашен</span></div>
         </div>
       </div>
-      <div class="partners__mock">
-        <div class="pform-sticky">
+
+      <div class="pdetail">
+        <div class="pdetail__copy">
+          <h3 data-i18n="pm.dTitle">Что указать в сертификате</h3>
+          <dl class="fields">
+            <div><dt data-i18n="p.fShop">Магазин</dt><dd data-i18n="pm.d1">Где покупатель погасит сертификат</dd></div>
+            <div><dt data-i18n="p.fAmount">Сумма</dt><dd data-i18n="pm.d2">Фиксированная или на выбор покупателя</dd></div>
+            <div><dt data-i18n="p.fDesc">Описание</dt><dd data-i18n="pm.d3">Что можно купить по сертификату</dd></div>
+            <div><dt data-i18n="p.fValid">Срок действия</dt><dd data-i18n="pm.d4">После этой даты сертификат не погасить</dd></div>
+          </dl>
+          <p class="pdetail__note" data-i18n="pm.dNote">После отправки сертификат уходит на проверку и появляется в каталоге только после одобрения.</p>
+          <div class="partners__actions">
+            <a class="btn btn--partner btn--lg magnetic" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="pp.apply">Подать заявку</span></a>
+            <a class="btn btn--ghost btn--lg" href="#redeem"><span data-i18n="pp.howRedeem">Как проходит погашение</span></a>
+          </div>
+        </div>
+        <div class="pdetail__mock">
           <div class="pform" id="pform" data-reveal>
             <div class="pform__head"><b data-i18n="p.formTitle">Новый сертификат</b><span class="pill pill--wait" id="pStatus">На проверке</span></div>
             <div class="pform__bar"><i></i></div>
@@ -1035,20 +1135,9 @@ p{margin:0}
     'r.n1': 'Sertifikat uni chiqargan hamkor do‘konida amal qiladi.',
     'r.n2': 'Amal qilish muddati o‘tgan sertifikatni ishlatib bo‘lmaydi.',
     'p.eyebrow': 'Ulanish',
-    'p.title': 'Arizadan ishlatishgacha besh qadam',
-    'p.lead': 'Xaridorlar katalogga ishonishi uchun har bir sertifikat tekshiruvdan o‘tadi. Ishlatish uchun telefon kifoya.',
-    'p.s1t': 'Ariza',
-    'p.s1p': 'Shakl orqali ariza topshiring yoki servis administratoridan akkaunt oling.',
-    'p.s2t': 'Tasdiqlash',
-    'p.s2p': 'Hamkor kabinetiga kirish administrator tekshiruvidan so‘ng ochiladi.',
-    'p.s3t': 'Sertifikat',
-    'p.s3p': 'Do‘kon, summa, tavsif va amal qilish muddatini kiriting. Summa qat’iy yoki xaridor tanlovi bo‘yicha bo‘ladi.',
-    'p.s4t': 'Moderatsiya',
-    'p.s4p': 'Sertifikatni administrator tekshiradi. Tasdiqlangach, u katalogda paydo bo‘ladi.',
-    'p.s5t': 'Ishlatish',
-    'p.s5p': 'Xaridorning QR-kodini telefon kamerasi yoki kassa skaneri bilan skanerlang.',
+    'p.title': 'Ulanish qanday o‘tadi',
+    'p.lead': 'Arizadan birinchi ishlatishgacha olti bosqich. Har bir qadamda kim mas’ul ekani va natijada qanday holat paydo bo‘lishi ko‘rinadi.',
     'p.cta': 'Hamkor bo‘lish',
-    'p.cta2': 'Ishlatish qanday o‘tadi',
     'p.formTitle': 'Yangi sertifikat',
     'p.fShop': 'Do‘kon',
     'p.fAmount': 'Summa',
@@ -1089,6 +1178,39 @@ p{margin:0}
     'ft.buyers': 'Xaridorlarga',
     'ft.connect': 'Ulanish',
     'ft.pay': 'To‘lov',
+    'pm.roleShop': 'Do‘kon',
+    'pm.roleTuhfaSub': 'administrator va tizim',
+    'pm.roleBuyer': 'Xaridor',
+    'pm.res': 'Natija',
+    'pm.or': 'yoki',
+    'pm.s1': 'Ariza',
+    'pm.s2': 'Tekshiruv',
+    'pm.s3': 'Sertifikat',
+    'pm.s4': 'Moderatsiya',
+    'pm.s5': 'Savdo',
+    'pm.s6': 'Ishlatish',
+    'pm.a1': 'Shakl orqali ariza topshiradi',
+    'pm.a1b': 'Administrator akkauntni o‘zi yaratadi',
+    'pm.a2': 'Hamkorni tekshiradi va tasdiqlaydi',
+    'pm.a3': 'Sertifikat yaratadi: summa, tavsif, muddat',
+    'pm.a4': 'Sertifikatni tekshiradi va tasdiqlaydi',
+    'pm.a5': 'Click yoki Payme orqali sotib oladi va do‘stiga sovg‘a qiladi',
+    'pm.a6a': 'Kassada QR-kodni ko‘rsatadi',
+    'pm.a6b': 'QR-kodni kamera yoki skaner bilan skanerlaydi',
+    'pm.a6c': 'Ishlatishni tasdiqlaydi va takrorlashni bloklaydi',
+    'pm.r1': 'Ariza qabul qilindi',
+    'pm.r2': 'Kabinet ochildi',
+    'pm.r3': 'Tekshiruvda',
+    'pm.r4': 'Katalogda e’lon qilindi',
+    'pm.r5': 'Sotildi',
+    'pm.r6': 'Ishlatildi',
+    'pm.dTitle': 'Sertifikatda nimani ko‘rsatish kerak',
+    'pm.d1': 'Xaridor sertifikatni qayerda ishlatadi',
+    'pm.d2': 'Qat’iy yoki xaridor tanlovi bo‘yicha',
+    'pm.d3': 'Sertifikat bo‘yicha nima xarid qilish mumkin',
+    'pm.d4': 'Bu sanadan keyin sertifikatni ishlatib bo‘lmaydi',
+    'pm.dNote': 'Yuborilgach sertifikat tekshiruvga ketadi va faqat tasdiqlangandan keyin katalogda paydo bo‘ladi.',
+    'pp.howRedeem': 'Ishlatish qanday o‘tadi',
     'aud.buyers': 'Xaridorlarga',
     'biz.eyebrow': 'Biznes uchun',
     'biz.title': 'Do‘kon egasimisiz? Sovg‘a sertifikatlarini Tuhfa orqali soting',
@@ -1490,6 +1612,17 @@ p{margin:0}
     $$('.pstep').forEach(function (p) {
       ST.create({ trigger: p, start: 'top 68%', onEnter: function () { p.classList.add('is-on'); }, onLeaveBack: function () { p.classList.remove('is-on'); } });
     });
+
+    /* карта процесса: этапы появляются слева направо */
+    if ($('.pmap')) {
+      var pm = G.timeline({ scrollTrigger: { trigger: '.pmap', start: 'top 75%', once: true } });
+      $$('.pmap .stage').forEach(function (st, i) {
+        var at = i * 0.26;
+        pm.from(st.querySelector('.stage__head'), { x: -18, opacity: 0, duration: 0.55, ease: 'expo.out' }, at)
+          .from(st.querySelectorAll('.act'), { y: 16, opacity: 0, duration: 0.55, stagger: 0.07, ease: 'expo.out' }, at + 0.1)
+          .from(st.querySelector('.stage__res'), { scale: 0.7, opacity: 0, duration: 0.5, ease: 'back.out(2.2)' }, at + 0.22);
+      });
+    }
 
     /* счётчики */
     $$('[data-count]').forEach(function (el) {
