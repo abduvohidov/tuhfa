@@ -1,0 +1,1410 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tuhfa — подарки в Telegram</title>
+<meta name="theme-color" content="#140F22">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tuhfa — подарки в Telegram">
+<meta property="og:description" content="Подарочные сертификаты магазинов Узбекистана и анимационные подарки в Telegram. Оплата через Click и Payme.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="description" content="Tuhfa — подарочные сертификаты магазинов Узбекистана и анимационные подарки в Telegram. Оплата через Click и Payme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap">
+<style>
+:root{
+  /* Layout: «путь подарка» — праздничная ночь; сюжет ведёт телефон с мини-приложением, лента-икат сшивает секции, партнёрам отдана светлая «бумажная» полоса */
+  --ink:#140F22; --ink-2:#1C1630; --ink-3:#28203F; --ink-4:#3A3058; --black:#07050D;
+  --text:#F5F0FA; --muted:#A99FC0; --line:#2C2446; --white:#FFFFFF;
+  --anor:#EF3E5C; --anor-deep:#B8213F; --anor-light:#FF8DA1;
+  --saffron:#FFB648; --saffron-deep:#E3922A; --saffron-light:#FFD594;
+  --sky:#5CC8F5; --mint:#46D7A0;
+  --mint-glow:rgba(70,215,160,.55); --anor-glow:rgba(239,62,92,.5);
+  --paper:#F3EEF8; --paper-2:#E9E1F3; --paper-ink:#1A1430; --paper-muted:#5E5476; --paper-line:#D6CBE5;
+  --wait-bg:#FFF0D6; --wait-fg:#8F5400; --live-bg:#D9F6EA; --live-fg:#0B7550;
+  --ikat-rich:none; --ikat-bright:none;
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Onest","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --fs-hero:clamp(2.1rem,5.3vw,4.5rem);
+  --fs-h2:clamp(1.75rem,4vw,3.3rem);
+  --fs-h3:clamp(1.15rem,1.7vw,1.4rem);
+  --fs-lead:clamp(1.02rem,1.25vw,1.18rem);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:clip}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:1rem;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+a{color:inherit}
+::selection{background:var(--saffron);color:var(--paper-ink)}
+:focus-visible{outline:2px solid var(--saffron);outline-offset:3px;border-radius:6px}
+
+.wrap{max-width:1240px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:720px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+
+h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.06;letter-spacing:-.025em;margin:0;text-wrap:balance}
+h2{font-size:var(--fs-h2)}
+h3{font-size:var(--fs-h3);line-height:1.2}
+p{margin:0}
+.mono{font-family:var(--f-mono)}
+.eyebrow{display:inline-flex;align-items:center;gap:.7em;margin:0 0 1.25rem;font:600 .74rem/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--saffron)}
+.eyebrow::before{content:"";width:9px;height:9px;rotate:45deg;border-radius:2px;background:var(--anor) var(--ikat-rich) center/24px auto}
+.lead{font-size:var(--fs-lead);color:var(--muted);max-width:36em;margin-top:1.25rem;text-wrap:pretty}
+
+/* split words */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-block:.1em;margin-block:-.1em}
+.wi{display:inline-block}
+
+/* buttons */
+.btn{--bg:var(--ink-3);--fg:var(--text);position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.6em;padding:1em 1.5em;border-radius:999px;border:1px solid transparent;background:var(--bg);color:var(--fg);font:600 1rem/1 var(--f-body);text-decoration:none;cursor:pointer;white-space:nowrap;transition:color .45s var(--ease),border-color .45s var(--ease)}
+.btn::before{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:inherit;background:var(--saffron);transform:translateY(102%);transition:transform .55s var(--ease)}
+.btn:hover::before{transform:none}
+.btn:hover{color:var(--paper-ink)}
+.btn svg{width:1.1em;height:1.1em;flex:none;transition:transform .45s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn--primary{--bg:var(--anor);--fg:var(--white)}
+.btn--ghost{--bg:transparent;border-color:var(--ink-4)}
+.btn--lg{padding:1.1em 1.7em;font-size:1.03rem}
+.btn--sm{padding:.7em 1.05em;font-size:.86rem}
+.magnetic{will-change:transform}
+
+.ulink{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .45s var(--ease),color .3s}
+.ulink:hover{background-size:100% 1px}
+
+/* custom cursor */
+.cursor{position:fixed;left:0;top:0;z-index:100;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid var(--saffron);pointer-events:none;opacity:0;transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background-color .35s,opacity .3s}
+.cursor.is-on{opacity:.9}
+.cursor.is-hover{width:64px;height:64px;margin:-32px 0 0 -32px;background-color:rgba(255,182,72,.12)}
+@media (pointer:coarse){.cursor{display:none}}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;padding-top:env(safe-area-inset-top,0px);transition:transform .55s var(--ease),background-color .35s,box-shadow .35s}
+.nav.is-scrolled{background-color:rgba(20,15,34,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav.is-hidden{transform:translateY(-105%)}
+.nav__in{height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 1.3rem/1 var(--f-display);letter-spacing:-.04em;color:var(--text)}
+.logo__mark{width:20px;height:20px;rotate:45deg;border-radius:5px;flex:none;background:var(--anor) var(--ikat-rich) center/26px auto;box-shadow:0 0 0 3px var(--ink),0 0 0 4.5px var(--saffron)}
+.nav__links{display:flex;gap:26px}
+.nav__links a{position:relative;text-decoration:none;color:var(--muted);font-size:.92rem;font-weight:500;transition:color .3s}
+.nav__links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1.5px;background:var(--saffron);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.nav__links a:hover,.nav__links a.is-active{color:var(--text)}
+.nav__links a:hover::after,.nav__links a.is-active::after{transform:scaleX(1);transform-origin:left}
+.nav__right{display:flex;align-items:center;gap:10px}
+.lang{display:inline-flex;padding:3px;border-radius:999px;background:var(--ink-2);border:1px solid var(--line)}
+.lang button{appearance:none;border:0;background:transparent;cursor:pointer;font:600 .72rem/1 var(--f-mono);letter-spacing:.08em;padding:.6em .75em;border-radius:999px;color:var(--muted);transition:background-color .3s,color .3s}
+.lang button[aria-pressed="true"]{background:var(--text);color:var(--ink)}
+@media (max-width:980px){.nav__links{display:none}}
+@media (max-width:420px){.nav .btn--sm{padding:.68em .85em;font-size:.8rem}.logo{font-size:1.15rem}.nav__right{gap:6px}.lang button{padding:.6em .62em}}
+
+/* hero */
+.hero{position:relative;isolation:isolate;overflow:clip;padding-top:calc(72px + env(safe-area-inset-top,0px) + clamp(36px,7vh,88px));padding-bottom:clamp(48px,7vw,96px)}
+.hero__bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero__bg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--ink-4) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 62% 42%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 62% 42%,#000 25%,transparent 75%);opacity:.55}
+.glow{position:absolute;border-radius:50%;aspect-ratio:1;filter:blur(70px)}
+.g1{width:clamp(320px,46vw,640px);right:-10%;top:-16%;background:var(--anor);opacity:.3;animation:drift 20s ease-in-out infinite alternate}
+.g2{width:clamp(240px,30vw,440px);right:20%;bottom:-14%;background:var(--saffron);opacity:.14;animation:drift 26s ease-in-out infinite alternate-reverse}
+.g3{width:clamp(260px,34vw,480px);left:-14%;top:22%;background:var(--sky);opacity:.1;animation:drift 32s ease-in-out infinite alternate}
+@keyframes drift{to{translate:5vw 4vh;scale:1.15}}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,72px);align-items:center}
+.hero__copy{min-width:0}
+.hero__title{font-size:var(--fs-hero);font-weight:800;line-height:1.02;letter-spacing:-.035em}
+.ikat-text{font-style:normal;display:inline-block;color:var(--saffron)}
+.has-ikat .ikat-text{color:transparent;background:var(--saffron) var(--ikat-bright) 0 0/58px auto repeat;-webkit-background-clip:text;background-clip:text;animation:ikatRun 40s linear infinite}
+@keyframes ikatRun{to{background-position:-580px 0}}
+.hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:2rem}
+.hero__facts{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;padding:0;margin:2.2rem 0 0;color:var(--muted);font-size:.86rem}
+.hero__facts li{display:inline-flex;align-items:center;gap:9px}
+.hero__facts li::before{content:"";width:7px;height:7px;rotate:45deg;background:var(--saffron);border-radius:1px}
+
+.hero__stage{position:relative;height:600px;--pw:262px;min-width:0}
+.layer{position:absolute}
+.l-phone{left:calc(55% - var(--pw) / 2);top:calc(50% - var(--pw) * 19 / 18)}
+.l-cert{right:-1%;top:41%}
+.l-box{left:0;bottom:2%}
+.l-pay{left:0;top:1%}
+.l-fwd{left:-1%;top:52%}
+.float{animation:bob 6s ease-in-out infinite}
+.f2{animation-duration:7.5s;animation-delay:-2s}
+.f3{animation-duration:6.5s;animation-delay:-4s}
+.f4{animation-duration:5.5s;animation-delay:-1s}
+.f5{animation-duration:8s;animation-delay:-3s}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@media (max-width:900px){
+  .hero__grid{grid-template-columns:minmax(0,1fr)}
+  .hero__stage{height:500px;--pw:216px;width:100%;max-width:460px;margin-inline:auto}
+  .l-cert .cert--mini{width:166px}
+  .l-box .giftbox{font-size:12.5px}
+  .chip{font-size:.72rem;padding:8px 11px 8px 8px}
+  .chip__ico{width:24px;height:24px}
+}
+
+/* phone + app UI */
+.phone{position:relative;width:var(--pw);aspect-ratio:9/19;padding:10px;border-radius:44px;background:var(--ink-2);box-shadow:0 0 0 1.5px var(--ink-4),inset 0 0 0 1px rgba(255,255,255,.05),0 50px 90px -30px rgba(0,0,0,.75)}
+.phone::before{content:"";position:absolute;z-index:4;top:18px;left:50%;width:78px;margin-left:-39px;height:22px;border-radius:20px;background:var(--black)}
+.phone--hero{rotate:-4deg}
+.screen{position:relative;height:100%;overflow:hidden;border-radius:34px;background:var(--ink)}
+.app,.scr{position:absolute;inset:46px 13px 13px;display:flex;flex-direction:column;gap:10px}
+.app-head{display:flex;justify-content:space-between;align-items:center;gap:8px;font:700 .92rem/1.2 var(--f-display);letter-spacing:-.02em}
+.app-count{font:600 .66rem/1 var(--f-mono);padding:.4em .65em;border-radius:99px;background:var(--ink-3);color:var(--muted)}
+.rows{display:grid;gap:7px}
+.gift-row{display:flex;align-items:center;gap:9px;padding:9px;border-radius:14px;background:var(--ink-2);min-width:0}
+.gift-row.is-muted{opacity:.55}
+.gift-row.is-new{box-shadow:inset 0 0 0 1.5px var(--anor)}
+.gi{width:34px;height:34px;border-radius:10px;flex:none}
+.gi--cert{background:var(--anor) var(--ikat-rich) center/40px auto}
+.gi--anim{background:radial-gradient(circle at 36% 34%,var(--anor-light),var(--anor) 50%,var(--anor-deep))}
+.gi--flow{background:radial-gradient(circle at 50% 50%,var(--saffron) 0 18%,transparent 19%),radial-gradient(circle at 30% 30%,var(--sky) 0 22%,transparent 23%),radial-gradient(circle at 70% 30%,var(--sky) 0 22%,transparent 23%),radial-gradient(circle at 30% 70%,var(--sky) 0 22%,transparent 23%),radial-gradient(circle at 70% 70%,var(--sky) 0 22%,transparent 23%),var(--ink-3)}
+.gift-row__txt{flex:1;min-width:0;display:grid;gap:1px;line-height:1.3}
+.gift-row__txt b{font-size:.74rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gift-row__txt small{font-size:.64rem;color:var(--muted);white-space:nowrap}
+.pill{display:inline-block;font:600 .6rem/1 var(--f-mono);letter-spacing:.03em;padding:.5em .7em;border-radius:99px;white-space:nowrap;flex:none}
+.pill--ok{background:rgba(70,215,160,.14);color:var(--mint)}
+.pill--sky{background:rgba(92,200,245,.14);color:var(--sky)}
+.pill--muted{background:var(--ink-3);color:var(--muted)}
+.pill--new{background:var(--anor);color:var(--white)}
+.pill--wait{background:var(--wait-bg);color:var(--wait-fg)}
+.pill--live{background:var(--live-bg);color:var(--live-fg)}
+.app-qr{margin-top:auto;display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:center;padding:10px;border-radius:16px;background:var(--paper);color:var(--paper-ink)}
+.app-qr__txt{display:grid;gap:3px;line-height:1.25;min-width:0}
+.app-qr__txt b{font-size:.72rem}
+.app-qr__txt small{font-size:.6rem;color:var(--paper-muted)}
+.qr{background:var(--white);color:var(--paper-ink);border-radius:8px;padding:4px;line-height:0}
+.qr svg{display:block;width:100%;height:auto}
+
+/* story screens */
+.scr{opacity:0;transform:translateY(18px) scale(.98);transition:opacity .5s var(--ease),transform .6s var(--ease);pointer-events:none}
+.scr.is-active{opacity:1;transform:none}
+.tabs{display:flex;gap:4px;padding:4px;border-radius:12px;background:var(--ink-2)}
+.tabs span{flex:1;text-align:center;font-size:.66rem;font-weight:600;padding:.55em .3em;border-radius:9px;color:var(--muted)}
+.tabs .is-on{background:var(--ink-4);color:var(--text)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{display:grid;gap:5px;padding:8px;border-radius:14px;background:var(--ink-2);line-height:1.25;min-width:0}
+.tile i{display:block;aspect-ratio:1.25;border-radius:10px}
+.tile b{font-size:.7rem}
+.tile small{font-size:.6rem;color:var(--muted)}
+.art-1{background:var(--anor) var(--ikat-rich) center/46px auto}
+.art-2{background:radial-gradient(circle at 50% 55%,var(--saffron) 0 10%,transparent 11%),radial-gradient(circle at 50% 30%,var(--sky) 0 14%,transparent 15%),radial-gradient(circle at 30% 60%,var(--sky) 0 14%,transparent 15%),radial-gradient(circle at 70% 60%,var(--sky) 0 14%,transparent 15%),radial-gradient(circle at 50% 80%,var(--sky) 0 14%,transparent 15%),var(--ink-3)}
+.art-3{background:radial-gradient(ellipse 30% 22% at 50% 62%,var(--saffron-deep) 0 60%,transparent 62%),radial-gradient(ellipse 36% 26% at 50% 58%,var(--paper) 0 70%,transparent 72%),var(--ink-4)}
+.art-4{background:radial-gradient(circle at 50% 58%,var(--anor) 0 30%,transparent 31%),radial-gradient(circle at 44% 50%,var(--anor-light) 0 12%,transparent 13%),var(--ink-3)}
+.order{display:grid;gap:4px;padding:12px;border-radius:14px;background:var(--ink-2)}
+.order span{font-size:.7rem;color:var(--muted)}
+.order b{font:700 1.05rem/1.2 var(--f-display);letter-spacing:-.02em}
+.label-sm{font:600 .58rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.payopt{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;border:1px solid var(--line);font-weight:700;font-size:.84rem}
+.payopt.is-on{border-color:var(--saffron);background:rgba(255,182,72,.08)}
+.radio{width:16px;height:16px;border-radius:50%;border:2px solid var(--ink-4);flex:none}
+.payopt.is-on .radio{border-color:var(--saffron);background:radial-gradient(circle,var(--saffron) 0 38%,transparent 42%)}
+.app-btn{margin-top:auto;text-align:center;padding:12px;border-radius:12px;background:var(--anor);color:var(--white);font-weight:700;font-size:.78rem}
+.toast{display:flex;gap:10px;align-items:center;padding:10px;border-radius:14px;background:var(--ink-3);box-shadow:0 12px 26px -12px rgba(0,0,0,.7);line-height:1.3}
+.toast__ico{width:30px;height:30px;border-radius:50%;flex:none;background:var(--anor) var(--ikat-rich) center/34px auto}
+.toast b{display:block;font-size:.7rem}
+.toast small{display:block;font-size:.62rem;color:var(--muted)}
+.contacts{display:grid;gap:6px}
+.contact{display:flex;align-items:center;gap:10px;padding:8px;border-radius:12px;background:var(--ink-2);font-size:.78rem;font-weight:600}
+.contact.is-on{box-shadow:inset 0 0 0 1.5px var(--sky)}
+.ava{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;font:700 .72rem/1 var(--f-display);color:var(--ink)}
+.a1{background:var(--saffron)}.a2{background:var(--sky)}.a3{background:var(--mint)}
+.tick{margin-left:auto;width:18px;height:18px;border-radius:50%;background:var(--sky);color:var(--ink);display:grid;place-items:center}
+.tick svg{width:12px;height:12px}
+.bigqr{width:74%;margin:4px auto 0;padding:12px;border-radius:18px;background:var(--white)}
+.bigqr .qr{padding:0}
+.scr-note{text-align:center;font-weight:600;font-size:.78rem;line-height:1.3}
+.valid{text-align:center;font-size:.62rem;color:var(--muted)}
+
+/* gift box */
+.giftbox{position:relative;display:block;width:10em;height:9.6em;font-size:20px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.giftbox > span{position:absolute;display:block}
+.giftbox__glow{left:50%;top:38%;width:13em;height:13em;margin:-6.5em 0 0 -6.5em;border-radius:50%;background:radial-gradient(circle,rgba(255,182,72,.5),transparent 62%);opacity:0;transform:scale(.4);transition:opacity .6s var(--ease),transform .9s var(--ease)}
+.giftbox__inside{left:50%;bottom:2.2em;width:5.4em;margin-left:-2.7em;z-index:2;opacity:0;transform:translateY(1.6em) scale(.55);transition:opacity .35s ease .12s,transform .9s var(--spring) .12s}
+.giftbox__inside svg{display:block;width:100%;height:auto;overflow:visible}
+.giftbox__body{left:.5em;right:.5em;bottom:0;height:6em;z-index:1;border-radius:.45em .45em .7em .7em;background:var(--anor) var(--ikat-rich) 0 0/4.2em auto;box-shadow:inset -1.1em -.7em 1.4em rgba(0,0,0,.38),inset .3em .2em .6em rgba(255,255,255,.08),0 1.4em 2.4em -.8em rgba(0,0,0,.65);overflow:hidden}
+.giftbox__lid{left:0;right:0;top:1.7em;height:2em;z-index:3;border-radius:.45em;background:var(--anor-deep) var(--ikat-rich) .8em .4em/4.2em auto;box-shadow:inset 0 -.55em .8em rgba(0,0,0,.35),0 .5em 1em rgba(0,0,0,.4);transform-origin:15% 100%;transition:transform .8s var(--spring)}
+.giftbox:not(.is-open) .giftbox__lid{animation:wiggle 5.5s ease-in-out infinite}
+@keyframes wiggle{0%,82%,100%{translate:0 0;rotate:0deg}86%{translate:0 -6px;rotate:-4deg}90%{translate:0 -2px;rotate:3deg}94%{translate:0 0;rotate:-1deg}}
+.rib{position:absolute;display:block}
+.rib--v{left:calc(50% - .7em);width:1.4em;top:0;bottom:0;background:linear-gradient(90deg,var(--saffron-deep),var(--saffron) 35%,var(--saffron-light) 55%,var(--saffron) 72%,var(--saffron-deep))}
+.rib--h{left:0;right:0;top:calc(46% - .6em);height:1.2em;background:linear-gradient(180deg,var(--saffron-deep),var(--saffron) 35%,var(--saffron-light) 55%,var(--saffron) 72%,var(--saffron-deep))}
+.bow{position:absolute;left:50%;top:-1.35em;width:0;height:0;z-index:4}
+.bow i{position:absolute;top:.65em;width:2.3em;height:1.5em;border:.45em solid var(--saffron);border-radius:50%/60% 60% 40% 40%;background:rgba(0,0,0,.12)}
+.bow i:first-child{right:.05em;transform:rotate(-20deg);transform-origin:right center}
+.bow i:last-child{left:.05em;transform:rotate(20deg);transform-origin:left center}
+.bow::after{content:"";position:absolute;left:-.55em;top:.9em;width:1.1em;height:1em;border-radius:.35em;background:var(--saffron-deep);box-shadow:inset 0 .15em 0 var(--saffron-light)}
+.giftbox.is-open .giftbox__lid{transform:translate(1.4em,-4.4em) rotate(-17deg)}
+.giftbox.is-open .giftbox__inside{opacity:1;transform:translateY(-3.6em) scale(1)}
+.giftbox.is-open .giftbox__glow{opacity:1;transform:scale(1)}
+.giftbox.is-open .giftbox__inside svg{animation:bob 4s ease-in-out .9s infinite}
+
+/* certificate */
+.cert{position:relative;overflow:hidden;display:grid;gap:14px;padding:18px 20px 18px 32px;border-radius:20px;background:var(--paper);color:var(--paper-ink);box-shadow:0 30px 60px -28px rgba(0,0,0,.75)}
+.cert::before{content:"";position:absolute;left:0;top:0;bottom:0;width:12px;background:var(--anor) var(--ikat-rich) 0 0/44px auto}
+.cert__top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cert__shop{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.9rem;min-width:0}
+.cert__logo{width:22px;height:22px;border-radius:7px;flex:none;background:var(--paper-ink);box-shadow:inset 0 0 0 5px var(--paper-ink),inset 0 0 0 11px var(--saffron)}
+.cert__tag{font:600 .6rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--anor-deep);border:1px solid currentColor;padding:.45em .6em;border-radius:99px;white-space:nowrap}
+.cert__amount{font:800 clamp(1.8rem,3.4vw,2.5rem)/1 var(--f-display);letter-spacing:-.035em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cert__amount .cur{font-size:.42em;font-weight:500;letter-spacing:0;color:var(--paper-muted)}
+.cert__bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.cert__valid{display:grid;gap:2px;line-height:1.25}
+.cert__valid small{font-size:.7rem;color:var(--paper-muted)}
+.cert__valid b{font:600 .9rem var(--f-mono)}
+.cert .qr{width:78px;flex:none;border:1px solid var(--paper-line)}
+.cert--mini{width:206px;gap:10px;padding:14px 14px 14px 24px;rotate:7deg}
+.cert--mini::before{width:9px}
+.cert--mini .cert__amount{font-size:1.4rem}
+.cert--mini .cert__tag{font-size:.52rem}
+.cert--mini .cert__shop{font-size:.76rem}
+.cert--mini .qr{width:50px}
+.cert--mini small{font-size:.62rem;color:var(--paper-muted)}
+
+/* floating chips */
+.chip{display:inline-flex;align-items:center;gap:10px;padding:10px 14px 10px 10px;border-radius:16px;background:rgba(28,22,48,.85);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--ink-4);font-size:.8rem;font-weight:600;white-space:nowrap;box-shadow:0 18px 40px -16px rgba(0,0,0,.75)}
+.chip__ico{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;flex:none}
+.chip__ico svg{width:15px;height:15px}
+.chip__ico--ok{background:rgba(70,215,160,.16);color:var(--mint)}
+.chip__ico--sky{background:rgba(92,200,245,.16);color:var(--sky)}
+
+/* marquee ribbons */
+.bands{position:relative;height:clamp(120px,13vw,170px);overflow:hidden;display:grid;place-items:center}
+.band{position:absolute;left:-6%;right:-6%}
+.band--ikat{height:24px;rotate:2.4deg;background:var(--anor) var(--ikat-rich) 0 0/48px auto;animation:ribbon 50s linear infinite;box-shadow:0 10px 30px -10px rgba(0,0,0,.6)}
+@keyframes ribbon{to{background-position:-960px 0}}
+.band--text{rotate:-2deg;padding-block:16px;background:var(--anor);box-shadow:0 24px 40px -22px rgba(0,0,0,.7)}
+.band__track{display:flex;width:max-content}
+.band__group{display:flex}
+.band__item{display:inline-flex;align-items:center;gap:clamp(18px,3vw,34px);padding-right:clamp(18px,3vw,34px);font:700 clamp(.95rem,1.9vw,1.4rem)/1 var(--f-display);letter-spacing:.01em;text-transform:uppercase;color:var(--white);white-space:nowrap}
+.band__item::after{content:"";width:.5em;height:.5em;rotate:45deg;background:var(--saffron);border-radius:2px}
+
+/* sections */
+.section{position:relative;overflow-x:clip;padding-block:clamp(84px,11vw,150px)}
+.cta{overflow-x:clip}
+.sec-head{max-width:820px;margin-bottom:clamp(40px,6vw,72px)}
+.deco{position:absolute;pointer-events:none;aspect-ratio:1;rotate:45deg;border-radius:28px;border:1px solid var(--line)}
+.deco::after{content:"";position:absolute;inset:30%;border-radius:12px;background:var(--anor) var(--ikat-rich) center/40px auto;opacity:.5}
+.deco--1{width:clamp(130px,18vw,250px);right:-4%;top:4%}
+
+/* gifts */
+.gifts__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.gcard{display:flex;flex-direction:column;min-width:0;border-radius:28px;background:var(--ink-2);border:1px solid var(--line);overflow:hidden;transition:border-color .4s;will-change:transform}
+.gcard:hover{border-color:var(--ink-4)}
+.gcard__media{position:relative;display:flex;flex-direction:column;justify-content:center;gap:22px;min-height:400px;padding:clamp(20px,3vw,32px);background:radial-gradient(120% 90% at 50% 0%,var(--ink-3),var(--ink-2) 70%)}
+.gcard__body{display:grid;gap:12px;align-content:start;padding:clamp(20px,3vw,32px);border-top:1px solid var(--line)}
+.gcard__label{font:600 .7rem/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--saffron)}
+.gcard__body p{color:var(--muted)}
+.ticks{list-style:none;display:grid;gap:8px;padding:0;margin:6px 0 0}
+.ticks li{display:flex;align-items:baseline;gap:12px;font-size:.94rem}
+.ticks li::before{content:"";width:7px;height:7px;rotate:45deg;border-radius:1px;background:var(--anor);flex:none;translate:0 -2px}
+.cert-stage{max-width:420px;width:100%;margin-inline:auto}
+.picker{display:grid;gap:10px;max-width:420px;width:100%;margin-inline:auto}
+.picker__label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.amounts{display:flex;flex-wrap:wrap;gap:8px}
+.amt{appearance:none;cursor:pointer;padding:.65em 1em;border-radius:999px;border:1px solid var(--ink-4);background:transparent;color:var(--muted);font:600 .8rem/1 var(--f-mono);transition:background-color .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.amt:hover{color:var(--text);border-color:var(--muted)}
+.amt:active{transform:scale(.96)}
+.amt[aria-checked="true"]{background:var(--saffron);border-color:var(--saffron);color:var(--paper-ink)}
+.custom{display:grid;gap:8px;padding-top:4px}
+.custom label{font-size:.82rem;color:var(--muted)}
+.custom input{width:100%;accent-color:var(--saffron)}
+.gcard__media--box{align-items:center;text-align:center}
+.box-zone{display:grid;place-items:center;padding-top:3.5em;font-size:20px}
+.hint{position:absolute;top:22px;left:50%;translate:-50% 0;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:opacity .4s}
+.gcard__media--box:has(.giftbox.is-open) .hint{opacity:0}
+.box-actions{display:grid;justify-items:center;gap:12px}
+.box-status{min-height:1.6em;font-size:.9rem;color:var(--mint);font-weight:500}
+@media (max-width:880px){.gifts__grid{grid-template-columns:minmax(0,1fr)}.gcard__media{min-height:0}}
+@media (max-width:420px){.box-zone{font-size:16px}}
+
+/* journey */
+.journey__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px)}
+.journey__phone{position:relative;min-width:0}
+.journey__sticky{position:sticky;top:max(96px,calc(50vh - 300px));display:flex;flex-direction:column;align-items:center;--pw:min(282px,calc((100vh - 170px) * 9 / 19))}
+.jdots{display:flex;gap:8px;justify-content:center;margin-top:20px}
+.jdots i{width:8px;height:8px;border-radius:99px;background:var(--ink-4);transition:width .45s var(--ease),background-color .45s}
+.jdots i.is-on{width:28px;background:var(--saffron)}
+.steps{list-style:none;margin:0;padding:0}
+.step{min-height:68vh;display:flex;flex-direction:column;justify-content:center;gap:14px;max-width:540px;transition:opacity .5s var(--ease)}
+.step__n{font:600 .78rem/1 var(--f-mono);letter-spacing:.12em;color:var(--saffron)}
+.step h3{font-size:clamp(1.45rem,2.7vw,2.25rem);line-height:1.1}
+.step p{color:var(--muted);font-size:var(--fs-lead);max-width:30em}
+.journey-live .step{opacity:.22}
+.journey-live .step.is-active{opacity:1}
+.step__phone{display:none;justify-content:center;margin-bottom:8px}
+.phone--mini{--pw:236px;aspect-ratio:auto;height:300px;padding:9px 9px 0;border-radius:40px 40px 0 0;-webkit-mask-image:linear-gradient(#000 68%,transparent);mask-image:linear-gradient(#000 68%,transparent)}
+.phone--mini .screen{border-radius:31px 31px 0 0}
+.phone--mini .scr{opacity:1;transform:none}
+@media (max-width:880px){
+  .journey__grid{grid-template-columns:minmax(0,1fr)}
+  .journey__phone{display:none}
+  .steps{display:grid;gap:64px}
+  .step{min-height:0;max-width:none}
+  .step__phone{display:flex}
+}
+
+/* redeem */
+.redeem{background:linear-gradient(180deg,var(--ink),var(--ink-2) 45%,var(--ink))}
+.redeem__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:center;width:100%}
+.redeem__copy{min-width:0}
+.rsteps{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:8px}
+.rsteps li{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:14px;border:1px solid var(--line);color:var(--muted);transition:color .4s,background-color .4s,border-color .4s}
+.rsteps__n{font:600 .72rem/1 var(--f-mono);color:var(--ink-4);transition:color .4s}
+.rsteps li.is-on{color:var(--text);background:var(--ink-3);border-color:var(--ink-4)}
+.rsteps li.is-on .rsteps__n{color:var(--saffron)}
+.rsteps li.is-bad.is-on{border-color:var(--anor)}
+.rsteps li.is-bad.is-on .rsteps__n{color:var(--anor-light)}
+.redeem__stage{min-width:0}
+.scanner{position:relative;display:grid;place-items:center;width:100%;max-width:min(460px,56vh);aspect-ratio:1;margin-inline:auto;overflow:hidden;border-radius:32px;border:1px solid var(--line);background:radial-gradient(circle at 50% 45%,var(--ink-3),var(--ink) 72%)}
+.scanner__label{position:absolute;top:16px;left:18px;display:inline-flex;align-items:center;gap:8px;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.scanner__label i{width:8px;height:8px;border-radius:50%;background:var(--anor);animation:blink 1.4s steps(2,start) infinite}
+@keyframes blink{to{visibility:hidden}}
+.scanner__frame{position:absolute;inset:16%}
+.scanner__frame i{position:absolute;width:30px;height:30px;border:3px solid var(--saffron)}
+.scanner__frame i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
+.scanner__frame i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-radius:0 12px 0 0}
+.scanner__frame i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-radius:0 0 0 12px}
+.scanner__frame i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 12px 0}
+.rcert{width:50%;display:grid;gap:8px;padding:12px;border-radius:16px;background:var(--paper);color:var(--paper-ink);box-shadow:0 24px 50px -20px rgba(0,0,0,.8)}
+.rcert__top{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:.62rem;font-weight:600;line-height:1.2}
+.rcert__top span:last-child{font:600 .52rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--anor-deep)}
+.rcert .qr{padding:0}
+.rcert__amt{font:800 clamp(.8rem,1.6vw,1rem)/1 var(--f-display);letter-spacing:-.02em;white-space:nowrap}
+.laser{position:absolute;left:16%;right:16%;top:16%;height:2px;border-radius:2px;background:var(--mint);box-shadow:0 0 18px 3px var(--mint-glow);opacity:0}
+.flash{position:absolute;inset:0;opacity:0;pointer-events:none}
+.flash--ok{background:radial-gradient(circle,var(--mint-glow),transparent 70%)}
+.flash--bad{background:radial-gradient(circle,var(--anor-glow),transparent 70%)}
+.stamp{position:absolute;left:50%;top:45%;translate:-50% -50%;rotate:-12deg;padding:.45em .7em;border:3px solid var(--mint);border-radius:12px;background:rgba(20,15,34,.75);color:var(--mint);font:800 clamp(1rem,2.3vw,1.55rem)/1 var(--f-display);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;opacity:0}
+.result{position:absolute;left:7%;right:7%;bottom:6%;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;font-weight:600;font-size:.86rem;line-height:1.3;text-align:left;opacity:0}
+.result svg{width:20px;height:20px;flex:none}
+.result--ok{background:rgba(20,15,34,.85);color:var(--mint);border:1px solid rgba(70,215,160,.4)}
+.result--bad{background:rgba(20,15,34,.85);color:var(--anor-light);border:1px solid rgba(239,62,92,.5)}
+.scanner.is-static .stamp,.scanner.is-static .result--ok{opacity:1}
+.rnotes{list-style:none;display:grid;gap:12px;max-width:min(460px,56vh);margin:22px auto 0;padding:0}
+.rnotes li{display:flex;gap:12px;align-items:flex-start;font-size:.9rem;color:var(--muted);line-height:1.5}
+.rnotes svg{width:20px;height:20px;flex:none;color:var(--saffron);margin-top:1px}
+@media (min-width:881px) and (min-height:760px){.redeem.is-pinnable{min-height:100vh;display:flex;align-items:center;padding-block:96px 40px}}
+@media (max-width:880px){.redeem__grid{grid-template-columns:minmax(0,1fr)}}
+
+/* partners (paper band) */
+.partners{background:var(--paper);color:var(--paper-ink);border-radius:clamp(28px,4vw,56px);margin-inline:clamp(0px,1.4vw,20px)}
+.partners .eyebrow{color:var(--anor-deep)}
+.partners .lead{color:var(--paper-muted)}
+.partners .btn--ghost{--fg:var(--paper-ink);border-color:var(--paper-line)}
+.partners__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,96px)}
+.partners__copy{min-width:0}
+.psteps{--p:1;position:relative;list-style:none;display:grid;gap:26px;margin:40px 0 44px;padding:0}
+.psteps::before,.psteps::after{content:"";position:absolute;left:17px;top:18px;bottom:18px;width:2px;border-radius:2px}
+.psteps::before{background:var(--paper-line)}
+.psteps::after{background:var(--anor);transform-origin:top;transform:scaleY(var(--p))}
+.pstep{position:relative;z-index:1;display:grid;grid-template-columns:36px minmax(0,1fr);gap:18px}
+.pstep__n{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:2px solid var(--paper-line);color:var(--paper-muted);font:600 .8rem/1 var(--f-mono);transition:background-color .45s var(--ease),border-color .45s,color .45s,box-shadow .45s}
+.pstep.is-on .pstep__n{background:var(--anor);border-color:var(--anor);color:var(--white);box-shadow:0 0 0 6px rgba(239,62,92,.14)}
+.pstep h3{font-size:1.12rem;margin-top:7px}
+.pstep p{margin-top:6px;color:var(--paper-muted);max-width:34em}
+.partners__actions{display:flex;flex-wrap:wrap;gap:12px}
+.partners__mock{min-width:0}
+.pform-sticky{position:sticky;top:110px}
+.pform{display:grid;gap:16px;padding:clamp(20px,3vw,28px);border-radius:26px;background:var(--white);color:var(--paper-ink);box-shadow:0 0 0 1px var(--paper-line),0 40px 70px -40px rgba(26,20,48,.45)}
+.pform__head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pform__head b{font:700 1.02rem/1.2 var(--f-display);letter-spacing:-.02em}
+.pform__bar{height:3px;border-radius:3px;background:var(--paper-2);overflow:hidden}
+.pform__bar i{display:block;height:100%;width:38%;border-radius:3px;background:var(--saffron);animation:load 1.5s var(--ease) infinite}
+.pform.is-live .pform__bar i{width:100%;background:var(--mint);animation:none;transition:width .6s var(--ease)}
+@keyframes load{from{transform:translateX(-100%)}to{transform:translateX(270%)}}
+.field{display:grid;gap:6px;min-width:0}
+.field > span:first-child{font:600 .64rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--paper-muted)}
+.input{padding:.75em .9em;border-radius:12px;border:1px solid var(--paper-line);background:var(--paper);font-size:.9rem;line-height:1.4;min-width:0;overflow-wrap:anywhere}
+.seg{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:12px;border:1px solid var(--paper-line);background:var(--paper)}
+.seg span{flex:1 1 auto;text-align:center;padding:.55em .6em;border-radius:9px;font-size:.8rem;color:var(--paper-muted)}
+.seg .is-on{background:var(--white);color:var(--paper-ink);font-weight:600;box-shadow:0 1px 3px rgba(26,20,48,.12)}
+.pform__foot{font-size:.74rem;color:var(--paper-muted);display:flex;gap:8px;align-items:center}
+.pform__foot svg{width:16px;height:16px;flex:none;color:var(--anor-deep)}
+@media (max-width:880px){.partners__grid{grid-template-columns:minmax(0,1fr)}.pform-sticky{position:static}}
+
+/* rules */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.stat{display:grid;gap:12px;align-content:start;padding:clamp(20px,2.4vw,28px);border-radius:22px;background:var(--ink-2);border:1px solid var(--line)}
+.stat__v{font:800 clamp(2.1rem,4.2vw,3.5rem)/1 var(--f-display);letter-spacing:-.04em;color:var(--saffron);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat p{color:var(--muted);font-size:.93rem;line-height:1.5}
+.guard{position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;margin-top:16px;padding:clamp(20px,2.6vw,30px) clamp(20px,2.6vw,30px) clamp(20px,2.6vw,30px) clamp(32px,3.6vw,44px);border-radius:22px;background:var(--ink-2);border:1px solid var(--line)}
+.guard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:var(--anor) var(--ikat-rich) 0 0/40px auto}
+.guard__ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:rgba(70,215,160,.12);color:var(--mint)}
+.guard__ico svg{width:26px;height:26px}
+.guard h3{font-size:1.1rem}
+.guard p{margin-top:6px;color:var(--muted)}
+@media (max-width:960px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.stats{gap:10px}.guard{grid-template-columns:minmax(0,1fr)}}
+
+/* faq */
+.faq__grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px);align-items:start}
+.faq__head{position:sticky;top:120px}
+.qa{border-top:1px solid var(--line)}
+.qa:last-child{border-bottom:1px solid var(--line)}
+.qa__q{appearance:none;border:0;background:transparent;width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:22px 0;text-align:left;cursor:pointer;color:var(--text);font:600 clamp(1rem,1.35vw,1.14rem)/1.4 var(--f-body)}
+.qa__icon{position:relative;width:34px;height:34px;flex:none;border-radius:50%;border:1px solid var(--ink-4);transition:transform .45s var(--ease),background-color .35s,border-color .35s}
+.qa__icon::before,.qa__icon::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;margin:-.75px 0 0 -6px;background:var(--text);transition:background-color .35s}
+.qa__icon::after{transform:rotate(90deg)}
+.qa__q:hover .qa__icon{border-color:var(--saffron)}
+.qa.is-open .qa__icon{transform:rotate(45deg);background:var(--saffron);border-color:var(--saffron)}
+.qa.is-open .qa__icon::before,.qa.is-open .qa__icon::after{background:var(--paper-ink)}
+.qa__a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
+.qa__a > div{overflow:hidden}
+.qa__a p{padding:0 52px 24px 0;color:var(--muted);max-width:42em}
+.qa.is-open .qa__a{grid-template-rows:1fr}
+@media (max-width:880px){.faq__grid{grid-template-columns:minmax(0,1fr)}.faq__head{position:static}.qa__a p{padding-right:0}}
+
+/* final cta */
+.cta{padding-block:clamp(24px,4vw,56px) clamp(84px,10vw,140px)}
+.cta__box{--rib:clamp(34px,5vw,64px);--rx:clamp(28px,15%,220px);--ry:clamp(40px,9%,84px);position:relative;overflow:hidden;min-height:clamp(440px,46vw,580px);padding:clamp(40px,7vw,96px) clamp(22px,6vw,80px) clamp(150px,16vw,190px);border-radius:clamp(28px,4vw,48px);border:1px solid var(--line);background:radial-gradient(110% 120% at 0% 0%,var(--ink-3),var(--ink-2) 62%)}
+.cta__rib{position:absolute;background:var(--anor) var(--ikat-rich) 0 0/56px auto;box-shadow:0 0 40px rgba(0,0,0,.45)}
+.cta__rib--v{top:0;bottom:0;right:var(--rx);width:var(--rib)}
+.cta__rib--h{left:0;right:0;bottom:var(--ry);height:var(--rib)}
+.cta__bow{position:absolute;z-index:1;right:calc(var(--rx) + var(--rib) / 2);bottom:calc(var(--ry) + var(--rib) / 2);width:0;height:0;font-size:clamp(18px,3vw,36px)}
+.cta__bow .bow{left:0;top:-1.4em}
+.cta__content{position:relative;z-index:2;max-width:min(680px,calc(100% - var(--rx) - var(--rib)))}
+.cta h2{font-size:clamp(1.9rem,4.8vw,4rem);line-height:1.04}
+.cta__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:2rem}
+@media (max-width:600px){.cta__box{--rx:22px;--rib:30px;--ry:36px}.cta__content{max-width:calc(100% - 44px)}}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding-block:56px 36px}
+.foot__grid{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:32px}
+.foot__brand p{margin-top:14px;color:var(--muted);max-width:26em;font-size:.94rem}
+.foot__col{display:grid;gap:10px;align-content:start;font-size:.92rem;color:var(--muted)}
+.foot__col b{color:var(--text);font:600 .7rem/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+.foot__col a{justify-self:start;color:var(--muted)}
+.foot__col a:hover{color:var(--text)}
+.foot__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font:500 .78rem/1.4 var(--f-mono)}
+@media (max-width:820px){.foot__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.foot__brand{grid-column:1/-1}}
+
+/* confetti */
+.confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:80}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+<div class="cursor" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a class="logo" href="#top" aria-label="Tuhfa"><span class="logo__mark"></span><span>tuhfa</span></a>
+    <nav class="nav__links" aria-label="Разделы">
+      <a href="#gifts" data-i18n="nav.gifts">Подарки</a>
+      <a href="#journey" data-i18n="nav.how">Как это работает</a>
+      <a href="#redeem" data-i18n="nav.redeem">Погашение</a>
+      <a href="#partners" data-i18n="nav.partners">Партнёрам</a>
+      <a href="#faq" data-i18n="nav.faq">Вопросы</a>
+    </nav>
+    <div class="nav__right">
+      <div class="lang" role="group" aria-label="Язык / Til">
+        <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-lang="uz" aria-pressed="false">UZ</button>
+      </div>
+      <a class="btn btn--primary btn--sm" data-bot href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="nav.cta">Открыть бота</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__bg" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span><span class="glow g3"></span></div>
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Подарки в Telegram · Узбекистан</p>
+        <h1 class="hero__title" data-i18n="hero.title" data-split>Подарите <em class="ikat-text">радость</em> прямо в&nbsp;Telegram</h1>
+        <p class="lead" data-i18n="hero.lead">Подарочные сертификаты магазинов Узбекистана и анимационные подарки. Выберите подарок, оплатите через Click или Payme и отправьте другу. Всё происходит внутри Telegram.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg magnetic" data-bot href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="hero.cta1">Выбрать подарок</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost btn--lg" href="#partners"><span data-i18n="hero.cta2">Подключить магазин</span></a>
+        </div>
+        <ul class="hero__facts">
+          <li data-i18n="hero.f1">Оплата через Click и Payme</li>
+          <li data-i18n="hero.f2">На узбекском и русском</li>
+          <li data-i18n="hero.f3">Работает 24/7</li>
+        </ul>
+      </div>
+
+      <div class="hero__stage" aria-hidden="true">
+        <div class="layer l-phone"><div class="px" data-depth="0.35"><div class="float">
+          <div class="phone phone--hero"><div class="screen"><div class="app">
+            <div class="app-head"><span data-i18n="ui.mygifts">Мои подарки</span><span class="app-count">3</span></div>
+            <div class="rows">
+              <div class="gift-row"><span class="gi gi--cert"></span><span class="gift-row__txt"><b data-i18n="ui.certBooks">Сертификат · Книги</b><small class="mono">200 000 <span data-i18n="cur">сум</span></small></span><span class="pill pill--ok" data-i18n="ui.stActive">Активен</span></div>
+              <div class="gift-row"><span class="gi gi--anim"></span><span class="gift-row__txt"><b data-i18n="ui.anorGift">Подарок «Анор»</b><small data-i18n="ui.animation">Анимация</small></span><span class="pill pill--sky" data-i18n="ui.stOpened">Открыт</span></div>
+              <div class="gift-row is-muted"><span class="gi gi--flow"></span><span class="gift-row__txt"><b data-i18n="ui.certFlowers">Сертификат · Цветы</b><small class="mono">150 000 <span data-i18n="cur">сум</span></small></span><span class="pill pill--muted" data-i18n="ui.stSent">Переслан</span></div>
+            </div>
+            <div class="app-qr"><div class="qr" data-qr="4"></div><div class="app-qr__txt"><b data-i18n="ui.showQr">Покажите QR-код на кассе</b><small class="mono" data-i18n="ui.validFull">Действует до 31.12.2026</small></div></div>
+          </div></div></div>
+        </div></div></div>
+
+        <div class="layer l-cert"><div class="px" data-depth="1.1"><div class="float f2">
+          <div class="cert cert--mini">
+            <div class="cert__top"><span class="cert__shop" data-i18n="cert.shop">Книжная лавка</span><span class="cert__tag" data-i18n="cert.tag">Сертификат</span></div>
+            <div class="cert__amount">200 000 <span class="cur" data-i18n="cur">сум</span></div>
+            <div class="cert__bottom"><small class="mono" data-i18n="cert.until">до 31.12.2026</small><div class="qr" data-qr="9"></div></div>
+          </div>
+        </div></div></div>
+
+        <div class="layer l-box"><div class="px" data-depth="0.8"><div class="float f3">
+          <div class="giftbox" id="heroBox" data-cursor>
+            <span class="giftbox__glow"></span>
+            <span class="giftbox__inside"><svg viewBox="0 0 120 130"><defs><radialGradient id="pgA" cx="38%" cy="40%" r="70%"><stop offset="0" style="stop-color:var(--anor-light)"/><stop offset=".55" style="stop-color:var(--anor)"/><stop offset="1" style="stop-color:var(--anor-deep)"/></radialGradient></defs><path d="M45 28 L49 8 L55 21 L60 4 L65 21 L71 8 L75 28 Z" style="fill:var(--anor-deep)"/><circle cx="60" cy="77" r="48" fill="url(#pgA)"/><ellipse cx="42" cy="58" rx="13" ry="7.5" transform="rotate(-35 42 58)" style="fill:var(--white);opacity:.35"/></svg></span>
+            <span class="giftbox__body"><i class="rib rib--v"></i><i class="rib rib--h"></i></span>
+            <span class="giftbox__lid"><i class="rib rib--v"></i><span class="bow"><i></i><i></i></span></span>
+          </div>
+        </div></div></div>
+
+        <div class="layer l-pay"><div class="px" data-depth="1.4"><div class="float f4">
+          <div class="chip"><span class="chip__ico chip__ico--ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span data-i18n="hero.chipPay">Оплачено через Payme</span></div>
+        </div></div></div>
+
+        <div class="layer l-fwd"><div class="px" data-depth="0.6"><div class="float f5">
+          <div class="chip"><span class="chip__ico chip__ico--sky"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span data-i18n="hero.chipFwd">Переслано Азизе</span></div>
+        </div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIBBONS -->
+  <div class="bands" aria-hidden="true">
+    <div class="band band--ikat"></div>
+    <div class="band band--text"><div class="band__track">
+      <div class="band__group">
+        <span class="band__item" data-i18n="band.1">Сертификаты магазинов</span>
+        <span class="band__item" data-i18n="band.2">Анимационные подарки</span>
+        <span class="band__item" data-i18n="band.3">Click и Payme</span>
+        <span class="band__item" data-i18n="band.4">QR-код на кассе</span>
+        <span class="band__item">O‘zbekcha · Русский</span>
+        <span class="band__item">24/7</span>
+      </div>
+      <div class="band__group">
+        <span class="band__item" data-i18n="band.1">Сертификаты магазинов</span>
+        <span class="band__item" data-i18n="band.2">Анимационные подарки</span>
+        <span class="band__item" data-i18n="band.3">Click и Payme</span>
+        <span class="band__item" data-i18n="band.4">QR-код на кассе</span>
+        <span class="band__item">O‘zbekcha · Русский</span>
+        <span class="band__item">24/7</span>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- GIFTS -->
+  <section class="section gifts" id="gifts">
+    <span class="deco deco--1" data-speed="0.8" aria-hidden="true"></span>
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow" data-i18n="g.eyebrow">Что подарить</p>
+        <h2 data-i18n="g.title" data-split>Два вида подарков на старте</h2>
+        <p class="lead" data-i18n="g.lead" data-reveal>Сертификат, чтобы друг сам выбрал подарок в любимом магазине. Или анимационный подарок, который радует сразу.</p>
+      </header>
+
+      <div class="gifts__grid">
+        <article class="gcard" data-tilt data-reveal>
+          <div class="gcard__media">
+            <div class="cert-stage" data-speed="0.12">
+              <div class="cert" id="certDemo">
+                <div class="cert__top"><span class="cert__shop"><i class="cert__logo"></i><span data-i18n="cert.shop">Книжная лавка</span></span><span class="cert__tag" data-i18n="cert.tag">Сертификат</span></div>
+                <div class="cert__amount"><span id="certAmt">200 000</span> <span class="cur" data-i18n="cur">сум</span></div>
+                <div class="cert__bottom"><div class="cert__valid"><small data-i18n="cert.validLabel">Срок действия</small><b>31.12.2026</b></div><div class="qr" data-qr="7"></div></div>
+              </div>
+            </div>
+            <div class="picker">
+              <p class="picker__label mono" id="pickLabel" data-i18n="g.pick">Выберите номинал</p>
+              <div class="amounts" role="radiogroup" aria-labelledby="pickLabel">
+                <button type="button" class="amt" role="radio" aria-checked="false" data-amt="100000">100 000</button>
+                <button type="button" class="amt" role="radio" aria-checked="true" data-amt="200000">200 000</button>
+                <button type="button" class="amt" role="radio" aria-checked="false" data-amt="500000">500 000</button>
+                <button type="button" class="amt" role="radio" aria-checked="false" data-amt="custom" data-i18n="g.custom">Своя сумма</button>
+              </div>
+              <div class="custom" id="customBox" hidden>
+                <label for="amtRange" data-i18n="g.range">Сумма на выбор покупателя</label>
+                <input type="range" id="amtRange" min="50000" max="2000000" step="10000" value="350000">
+              </div>
+            </div>
+          </div>
+          <div class="gcard__body">
+            <span class="gcard__label" data-i18n="g.c1label">Сертификат партнёра</span>
+            <h3 data-i18n="g.c1title">Подарочный сертификат</h3>
+            <p data-i18n="g.c1text">Сертификат магазина-партнёра на фиксированную сумму или на сумму по выбору покупателя. Получатель показывает QR-код на кассе.</p>
+            <ul class="ticks">
+              <li data-i18n="g.c1b1">Срок действия указан на сертификате</li>
+              <li data-i18n="g.c1b2">Погашается только один раз</li>
+              <li data-i18n="g.c1b3">Каждый сертификат проверен перед публикацией</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="gcard" data-tilt data-reveal>
+          <div class="gcard__media gcard__media--box">
+            <span class="hint mono" data-i18n="g.hint">Нажмите на коробку</span>
+            <div class="box-zone">
+              <div class="giftbox" id="demoBox" data-cursor role="button" tabindex="0" aria-label="Открыть подарок">
+                <span class="giftbox__glow"></span>
+                <span class="giftbox__inside"><svg viewBox="0 0 120 130"><defs><radialGradient id="pgB" cx="38%" cy="40%" r="70%"><stop offset="0" style="stop-color:var(--anor-light)"/><stop offset=".55" style="stop-color:var(--anor)"/><stop offset="1" style="stop-color:var(--anor-deep)"/></radialGradient></defs><path d="M45 28 L49 8 L55 21 L60 4 L65 21 L71 8 L75 28 Z" style="fill:var(--anor-deep)"/><circle cx="60" cy="77" r="48" fill="url(#pgB)"/><ellipse cx="42" cy="58" rx="13" ry="7.5" transform="rotate(-35 42 58)" style="fill:var(--white);opacity:.35"/></svg></span>
+                <span class="giftbox__body"><i class="rib rib--v"></i><i class="rib rib--h"></i></span>
+                <span class="giftbox__lid"><i class="rib rib--v"></i><span class="bow"><i></i><i></i></span></span>
+              </div>
+            </div>
+            <div class="box-actions">
+              <button type="button" class="btn btn--primary" id="openBtn"><span id="openLabel">Открыть подарок</span></button>
+              <p class="box-status" id="boxStatus" aria-live="polite"></p>
+            </div>
+          </div>
+          <div class="gcard__body">
+            <span class="gcard__label" data-i18n="g.c2label">Без похода в магазин</span>
+            <h3 data-i18n="g.c2title">Анимационный подарок</h3>
+            <p data-i18n="g.c2text">Цифровой подарок с анимацией открытия. Получатель видит её при первом просмотре, а подарок остаётся в его коллекции.</p>
+            <ul class="ticks">
+              <li data-i18n="g.c2b1">Открывается прямо в Telegram</li>
+              <li data-i18n="g.c2b2">Можно оставить себе или переслать</li>
+              <li data-i18n="g.c2b3">Ничего не нужно сканировать</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section class="section journey" id="journey">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow" data-i18n="j.eyebrow">Путь подарка</p>
+        <h2 data-i18n="j.title" data-split>От каталога до друга за пять шагов</h2>
+        <p class="lead" data-i18n="j.lead" data-reveal>Бот присылает уведомления, а покупка и хранение подарков проходят в мини-приложении.</p>
+      </header>
+
+      <div class="journey__grid">
+        <div class="journey__phone" aria-hidden="true">
+          <div class="journey__sticky">
+            <div class="phone"><div class="screen" id="storyScreen">
+              <!-- 1: catalog -->
+              <div class="scr is-active">
+                <div class="app-head"><span data-i18n="ui.catalog">Каталог</span><span class="app-count">MVP</span></div>
+                <div class="tabs"><span class="is-on" data-i18n="ui.tabCerts">Сертификаты</span><span data-i18n="ui.tabAnim">Анимации</span></div>
+                <div class="tiles">
+                  <div class="tile"><i class="art-1"></i><b data-i18n="ui.books">Книги</b><small class="mono">200 000</small></div>
+                  <div class="tile"><i class="art-2"></i><b data-i18n="ui.flowers">Цветы</b><small class="mono">150 000</small></div>
+                  <div class="tile"><i class="art-3"></i><b data-i18n="ui.coffee">Кофейня</b><small class="mono" data-i18n="ui.from">от 50 000</small></div>
+                  <div class="tile"><i class="art-4"></i><b data-i18n="ui.anor">«Анор»</b><small data-i18n="ui.animation">Анимация</small></div>
+                </div>
+              </div>
+              <!-- 2: payment -->
+              <div class="scr">
+                <div class="app-head"><span data-i18n="ui.pay">Оплата</span></div>
+                <div class="order"><span data-i18n="ui.certBooks">Сертификат · Книги</span><b>200 000 <span data-i18n="cur">сум</span></b></div>
+                <div class="label-sm" data-i18n="ui.method">Способ оплаты</div>
+                <div class="payopt is-on"><span class="radio"></span>Click</div>
+                <div class="payopt"><span class="radio"></span>Payme</div>
+                <div class="app-btn" data-i18n="ui.payBtn">Оплатить</div>
+              </div>
+              <!-- 3: my gifts -->
+              <div class="scr">
+                <div class="toast"><span class="toast__ico"></span><span><b data-i18n="ui.bot">Бот Tuhfa</b><small data-i18n="ui.botMsg">Оплата прошла. Подарок уже в «Моих подарках»</small></span></div>
+                <div class="app-head"><span data-i18n="ui.mygifts">Мои подарки</span></div>
+                <div class="rows">
+                  <div class="gift-row is-new"><span class="gi gi--cert"></span><span class="gift-row__txt"><b data-i18n="ui.certBooks">Сертификат · Книги</b><small class="mono">200 000 <span data-i18n="cur">сум</span></small></span><span class="pill pill--new" data-i18n="ui.stNew">Новый</span></div>
+                  <div class="gift-row"><span class="gi gi--anim"></span><span class="gift-row__txt"><b data-i18n="ui.anorGift">Подарок «Анор»</b><small data-i18n="ui.animation">Анимация</small></span><span class="pill pill--sky" data-i18n="ui.stOpened">Открыт</span></div>
+                </div>
+              </div>
+              <!-- 4: forward -->
+              <div class="scr">
+                <div class="app-head"><span data-i18n="ui.sendTo">Кому отправить?</span></div>
+                <div class="contacts">
+                  <div class="contact is-on"><span class="ava a1" data-i18n="ui.c1i">А</span><span data-i18n="ui.c1">Азиза</span><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></div>
+                  <div class="contact"><span class="ava a2" data-i18n="ui.c2i">Т</span><span data-i18n="ui.c2">Тимур</span></div>
+                  <div class="contact"><span class="ava a3" data-i18n="ui.c3i">М</span><span data-i18n="ui.c3">Мадина</span></div>
+                </div>
+                <div class="label-sm" data-i18n="ui.history">История</div>
+                <div class="gift-row is-muted"><span class="gi gi--cert"></span><span class="gift-row__txt"><b data-i18n="ui.certBooks">Сертификат · Книги</b><small data-i18n="ui.toAziza">Для Азизы</small></span><span class="pill pill--muted" data-i18n="ui.stSent">Переслан</span></div>
+                <div class="app-btn" data-i18n="ui.fwdBtn">Переслать</div>
+              </div>
+              <!-- 5: QR -->
+              <div class="scr">
+                <div class="app-head"><span data-i18n="ui.certBooks">Сертификат · Книги</span></div>
+                <div class="bigqr"><div class="qr" data-qr="3"></div></div>
+                <p class="scr-note" data-i18n="ui.showQr">Покажите QR-код на кассе</p>
+                <p class="valid mono" data-i18n="ui.validFull">Действует до 31.12.2026</p>
+                <div class="gift-row"><span class="gi gi--anim"></span><span class="gift-row__txt"><b data-i18n="ui.anorGift">Подарок «Анор»</b><small data-i18n="ui.noShop">Открывается в приложении</small></span><span class="pill pill--sky" data-i18n="ui.stOpened">Открыт</span></div>
+              </div>
+            </div></div>
+            <div class="jdots"><i class="is-on"></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+
+        <ol class="steps">
+          <li class="step is-active"><span class="step__n">01</span><h3 data-i18n="j.s1t">Выберите подарок</h3><p data-i18n="j.s1p">Каталог сертификатов и анимационных подарков открывается в мини-приложении внутри Telegram.</p></li>
+          <li class="step"><span class="step__n">02</span><h3 data-i18n="j.s2t">Оплатите через Click или Payme</h3><p data-i18n="j.s2p">Два самых привычных способа оплаты в Узбекистане.</p></li>
+          <li class="step"><span class="step__n">03</span><h3 data-i18n="j.s3t">Получите в «Мои подарки»</h3><p data-i18n="j.s3p">После оплаты подарок появляется в вашем разделе, а бот присылает уведомление.</p></li>
+          <li class="step"><span class="step__n">04</span><h3 data-i18n="j.s4t">Оставьте себе или перешлите</h3><p data-i18n="j.s4p">Перешлите подарок другу через Telegram. У друга появится подарок, а у вас останется запись с пометкой «переслан».</p></li>
+          <li class="step"><span class="step__n">05</span><h3 data-i18n="j.s5t">Откройте или погасите</h3><p data-i18n="j.s5p">Анимационный подарок открывается прямо в приложении. Сертификат погашается по QR-коду в магазине партнёра.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- REDEEM -->
+  <section class="section redeem" id="redeem">
+    <div class="wrap redeem__grid">
+      <div class="redeem__copy">
+        <p class="eyebrow" data-i18n="r.eyebrow">Погашение сертификата</p>
+        <h2 data-i18n="r.title" data-split>Один QR-код. Одно погашение.</h2>
+        <p class="lead" data-i18n="r.lead">Партнёр сканирует код камерой телефона или кассовым сканером. Система подтверждает погашение и блокирует повторное использование.</p>
+        <ol class="rsteps">
+          <li><span class="rsteps__n">01</span><span data-i18n="r.s1">Получатель показывает QR-код в магазине</span></li>
+          <li><span class="rsteps__n">02</span><span data-i18n="r.s2">Партнёр сканирует код</span></li>
+          <li><span class="rsteps__n">03</span><span data-i18n="r.s3">Система подтверждает погашение</span></li>
+          <li class="is-bad"><span class="rsteps__n">04</span><span data-i18n="r.s4">Повторная попытка отклоняется</span></li>
+        </ol>
+      </div>
+      <div class="redeem__stage">
+        <div class="scanner" id="scanner">
+          <span class="scanner__label mono"><i></i><span data-i18n="r.cam">Камера партнёра</span></span>
+          <div class="scanner__frame"><i></i><i></i><i></i><i></i></div>
+          <div class="rcert">
+            <div class="rcert__top"><span data-i18n="cert.shop">Книжная лавка</span><span data-i18n="cert.tag">Сертификат</span></div>
+            <div class="qr" data-qr="5"></div>
+            <div class="rcert__amt">200 000 <span data-i18n="cur">сум</span></div>
+          </div>
+          <span class="laser"></span>
+          <span class="flash flash--ok"></span>
+          <span class="flash flash--bad"></span>
+          <span class="stamp" data-i18n="r.stamp">Погашен</span>
+          <div class="result result--ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="r.ok">Сертификат погашен</span></div>
+          <div class="result result--bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="r.bad">Уже погашен. Повторно нельзя</span></div>
+        </div>
+        <ul class="rnotes">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="12" height="12" rx="3"/><path d="M9 3h9a3 3 0 0 1 3 3v9"/></svg><span data-i18n="r.n1">Сертификат не погасить дважды, даже если QR предъявят одновременно в двух местах.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="r.n2">Сертификат с истёкшим сроком действия погасить нельзя.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section partners" id="partners">
+    <div class="wrap partners__grid">
+      <div class="partners__copy">
+        <p class="eyebrow" data-i18n="p.eyebrow">Для магазинов</p>
+        <h2 data-i18n="p.title" data-split>Продавайте сертификаты там, где покупатели уже общаются</h2>
+        <p class="lead" data-i18n="p.lead">Подключите магазин к Tuhfa. Ваши подарочные сертификаты появятся в каталоге, а для погашения хватит телефона.</p>
+        <ol class="psteps">
+          <li class="pstep"><span class="pstep__n">1</span><div><h3 data-i18n="p.s1t">Заявка</h3><p data-i18n="p.s1p">Подайте заявку через форму или получите аккаунт от администратора сервиса.</p></div></li>
+          <li class="pstep"><span class="pstep__n">2</span><div><h3 data-i18n="p.s2t">Подтверждение</h3><p data-i18n="p.s2p">Доступ в кабинет партнёра открывается после проверки администратором.</p></div></li>
+          <li class="pstep"><span class="pstep__n">3</span><div><h3 data-i18n="p.s3t">Сертификат</h3><p data-i18n="p.s3p">Укажите магазин, сумму, описание и срок действия. Сумма бывает фиксированной или на выбор покупателя.</p></div></li>
+          <li class="pstep"><span class="pstep__n">4</span><div><h3 data-i18n="p.s4t">Модерация</h3><p data-i18n="p.s4p">Сертификат проверяет администратор. После одобрения он появляется в каталоге.</p></div></li>
+          <li class="pstep"><span class="pstep__n">5</span><div><h3 data-i18n="p.s5t">Погашение</h3><p data-i18n="p.s5p">Сканируйте QR-код покупателя камерой телефона или кассовым сканером.</p></div></li>
+        </ol>
+        <div class="partners__actions">
+          <a class="btn btn--primary btn--lg magnetic" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="p.cta">Стать партнёром</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost btn--lg" href="#redeem"><span data-i18n="p.cta2">Как проходит погашение</span></a>
+        </div>
+      </div>
+      <div class="partners__mock">
+        <div class="pform-sticky">
+          <div class="pform" id="pform" data-reveal>
+            <div class="pform__head"><b data-i18n="p.formTitle">Новый сертификат</b><span class="pill pill--wait" id="pStatus">На проверке</span></div>
+            <div class="pform__bar"><i></i></div>
+            <div class="field"><span data-i18n="p.fShop">Магазин</span><div class="input" data-i18n="cert.shop">Книжная лавка</div></div>
+            <div class="field"><span data-i18n="p.fAmount">Сумма</span><div class="seg"><span class="is-on" data-i18n="p.fFixed">Фиксированная</span><span data-i18n="p.fChoice">На выбор покупателя</span></div><div class="input mono">200 000 <span data-i18n="cur">сум</span></div></div>
+            <div class="field"><span data-i18n="p.fDesc">Описание</span><div class="input" data-i18n="p.fDescV">Книги, канцелярия и подарочная упаковка</div></div>
+            <div class="field"><span data-i18n="p.fValid">Срок действия</span><div class="input mono">31.12.2026</div></div>
+            <div class="pform__foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6l8-3z"/></svg><span data-i18n="p.formNote">Опубликовать сертификат без проверки нельзя</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section class="section rules" id="rules">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow" data-i18n="s.eyebrow">Правила сервиса</p>
+        <h2 data-i18n="s.title" data-split>Правила, которые защищают всех</h2>
+      </header>
+      <div class="stats">
+        <div class="stat" data-reveal><div class="stat__v"><span data-count="24">24</span>/7</div><p data-i18n="s.1">Бот и сервис доступны круглосуточно</p></div>
+        <div class="stat" data-reveal><div class="stat__v"><span data-count="100">100</span>%</div><p data-i18n="s.2">сертификатов проходят модерацию до публикации</p></div>
+        <div class="stat" data-reveal><div class="stat__v">1</div><p data-i18n="s.3">QR-код погашается только один раз</p></div>
+        <div class="stat" data-reveal><div class="stat__v"><span data-count="2">2</span></div><p data-i18n="s.4">языка интерфейса: узбекский и русский</p></div>
+      </div>
+      <div class="guard" data-reveal>
+        <span class="guard__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span>
+        <div><h3 data-i18n="s.gt">Купленный сертификат остаётся действительным</h3><p data-i18n="s.gp">Если продажи магазина приостановлены, уже купленные и не погашенные сертификаты не отзываются. Ограничение касается только новых продаж.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="wrap faq__grid">
+      <header class="faq__head">
+        <p class="eyebrow" data-i18n="f.eyebrow">Вопросы</p>
+        <h2 data-i18n="f.title" data-split>Частые вопросы</h2>
+        <p class="lead" data-i18n="f.lead">Коротко о главном перед первой покупкой.</p>
+      </header>
+      <div class="faq__list">
+        <div class="qa is-open"><button type="button" class="qa__q" id="q1" aria-expanded="true" aria-controls="a1"><span data-i18n="f.q1">Как отправить подарок другу?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a1" role="region" aria-labelledby="q1"><div><p data-i18n="f.a1">Откройте подарок в разделе «Мои подарки» и перешлите его другу через Telegram. Подарок сразу появится у получателя.</p></div></div></div>
+        <div class="qa"><button type="button" class="qa__q" id="q2" aria-expanded="false" aria-controls="a2"><span data-i18n="f.q2">Можно ли пользоваться подарком после пересылки?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a2" role="region" aria-labelledby="q2"><div><p data-i18n="f.a2">Нет. Право на подарок переходит к получателю, а у вас остаётся запись в истории с пометкой «переслан».</p></div></div></div>
+        <div class="qa"><button type="button" class="qa__q" id="q3" aria-expanded="false" aria-controls="a3"><span data-i18n="f.q3">Что будет, если срок сертификата истёк?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a3" role="region" aria-labelledby="q3"><div><p data-i18n="f.a3">Сертификат с истёкшим сроком погасить нельзя. Срок действия указан в карточке сертификата, проверьте его перед покупкой.</p></div></div></div>
+        <div class="qa"><button type="button" class="qa__q" id="q4" aria-expanded="false" aria-controls="a4"><span data-i18n="f.q4">Можно ли вернуть деньги за подарок?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a4" role="region" aria-labelledby="q4"><div><p data-i18n="f.a4">В текущей версии сервиса покупка окончательная: возврат и отмена оплаченного заказа не предусмотрены.</p></div></div></div>
+        <div class="qa"><button type="button" class="qa__q" id="q5" aria-expanded="false" aria-controls="a5"><span data-i18n="f.q5">Нужно ли идти в магазин с анимационным подарком?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a5" role="region" aria-labelledby="q5"><div><p data-i18n="f.a5">Нет. Анимационный подарок открывается прямо в приложении и остаётся в вашей коллекции.</p></div></div></div>
+        <div class="qa"><button type="button" class="qa__q" id="q6" aria-expanded="false" aria-controls="a6"><span data-i18n="f.q6">Как магазину стать партнёром?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a6" role="region" aria-labelledby="q6"><div><p data-i18n="f.a6">Подайте заявку. После проверки администратором откроется кабинет партнёра, где вы создаёте сертификаты и подтверждаете их погашение.</p></div></div></div>
+        <div class="qa"><button type="button" class="qa__q" id="q7" aria-expanded="false" aria-controls="a7"><span data-i18n="f.q7">На каких языках работает сервис?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a7" role="region" aria-labelledby="q7"><div><p data-i18n="f.a7">На узбекском и русском. Язык можно сменить в любой момент.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="wrap">
+      <div class="cta__box">
+        <span class="cta__rib cta__rib--v" aria-hidden="true"></span>
+        <span class="cta__rib cta__rib--h" aria-hidden="true"></span>
+        <span class="cta__bow" aria-hidden="true"><span class="bow"><i></i><i></i></span></span>
+        <div class="cta__content">
+          <h2 data-i18n="c.title" data-split>Подарите что-нибудь приятное сегодня</h2>
+          <p class="lead" data-i18n="c.lead">Откройте бота, выберите подарок и отправьте его другу за пару минут.</p>
+          <div class="cta__actions">
+            <a class="btn btn--primary btn--lg magnetic" data-bot href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="nav.cta">Открыть бота</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn--ghost btn--lg" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="p.cta">Стать партнёром</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__brand">
+      <a class="logo" href="#top" aria-label="Tuhfa"><span class="logo__mark"></span><span>tuhfa</span></a>
+      <p data-i18n="ft.desc">Сервис виртуальных подарков в Telegram для Узбекистана.</p>
+    </div>
+    <nav class="foot__col" aria-label="Покупателям"><b data-i18n="ft.buyers">Покупателям</b><a class="ulink" href="#gifts" data-i18n="nav.gifts">Подарки</a><a class="ulink" href="#journey" data-i18n="nav.how">Как это работает</a><a class="ulink" href="#faq" data-i18n="nav.faq">Вопросы</a></nav>
+    <nav class="foot__col" aria-label="Партнёрам"><b data-i18n="nav.partners">Партнёрам</b><a class="ulink" href="#partners" data-i18n="ft.connect">Подключение</a><a class="ulink" href="#redeem" data-i18n="nav.redeem">Погашение</a></nav>
+    <div class="foot__col"><b data-i18n="ft.pay">Оплата</b><span>Click</span><span>Payme</span></div>
+  </div>
+  <div class="wrap foot__bottom"><span>© 2026 Tuhfa</span><span>O‘zbekcha · Русский</span></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Настройки: ссылки на бота ---------- */
+  var BOT_URL = 'https://t.me/';          // замените на ссылку бота, например https://t.me/your_bot
+  var PARTNER_URL = 'https://t.me/';      // например https://t.me/your_bot?start=partner
+
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(pointer: fine)').matches;
+  var G = window.gsap, ST = window.ScrollTrigger;
+  var animate = !!(G && ST) && !reduce;
+  var cssVar = function (n) { return getComputedStyle(root).getPropertyValue(n).trim(); };
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  $$('[data-bot]').forEach(function (a) { a.href = a.getAttribute('data-bot') === 'partner' ? PARTNER_URL : BOT_URL; });
+
+  function prng(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+  /* ---------- Икат: узор генерируется на canvas ---------- */
+  function ikat(base, colors, seed) {
+    var w = 120, h = 180, d = 2, row = 2;
+    var c = document.createElement('canvas'); c.width = w * d; c.height = h * d;
+    var x = c.getContext('2d'); x.scale(d, d);
+    var rnd = prng(seed);
+    x.fillStyle = base; x.fillRect(0, 0, w, h);
+    var rows = Math.ceil(h / row), jit = [];
+    for (var i = 0; i < rows; i++) jit.push((rnd() - 0.5) * 6);
+    var centers = [[w / 2, h / 2], [0, 0], [w, 0], [0, h], [w, h]];
+    var layers = [0.94, 0.66, 0.38, 0.14];
+    layers.forEach(function (r, li) {
+      x.fillStyle = colors[li];
+      for (var i = 0; i < rows; i++) {
+        var y = i * row;
+        centers.forEach(function (cn) {
+          var t = 1 - Math.abs(y + row / 2 - cn[1]) / (h / 2 * r);
+          if (t <= 0) return;
+          var half = Math.round((w / 2) * r * t / 3) * 3;
+          var j = jit[i] * (0.5 + r * 0.7);
+          x.fillRect(cn[0] - half + j, y, half * 2, row);
+        });
+      }
+    });
+    x.globalAlpha = 0.08; x.fillStyle = '#000';
+    for (var k = 0; k < rows; k += 3) if (rnd() > 0.6) x.fillRect(0, k * row, w, row);
+    return c.toDataURL('image/png');
+  }
+  try {
+    var bright = ikat(cssVar('--saffron'), [cssVar('--anor'), cssVar('--paper'), cssVar('--sky'), cssVar('--anor-deep')], 7);
+    var rich = ikat(cssVar('--anor'), [cssVar('--saffron'), cssVar('--ink-2'), cssVar('--sky'), cssVar('--paper')], 19);
+    root.style.setProperty('--ikat-bright', 'url(' + bright + ')');
+    root.style.setProperty('--ikat-rich', 'url(' + rich + ')');
+    root.classList.add('has-ikat');
+  } catch (e) { /* остаются сплошные цвета */ }
+
+  /* ---------- QR-узор (декоративный) ---------- */
+  function qr(seed) {
+    var n = 21, r = prng(seed * 7919), d = '';
+    function inF(x, y) { return (x < 8 && y < 8) || (x >= n - 8 && y < 8) || (x < 8 && y >= n - 8); }
+    for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) if (!inF(x, y) && r() < 0.47) d += 'M' + x + ' ' + y + 'h1v1h-1z';
+    function f(ox, oy) { return 'M' + ox + ' ' + oy + 'h7v7h-7zM' + (ox + 1) + ' ' + (oy + 1) + 'v5h5v-5zM' + (ox + 2) + ' ' + (oy + 2) + 'h3v3h-3z'; }
+    d += f(0, 0) + f(n - 7, 0) + f(0, n - 7);
+    return '<svg viewBox="-1 -1 ' + (n + 2) + ' ' + (n + 2) + '" shape-rendering="crispEdges" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="' + d + '"/></svg>';
+  }
+  $$('[data-qr]').forEach(function (el) { el.innerHTML = qr(+el.getAttribute('data-qr') || 1); });
+
+  /* ---------- Мобильная версия «пути подарка»: экран у каждого шага ---------- */
+  var storyScreens = $$('#storyScreen .scr');
+  $$('.steps .step').forEach(function (step, i) {
+    if (!storyScreens[i]) return;
+    var holder = document.createElement('div'); holder.className = 'step__phone'; holder.setAttribute('aria-hidden', 'true');
+    var phone = document.createElement('div'); phone.className = 'phone phone--mini';
+    var screen = document.createElement('div'); screen.className = 'screen';
+    var clone = storyScreens[i].cloneNode(true); clone.classList.add('is-active');
+    screen.appendChild(clone); phone.appendChild(screen); holder.appendChild(phone);
+    step.insertBefore(holder, step.firstChild);
+  });
+
+  /* ---------- Тексты: русский в разметке, узбекский здесь ---------- */
+  var UZ = {
+    'nav.gifts': 'Sovg‘alar', 'nav.how': 'Qanday ishlaydi', 'nav.redeem': 'Ishlatish', 'nav.partners': 'Hamkorlarga', 'nav.faq': 'Savollar', 'nav.cta': 'Botni ochish',
+    'hero.eyebrow': 'Telegramda sovg‘alar · O‘zbekiston',
+    'hero.title': 'Telegramda <em class="ikat-text">quvonch</em> hadya qiling',
+    'hero.lead': 'O‘zbekiston do‘konlarining sovg‘a sertifikatlari va animatsion sovg‘alar. Sovg‘ani tanlang, Click yoki Payme orqali to‘lang va do‘stingizga yuboring. Hammasi Telegram ichida.',
+    'hero.cta1': 'Sovg‘a tanlash', 'hero.cta2': 'Do‘konni ulash',
+    'hero.f1': 'Click va Payme orqali to‘lov', 'hero.f2': 'O‘zbek va rus tillarida', 'hero.f3': '24/7 ishlaydi',
+    'hero.chipPay': 'Payme orqali to‘landi', 'hero.chipFwd': 'Azizaga yuborildi',
+    'cur': 'so‘m',
+    'ui.mygifts': 'Mening sovg‘alarim', 'ui.certBooks': 'Sertifikat · Kitoblar', 'ui.certFlowers': 'Sertifikat · Gullar', 'ui.anorGift': '«Anor» sovg‘asi', 'ui.animation': 'Animatsiya',
+    'ui.stActive': 'Faol', 'ui.stOpened': 'Ochilgan', 'ui.stSent': 'Yuborilgan', 'ui.stNew': 'Yangi',
+    'ui.showQr': 'QR-kodni kassada ko‘rsating', 'ui.validFull': '31.12.2026 gacha amal qiladi',
+    'ui.catalog': 'Katalog', 'ui.tabCerts': 'Sertifikatlar', 'ui.tabAnim': 'Animatsiyalar', 'ui.books': 'Kitoblar', 'ui.flowers': 'Gullar', 'ui.coffee': 'Qahvaxona', 'ui.from': '50 000 dan', 'ui.anor': '«Anor»',
+    'ui.pay': 'To‘lov', 'ui.method': 'To‘lov usuli', 'ui.payBtn': 'To‘lash',
+    'ui.bot': 'Tuhfa bot', 'ui.botMsg': 'To‘lov o‘tdi. Sovg‘a «Mening sovg‘alarim»da',
+    'ui.sendTo': 'Kimga yuborasiz?', 'ui.c1': 'Aziza', 'ui.c2': 'Temur', 'ui.c3': 'Madina', 'ui.c1i': 'A', 'ui.c2i': 'T', 'ui.c3i': 'M',
+    'ui.history': 'Tarix', 'ui.toAziza': 'Aziza uchun', 'ui.fwdBtn': 'Yuborish', 'ui.noShop': 'Ilovada ochiladi',
+    'cert.shop': 'Kitob do‘koni', 'cert.tag': 'Sertifikat', 'cert.until': '31.12.2026 gacha', 'cert.validLabel': 'Amal qilish muddati',
+    'band.1': 'Do‘kon sertifikatlari', 'band.2': 'Animatsion sovg‘alar', 'band.3': 'Click va Payme', 'band.4': 'Kassada QR-kod',
+    'g.eyebrow': 'Nima sovg‘a qilish mumkin', 'g.title': 'Boshlanishiga ikki xil sovg‘a',
+    'g.lead': 'Do‘stingiz sevimli do‘konidan sovg‘ani o‘zi tanlashi uchun sertifikat. Yoki darhol quvontiradigan animatsion sovg‘a.',
+    'g.pick': 'Nominalni tanlang', 'g.custom': 'O‘z summangiz', 'g.range': 'Xaridor tanlagan summa',
+    'g.c1label': 'Hamkor sertifikati', 'g.c1title': 'Sovg‘a sertifikati',
+    'g.c1text': 'Hamkor do‘konning qat’iy summadagi yoki xaridor tanlagan summadagi sertifikati. Qabul qiluvchi kassada QR-kodni ko‘rsatadi.',
+    'g.c1b1': 'Amal qilish muddati sertifikatda ko‘rsatilgan', 'g.c1b2': 'Faqat bir marta ishlatiladi', 'g.c1b3': 'Har bir sertifikat e’lon qilinishidan oldin tekshiriladi',
+    'g.hint': 'Qutini bosing',
+    'g.c2label': 'Do‘konga bormasdan', 'g.c2title': 'Animatsion sovg‘a',
+    'g.c2text': 'Ochilish animatsiyasiga ega raqamli sovg‘a. Qabul qiluvchi uni birinchi ko‘rganda animatsiya ijro etiladi, sovg‘a esa uning to‘plamida qoladi.',
+    'g.c2b1': 'To‘g‘ridan-to‘g‘ri Telegramda ochiladi', 'g.c2b2': 'O‘zingizga qoldirish yoki yuborish mumkin', 'g.c2b3': 'Hech narsani skanerlash shart emas',
+    'j.eyebrow': 'Sovg‘a yo‘li', 'j.title': 'Katalogdan do‘stingizgacha besh qadam',
+    'j.lead': 'Bot bildirishnomalar yuboradi, sovg‘alarni xarid qilish va saqlash esa mini-ilovada amalga oshadi.',
+    'j.s1t': 'Sovg‘ani tanlang', 'j.s1p': 'Sertifikatlar va animatsion sovg‘alar katalogi Telegram ichidagi mini-ilovada ochiladi.',
+    'j.s2t': 'Click yoki Payme orqali to‘lang', 'j.s2p': 'O‘zbekistonda eng ko‘p ishlatiladigan ikki to‘lov usuli.',
+    'j.s3t': '«Mening sovg‘alarim»da oling', 'j.s3p': 'To‘lovdan so‘ng sovg‘a bo‘limingizda paydo bo‘ladi, bot esa bildirishnoma yuboradi.',
+    'j.s4t': 'O‘zingizga qoldiring yoki yuboring', 'j.s4p': 'Sovg‘ani Telegram orqali do‘stingizga yuboring. Do‘stingizda sovg‘a paydo bo‘ladi, sizda esa «yuborilgan» belgili yozuv qoladi.',
+    'j.s5t': 'Oching yoki ishlating', 'j.s5p': 'Animatsion sovg‘a ilovaning o‘zida ochiladi. Sertifikat hamkor do‘konida QR-kod orqali ishlatiladi.',
+    'r.eyebrow': 'Sertifikatni ishlatish', 'r.title': 'Bitta QR-kod. Bir marta ishlatish.',
+    'r.lead': 'Hamkor kodni telefon kamerasi yoki kassa skaneri bilan skanerlaydi. Tizim ishlatilganini tasdiqlaydi va qayta foydalanishni bloklaydi.',
+    'r.s1': 'Qabul qiluvchi do‘konda QR-kodni ko‘rsatadi', 'r.s2': 'Hamkor kodni skanerlaydi', 'r.s3': 'Tizim ishlatilganini tasdiqlaydi', 'r.s4': 'Qayta urinish rad etiladi',
+    'r.cam': 'Hamkor kamerasi', 'r.stamp': 'Ishlatildi', 'r.ok': 'Sertifikat ishlatildi', 'r.bad': 'Allaqachon ishlatilgan. Qayta mumkin emas',
+    'r.n1': 'QR-kod bir vaqtda ikki joyda ko‘rsatilsa ham, sertifikatni ikki marta ishlatib bo‘lmaydi.',
+    'r.n2': 'Amal qilish muddati o‘tgan sertifikatni ishlatib bo‘lmaydi.',
+    'p.eyebrow': 'Do‘konlar uchun', 'p.title': 'Sertifikatlarni xaridorlar allaqachon muloqot qiladigan joyda soting',
+    'p.lead': 'Do‘koningizni Tuhfaga ulang. Sovg‘a sertifikatlaringiz katalogda paydo bo‘ladi, ishlatish uchun esa telefon kifoya.',
+    'p.s1t': 'Ariza', 'p.s1p': 'Shakl orqali ariza topshiring yoki servis administratoridan akkaunt oling.',
+    'p.s2t': 'Tasdiqlash', 'p.s2p': 'Hamkor kabinetiga kirish administrator tekshiruvidan so‘ng ochiladi.',
+    'p.s3t': 'Sertifikat', 'p.s3p': 'Do‘kon, summa, tavsif va amal qilish muddatini kiriting. Summa qat’iy yoki xaridor tanlovi bo‘yicha bo‘ladi.',
+    'p.s4t': 'Moderatsiya', 'p.s4p': 'Sertifikatni administrator tekshiradi. Tasdiqlangach, u katalogda paydo bo‘ladi.',
+    'p.s5t': 'Ishlatish', 'p.s5p': 'Xaridorning QR-kodini telefon kamerasi yoki kassa skaneri bilan skanerlang.',
+    'p.cta': 'Hamkor bo‘lish', 'p.cta2': 'Ishlatish qanday o‘tadi',
+    'p.formTitle': 'Yangi sertifikat', 'p.fShop': 'Do‘kon', 'p.fAmount': 'Summa', 'p.fFixed': 'Qat’iy', 'p.fChoice': 'Xaridor tanlovi',
+    'p.fDesc': 'Tavsif', 'p.fDescV': 'Kitoblar, kanselyariya va sovg‘a qadoqlari', 'p.fValid': 'Amal qilish muddati',
+    'p.formNote': 'Sertifikatni tekshiruvsiz e’lon qilib bo‘lmaydi',
+    's.eyebrow': 'Servis qoidalari', 's.title': 'Hammani himoya qiladigan qoidalar',
+    's.1': 'Bot va servis kecha-kunduz ishlaydi', 's.2': 'sertifikatlar e’lon qilinishidan oldin moderatsiyadan o‘tadi',
+    's.3': 'Har bir QR-kod faqat bir marta ishlatiladi', 's.4': 'interfeys tili: o‘zbek va rus',
+    's.gt': 'Sotib olingan sertifikat amal qilishda davom etadi',
+    's.gp': 'Do‘kon savdosi to‘xtatilsa ham, sotib olingan va hali ishlatilmagan sertifikatlar bekor qilinmaydi. Cheklov faqat yangi savdolarga tegishli.',
+    'f.eyebrow': 'Savollar', 'f.title': 'Ko‘p beriladigan savollar', 'f.lead': 'Birinchi xariddan oldin eng muhimlari.',
+    'f.q1': 'Sovg‘ani do‘stimga qanday yuboraman?', 'f.a1': '«Mening sovg‘alarim» bo‘limida sovg‘ani oching va uni Telegram orqali do‘stingizga yuboring. Sovg‘a darhol qabul qiluvchida paydo bo‘ladi.',
+    'f.q2': 'Yuborganimdan keyin sovg‘adan foydalana olamanmi?', 'f.a2': 'Yo‘q. Sovg‘aga bo‘lgan huquq qabul qiluvchiga o‘tadi, sizda esa tarixda «yuborilgan» belgili yozuv qoladi.',
+    'f.q3': 'Sertifikat muddati o‘tib ketsa nima bo‘ladi?', 'f.a3': 'Muddati o‘tgan sertifikatni ishlatib bo‘lmaydi. Amal qilish muddati sertifikat kartasida ko‘rsatilgan, xariddan oldin tekshiring.',
+    'f.q4': 'Sovg‘a uchun pulni qaytarish mumkinmi?', 'f.a4': 'Servisning joriy versiyasida xarid yakuniy hisoblanadi: to‘langan buyurtmani qaytarish yoki bekor qilish ko‘zda tutilmagan.',
+    'f.q5': 'Animatsion sovg‘a bilan do‘konga borish kerakmi?', 'f.a5': 'Yo‘q. Animatsion sovg‘a ilovaning o‘zida ochiladi va to‘plamingizda qoladi.',
+    'f.q6': 'Do‘kon qanday qilib hamkor bo‘ladi?', 'f.a6': 'Ariza topshiring. Administrator tekshiruvidan so‘ng hamkor kabineti ochiladi, unda sertifikatlar yaratasiz va ularning ishlatilishini tasdiqlaysiz.',
+    'f.q7': 'Servis qaysi tillarda ishlaydi?', 'f.a7': 'O‘zbek va rus tillarida. Tilni istalgan vaqtda almashtirish mumkin.',
+    'c.title': 'Bugun yoqimli sovg‘a qiling', 'c.lead': 'Botni oching, sovg‘a tanlang va bir necha daqiqada do‘stingizga yuboring.',
+    'ft.desc': 'O‘zbekiston uchun Telegramdagi virtual sovg‘alar servisi.', 'ft.buyers': 'Xaridorlarga', 'ft.connect': 'Ulanish', 'ft.pay': 'To‘lov'
+  };
+  var DYN = {
+    ru: { open: 'Открыть подарок', close: 'Упаковать снова', status: '«Анор» сохранён в «Моих подарках»', wait: 'На проверке', live: 'Опубликован', boxAria: 'Открыть подарок' },
+    uz: { open: 'Sovg‘ani ochish', close: 'Qayta o‘rash', status: '«Anor» «Mening sovg‘alarim»ga saqlandi', wait: 'Tekshiruvda', live: 'E’lon qilindi', boxAria: 'Sovg‘ani ochish' }
+  };
+  var RU = {};
+  $$('[data-i18n]').forEach(function (el) { var k = el.getAttribute('data-i18n'); if (!(k in RU)) RU[k] = el.innerHTML.trim(); });
+  var lang = 'ru';
+  function t(k) { return (DYN[lang] && DYN[lang][k]) || DYN.ru[k] || ''; }
+
+  /* ---------- Разбивка заголовков на слова ---------- */
+  function wrapWord(node) {
+    var w = document.createElement('span'); w.className = 'w';
+    var i = document.createElement('span'); i.className = 'wi';
+    i.appendChild(node); w.appendChild(i); return w;
+  }
+  function split(el) {
+    var frag = document.createDocumentFragment();
+    Array.prototype.slice.call(el.childNodes).forEach(function (n) {
+      if (n.nodeType === 3) {
+        n.textContent.split(/([ \t\n\r]+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^[ \t\n\r]+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+          frag.appendChild(wrapWord(document.createTextNode(part)));
+        });
+      } else if (n.nodeType === 1) {
+        frag.appendChild(n.tagName === 'BR' ? n : wrapWord(n));
+      }
+    });
+    el.innerHTML = ''; el.appendChild(frag);
+  }
+  $$('[data-split]').forEach(split);
+
+  /* ---------- Состояния интерактивных блоков ---------- */
+  var demoBox = $('#demoBox'), heroBox = $('#heroBox'), openBtn = $('#openBtn'), openLabel = $('#openLabel'), boxStatus = $('#boxStatus');
+  var pform = $('#pform'), pStatus = $('#pStatus'), pState = 'wait';
+  function renderBox() {
+    var open = demoBox.classList.contains('is-open');
+    openLabel.textContent = open ? t('close') : t('open');
+    boxStatus.textContent = open ? t('status') : '';
+    demoBox.setAttribute('aria-label', open ? t('close') : t('boxAria'));
+    demoBox.setAttribute('aria-pressed', String(open));
+  }
+  function renderP() {
+    pStatus.textContent = pState === 'live' ? t('live') : t('wait');
+    pStatus.className = 'pill ' + (pState === 'live' ? 'pill--live' : 'pill--wait');
+    pform.classList.toggle('is-live', pState === 'live');
+  }
+
+  function applyLang(l, silent) {
+    lang = l === 'uz' ? 'uz' : 'ru';
+    root.lang = lang;
+    var dict = lang === 'uz' ? UZ : RU;
+    $$('[data-i18n]').forEach(function (el) {
+      var v = dict[el.getAttribute('data-i18n')];
+      if (v == null) return;
+      el.innerHTML = v;
+      if (el.hasAttribute('data-split')) split(el);
+    });
+    $$('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+    renderBox(); renderP();
+    if (!silent) { try { localStorage.setItem('tuhfa-lang', lang); } catch (e) {} }
+    if (ST) requestAnimationFrame(function () { ST.refresh(); });
+  }
+  $$('[data-lang]').forEach(function (b) { b.addEventListener('click', function () { applyLang(b.getAttribute('data-lang')); }); });
+  var saved = null;
+  try { saved = localStorage.getItem('tuhfa-lang'); } catch (e) {}
+  if (!saved && /^uz/i.test(navigator.language || '')) saved = 'uz';
+  applyLang(saved || 'ru', true);
+
+  /* ---------- Конфетти ---------- */
+  var cv = $('#confetti'), cx = cv.getContext('2d'), parts = [], raf = 0;
+  function sizeCv() { var d = Math.min(window.devicePixelRatio || 1, 2); cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d, 0, 0, d, 0, 0); }
+  sizeCv(); addEventListener('resize', sizeCv);
+  var palette = ['--anor', '--saffron', '--sky', '--paper', '--mint'].map(cssVar);
+  function burst(el) {
+    if (reduce) return;
+    var r = el.getBoundingClientRect(), ox = r.left + r.width / 2, oy = r.top + r.height * 0.3;
+    for (var i = 0; i < 130; i++) {
+      var a = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 0.95, s = 6 + Math.random() * 10;
+      parts.push({ x: ox, y: oy, vx: Math.cos(a) * s, vy: Math.sin(a) * s, w: 6 + Math.random() * 6, h: 8 + Math.random() * 10, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4, c: palette[i % palette.length], dia: Math.random() < 0.35, life: 0 });
+    }
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  function tick() {
+    cx.clearRect(0, 0, innerWidth, innerHeight);
+    parts = parts.filter(function (p) { return p.y < innerHeight + 40 && p.life < 280; });
+    parts.forEach(function (p) {
+      p.life++; p.vx *= 0.985; p.vy = p.vy * 0.985 + 0.3; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c;
+      if (p.dia) { cx.beginPath(); cx.moveTo(0, -p.h / 2); cx.lineTo(p.w / 2, 0); cx.lineTo(0, p.h / 2); cx.lineTo(-p.w / 2, 0); cx.closePath(); cx.fill(); }
+      else { cx.scale(1, Math.cos(p.life * 0.15)); cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
+      cx.restore();
+    });
+    raf = parts.length ? requestAnimationFrame(tick) : 0;
+  }
+
+  /* ---------- Подарочные коробки ---------- */
+  function toggleBox(box) {
+    var open = !box.classList.contains('is-open');
+    box.classList.toggle('is-open', open);
+    if (open) setTimeout(function () { burst(box); }, 180);
+    if (box === demoBox) renderBox();
+  }
+  demoBox.addEventListener('click', function () { toggleBox(demoBox); });
+  demoBox.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleBox(demoBox); } });
+  openBtn.addEventListener('click', function () { toggleBox(demoBox); });
+  heroBox.addEventListener('click', function () { toggleBox(heroBox); });
+
+  /* ---------- Номинал сертификата ---------- */
+  var amtEl = $('#certAmt'), range = $('#amtRange'), customBox = $('#customBox'), proxy = { v: 200000 };
+  function fmt(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function setAmt(n, smooth) {
+    if (G && smooth && !reduce) G.to(proxy, { v: n, duration: 0.8, ease: 'power3.out', overwrite: true, onUpdate: function () { amtEl.textContent = fmt(proxy.v); } });
+    else { if (G) G.killTweensOf(proxy); proxy.v = n; amtEl.textContent = fmt(n); }
+  }
+  $$('.amt').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('.amt').forEach(function (o) { o.setAttribute('aria-checked', String(o === b)); });
+      var v = b.getAttribute('data-amt');
+      if (v === 'custom') { customBox.hidden = false; setAmt(+range.value, true); }
+      else { customBox.hidden = true; setAmt(+v, true); }
+      if (ST) ST.refresh();
+    });
+  });
+  range.addEventListener('input', function () { setAmt(+range.value, false); });
+
+  /* ---------- FAQ ---------- */
+  $$('.qa__q').forEach(function (q) {
+    q.addEventListener('click', function () {
+      var qa = q.parentNode, open = !qa.classList.contains('is-open');
+      qa.classList.toggle('is-open', open); q.setAttribute('aria-expanded', String(open));
+      if (ST) setTimeout(function () { ST.refresh(); }, 600);
+    });
+  });
+
+  /* ---------- Путь подарка: смена экранов ---------- */
+  var steps = $$('.steps .step'), dots = $$('.jdots i'), deskQ = window.matchMedia('(min-width: 881px)');
+  function setScreen(i) {
+    storyScreens.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+    steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+    dots.forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+  }
+  function syncJourney() { root.classList.toggle('journey-live', deskQ.matches); }
+  syncJourney(); deskQ.addEventListener ? deskQ.addEventListener('change', syncJourney) : deskQ.addListener(syncJourney);
+  if ('IntersectionObserver' in window) {
+    var jio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) setScreen(steps.indexOf(e.target)); }); }, { rootMargin: '-50% 0px -50% 0px' });
+    steps.forEach(function (s) { jio.observe(s); });
+    var pio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting && pState === 'wait') { setTimeout(function () { pState = 'live'; renderP(); }, reduce ? 0 : 1500); pio.disconnect(); } });
+    }, { threshold: 0.6 });
+    pio.observe(pform);
+  }
+
+  /* ---------- Без анимаций: статичные состояния ---------- */
+  var scanner = $('#scanner');
+  if (!animate) { scanner.classList.add('is-static'); return; }
+
+  /* ================= Анимации ================= */
+  G.registerPlugin(ST);
+
+  var lenis = null;
+  if (window.Lenis) {
+    lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+    lenis.on('scroll', ST.update);
+    G.ticker.add(function (time) { lenis.raf(time * 1000); });
+    G.ticker.lagSmoothing(0);
+  }
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href'); if (id.length < 2) return;
+      var target = document.querySelector(id); if (!target) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(target, { offset: id === '#top' ? 0 : -72, duration: 1.5 });
+      else target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  var nav = $('#nav'), lastY = 0;
+  function onScroll(y) {
+    nav.classList.toggle('is-scrolled', y > 24);
+    nav.classList.toggle('is-hidden', y > lastY && y > 560);
+    lastY = y;
+  }
+  if (lenis) lenis.on('scroll', function (l) { onScroll(l.scroll); });
+  else addEventListener('scroll', function () { onScroll(scrollY); }, { passive: true });
+
+  try {
+    /* hero: появление */
+    var intro = G.timeline({ defaults: { ease: 'expo.out' } });
+    intro.from('.hero__title .wi', { yPercent: 115, rotate: 5, duration: 1.25, stagger: 0.08 })
+      .from('.hero .eyebrow', { y: 14, opacity: 0, duration: 0.8 }, 0)
+      .from('.hero .lead, .hero__actions, .hero__facts', { y: 26, opacity: 0, duration: 1, stagger: 0.1 }, 0.35)
+      .from('.hero__stage .layer', { y: 70, opacity: 0, scale: 0.9, duration: 1.4, stagger: 0.09 }, 0.15)
+      .from('.bands', { opacity: 0, duration: 1 }, 0.6);
+
+    /* hero: параллакс от мыши и скролла */
+    if (fine) {
+      var hero = $('.hero');
+      var pxs = $$('.hero [data-depth]').map(function (el) {
+        return { d: +el.getAttribute('data-depth'), x: G.quickTo(el, 'x', { duration: 1, ease: 'power3' }), y: G.quickTo(el, 'y', { duration: 1, ease: 'power3' }) };
+      });
+      hero.addEventListener('pointermove', function (e) {
+        var r = hero.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
+        pxs.forEach(function (p) { p.x(dx * p.d * 44); p.y(dy * p.d * 32); });
+      });
+      hero.addEventListener('pointerleave', function () { pxs.forEach(function (p) { p.x(0); p.y(0); }); });
+    }
+    G.to('.hero__stage', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    G.to('.hero__copy', { yPercent: -6, opacity: 0.4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'center top', end: 'bottom top', scrub: true } });
+    G.to('.glow', { yPercent: 30, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+    /* бегущая лента: ускоряется от скорости скролла */
+    var track = $('.band__track');
+    var marquee = G.to(track, { xPercent: -50, duration: 38, ease: 'none', repeat: -1 });
+    var rest = 0;
+    ST.create({
+      trigger: '.bands', start: 'top bottom', end: 'bottom top',
+      onUpdate: function (self) {
+        var v = Math.min(Math.abs(self.getVelocity()) / 500, 5);
+        marquee.timeScale(1 + v);
+        clearTimeout(rest);
+        rest = setTimeout(function () { G.to(marquee, { timeScale: 1, duration: 1.2, ease: 'power2.out' }); }, 120);
+      }
+    });
+
+    /* заголовки по словам */
+    $$('[data-split]').forEach(function (el) {
+      if (el.classList.contains('hero__title')) return;
+      G.from(el.querySelectorAll('.wi'), { yPercent: 115, duration: 1.1, ease: 'expo.out', stagger: 0.05, scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+    $$('.sec-head .eyebrow, .redeem__copy .eyebrow, .partners .eyebrow, .faq__head .eyebrow').forEach(function (el) {
+      G.from(el, { x: -16, opacity: 0, duration: 0.9, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+    });
+
+    /* блоки */
+    G.set('[data-reveal]', { y: 48, opacity: 0 });
+    ST.batch('[data-reveal]', {
+      start: 'top 90%', once: true,
+      onEnter: function (b) { G.to(b, { y: 0, opacity: 1, duration: 1.1, ease: 'expo.out', stagger: 0.1, overwrite: true }); }
+    });
+    $$('.redeem__copy .lead, .rsteps li, .partners .lead, .pstep, .partners__actions, .faq__head .lead, .qa, .cta .lead, .cta__actions, .step__phone, .step h3, .step p').forEach(function (el) {
+      G.from(el, { y: 30, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
+    });
+
+    /* параллакс декоративных слоёв */
+    $$('[data-speed]').forEach(function (el) {
+      G.to(el, { y: function () { return -100 * parseFloat(el.getAttribute('data-speed')); }, ease: 'none', scrollTrigger: { trigger: el.closest('section') || el, start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
+    });
+
+    /* наклон карточек */
+    if (fine) $$('[data-tilt]').forEach(function (card) {
+      G.set(card, { transformPerspective: 1100 });
+      var rx = G.quickTo(card, 'rotationX', { duration: 0.7, ease: 'power3' }), ry = G.quickTo(card, 'rotationY', { duration: 0.7, ease: 'power3' });
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        ry(((e.clientX - r.left) / r.width - 0.5) * 5); rx(-((e.clientY - r.top) / r.height - 0.5) * 5);
+      });
+      card.addEventListener('pointerleave', function () { rx(0); ry(0); });
+    });
+
+    /* магнитные кнопки */
+    if (fine) $$('.magnetic').forEach(function (b) {
+      var mx = G.quickTo(b, 'x', { duration: 0.5, ease: 'power3' }), my = G.quickTo(b, 'y', { duration: 0.5, ease: 'power3' });
+      b.addEventListener('pointermove', function (e) { var r = b.getBoundingClientRect(); mx((e.clientX - r.left - r.width / 2) * 0.22); my((e.clientY - r.top - r.height / 2) * 0.3); });
+      b.addEventListener('pointerleave', function () { mx(0); my(0); });
+    });
+
+    /* курсор */
+    if (fine) {
+      var cur = $('.cursor');
+      var cxq = G.quickTo(cur, 'x', { duration: 0.35, ease: 'power3' }), cyq = G.quickTo(cur, 'y', { duration: 0.35, ease: 'power3' });
+      addEventListener('pointermove', function (e) { cur.classList.add('is-on'); cxq(e.clientX); cyq(e.clientY); }, { passive: true });
+      document.addEventListener('pointerover', function (e) { cur.classList.toggle('is-hover', !!(e.target.closest && e.target.closest('a,button,input,[data-cursor]'))); });
+      document.documentElement.addEventListener('pointerleave', function () { cur.classList.remove('is-on'); });
+    }
+
+    /* погашение: сканирование QR */
+    var mm = G.matchMedia();
+    var setR = function (i) { $$('.rsteps li').forEach(function (li, k) { li.classList.toggle('is-on', k === i); }); };
+    function buildScan() {
+      var q = function (s) { return scanner.querySelector(s); };
+      var tl = G.timeline({ defaults: { ease: 'power2.inOut' } });
+      tl.eventCallback('onUpdate', function () {
+        var tm = tl.time(), L = tl.labels;
+        setR(tm < L.s1 ? 0 : tm < L.s2 ? 1 : tm < L.s3 ? 2 : 3);
+      });
+      tl.addLabel('s0', 0)
+        .fromTo(q('.rcert'), { y: 50, rotation: -9 }, { y: 0, rotation: -2, duration: 1, ease: 'power3.out' }, 0)
+        .addLabel('s1', 1)
+        .fromTo(q('.scanner__frame'), { scale: 1.14, opacity: 0.35 }, { scale: 1, opacity: 1, duration: 0.5 }, 's1')
+        .fromTo(q('.laser'), { top: '16%', opacity: 0 }, { top: '84%', opacity: 1, duration: 0.7 }, 's1+=0.2')
+        .to(q('.laser'), { top: '16%', duration: 0.7 })
+        .to(q('.laser'), { opacity: 0, duration: 0.2 })
+        .addLabel('s2')
+        .fromTo(q('.flash--ok'), { opacity: 0.9 }, { opacity: 0, duration: 0.7, ease: 'power1.out' }, 's2')
+        .fromTo(q('.stamp'), { scale: 2.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, 's2')
+        .fromTo(q('.result--ok'), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 's2+=0.15')
+        .to({}, { duration: 0.9 })
+        .addLabel('s3')
+        .to(q('.result--ok'), { y: 24, opacity: 0, duration: 0.35 }, 's3')
+        .fromTo(q('.laser'), { top: '16%', opacity: 0 }, { top: '84%', opacity: 1, duration: 0.6, immediateRender: false }, 's3+=0.1')
+        .to(q('.laser'), { opacity: 0, duration: 0.2 })
+        .fromTo(q('.flash--bad'), { opacity: 1 }, { opacity: 0, duration: 0.7 })
+        .to(q('.rcert'), { x: -10, duration: 0.07, repeat: 5, yoyo: true, ease: 'none' }, '<')
+        .fromTo(q('.result--bad'), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, '<')
+        .to({}, { duration: 0.9 });
+      return tl;
+    }
+    mm.add('(min-width: 881px) and (min-height: 760px)', function () {
+      var sec = $('.redeem'); sec.classList.add('is-pinnable');
+      var tl = buildScan();
+      ST.create({ trigger: sec, start: 'top top', end: '+=1700', pin: true, scrub: 0.6, animation: tl, anticipatePin: 1 });
+      return function () { sec.classList.remove('is-pinnable'); };
+    });
+    mm.add('not all and (min-width: 881px) and (min-height: 760px)', function () {
+      var tl = buildScan(); tl.pause(0); tl.repeat(-1).repeatDelay(1.4);
+      ST.create({ trigger: scanner, start: 'top 80%', once: true, onEnter: function () { tl.play(); } });
+    });
+
+    /* партнёры: линия шагов */
+    G.fromTo('.psteps', { '--p': 0 }, { '--p': 1, ease: 'none', scrollTrigger: { trigger: '.psteps', start: 'top 70%', end: 'bottom 60%', scrub: true } });
+    $$('.pstep').forEach(function (p) {
+      ST.create({ trigger: p, start: 'top 68%', onEnter: function () { p.classList.add('is-on'); }, onLeaveBack: function () { p.classList.remove('is-on'); } });
+    });
+
+    /* счётчики */
+    $$('[data-count]').forEach(function (el) {
+      var end = +el.getAttribute('data-count'), o = { v: 0 };
+      el.textContent = '0';
+      G.to(o, { v: end, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true }, onUpdate: function () { el.textContent = Math.round(o.v); } });
+    });
+
+    /* финальный блок: ленты обвязывают «коробку» */
+    var cta = G.timeline({ scrollTrigger: { trigger: '.cta__box', start: 'top 75%', once: true } });
+    cta.from('.cta__rib--v', { scaleY: 0, transformOrigin: 'top center', duration: 1.2, ease: 'expo.inOut' })
+      .from('.cta__rib--h', { scaleX: 0, transformOrigin: 'left center', duration: 1.2, ease: 'expo.inOut' }, 0.15)
+      .from('.cta__bow', { scale: 0, rotation: -60, duration: 0.9, ease: 'back.out(2.2)' }, 0.95);
+
+    /* активный пункт меню */
+    ['gifts', 'journey', 'redeem', 'partners', 'faq'].forEach(function (id) {
+      var link = $('.nav__links a[href="#' + id + '"]');
+      ST.create({ trigger: '#' + id, start: 'top 50%', end: 'bottom 50%', onToggle: function (self) { link.classList.toggle('is-active', self.isActive); } });
+    });
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ST.refresh(); });
+    addEventListener('load', function () { ST.refresh(); });
+  } catch (err) {
+    G.set('[data-reveal], .wi, .hero *, .step *, .qa, .pstep', { clearProps: 'opacity,transform' });
+    scanner.classList.add('is-static');
+  }
+})();
+</script>
+</body>
+</html>
