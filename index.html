@@ -736,6 +736,27 @@ p{margin:0}
 
 /* v7: полоса прогресса шага следует за прокруткой */
 .step::after{transform:scaleX(var(--sp,0))}
+
+/* v8: вкладки этапов процесса */
+.bptabs{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 18px}
+.bptab{appearance:none;display:inline-flex;align-items:center;gap:10px;padding:.65em 1.15em .65em .65em;border-radius:999px;border:1.5px solid var(--paper-line);background:var(--white);color:var(--paper-muted);font:600 .95rem/1.25 var(--f-body);text-align:left;cursor:pointer;transition:background-color .3s,color .3s,border-color .3s}
+.bptab:hover{border-color:var(--paper-ink);color:var(--paper-ink)}
+.bptab[aria-selected="true"]{background:var(--paper-ink);border-color:var(--paper-ink);color:var(--paper)}
+.bptab__n{width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--paper-2);color:var(--paper-ink);font:700 .78rem/1 var(--f-mono)}
+.bptab[aria-selected="true"] .bptab__n{background:var(--saffron)}
+.bptabs__arrow{display:grid;color:var(--paper-muted)}
+.bptabs__arrow svg{width:20px;height:20px}
+.bpx__head{display:none}
+.bpxs{display:block!important}
+.bpx{margin-top:18px}
+.bpx__nav{display:flex;justify-content:flex-end;margin-top:16px}
+.bpx__nav--back{justify-content:flex-start}
+.bpx__go--back svg{rotate:180deg}
+@media (max-width:560px){
+  .bptabs{flex-direction:column;align-items:stretch}
+  .bptabs__arrow{align-self:center;rotate:90deg}
+  .bpx__go{white-space:normal;text-align:left}
+}
 </style>
 </head>
 <body>
@@ -1375,6 +1396,8 @@ p{margin:0}
     'bp.g3': 'Sertifikat amal qiladimi?',
     'bp.c2': 'Ishlatishni tasdiqlash',
     'bp.e4': 'Rad etildi: muddati o‘tgan yoki allaqachon ishlatilgan',
+    'bp.next': 'Keyingi bosqich: savdo va ishlatish',
+    'bp.prev': 'Oldingi bosqich: ulanish',
     'pm.roleShop': 'Do‘kon',
     'pm.roleTuhfaSub': 'administrator va tizim',
     'pm.roleBuyer': 'Xaridor',
@@ -1651,6 +1674,35 @@ p{margin:0}
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
   }
 
+  /* ---------- BPMN: вкладки этапов (по одной схеме, по порядку) ---------- */
+  var bpTabs = $$('.bptab'), bpPanels = $$('.bpx[role="tabpanel"]');
+  function showBp(i, focus) {
+    bpTabs.forEach(function (t, k) { var on = k === i; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+    bpPanels.forEach(function (pn, k) { pn.hidden = k !== i; });
+    var bp = bpPanels[i] && bpPanels[i].querySelector('.bp');
+    if (bp) { drawBp(bp); if (window.__bpAnim) window.__bpAnim(bp); }
+    if (focus && bpTabs[i]) bpTabs[i].focus();
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  }
+  bpTabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showBp(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault(); showBp((i + (e.key === 'ArrowRight' ? 1 : bpTabs.length - 1)) % bpTabs.length, true);
+    });
+  });
+  $$('.bpx__go').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      showBp(+btn.getAttribute('data-go') - 1);
+      var bar = $('.bptabs'); if (!bar) return;
+      requestAnimationFrame(function () {
+        var y = Math.max(0, bar.getBoundingClientRect().top + window.scrollY - $('#nav').offsetHeight - 24);
+        if (window.__lenis) { window.__lenis.resize(); window.__lenis.scrollTo(y, { duration: 1, force: true }); }
+        else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+  });
+
   /* ---------- Без анимаций: статичные состояния ---------- */
   var scanner = $('#scanner');
   if (!animate) { if (scanner) scanner.classList.add('is-static'); return; }
@@ -1661,6 +1713,7 @@ p{margin:0}
   var lenis = null;
   if (window.Lenis) {
     lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+    window.__lenis = lenis;
     lenis.on('scroll', ST.update);
     G.ticker.add(function (time) { lenis.raf(time * 1000); });
     G.ticker.lagSmoothing(0);
@@ -1835,7 +1888,13 @@ p{margin:0}
     }
 
     /* BPMN: элементы и связи появляются по ходу процесса */
+    window.__bpAnim = function (bp) {
+      var nodes = bp.querySelectorAll('.bp__task, .bp__ev, .bp__gw, .bp__flab'), w = bp.querySelector('.bp__wires');
+      G.fromTo(nodes, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, stagger: 0.06, ease: 'back.out(1.8)', overwrite: true });
+      G.fromTo(w, { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 0.2, ease: 'power1.out', overwrite: true });
+    };
     $$('.bp').forEach(function (bp) {
+      if (bp.closest('[hidden]')) return;
       var nodes = bp.querySelectorAll('.bp__task, .bp__ev, .bp__gw, .bp__flab');
       G.set(nodes, { opacity: 0, scale: 0.85 });
       G.set(bp.querySelector('.bp__wires'), { opacity: 0 });

@@ -736,6 +736,27 @@ p{margin:0}
 
 /* v7: полоса прогресса шага следует за прокруткой */
 .step::after{transform:scaleX(var(--sp,0))}
+
+/* v8: вкладки этапов процесса */
+.bptabs{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 18px}
+.bptab{appearance:none;display:inline-flex;align-items:center;gap:10px;padding:.65em 1.15em .65em .65em;border-radius:999px;border:1.5px solid var(--paper-line);background:var(--white);color:var(--paper-muted);font:600 .95rem/1.25 var(--f-body);text-align:left;cursor:pointer;transition:background-color .3s,color .3s,border-color .3s}
+.bptab:hover{border-color:var(--paper-ink);color:var(--paper-ink)}
+.bptab[aria-selected="true"]{background:var(--paper-ink);border-color:var(--paper-ink);color:var(--paper)}
+.bptab__n{width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--paper-2);color:var(--paper-ink);font:700 .78rem/1 var(--f-mono)}
+.bptab[aria-selected="true"] .bptab__n{background:var(--saffron)}
+.bptabs__arrow{display:grid;color:var(--paper-muted)}
+.bptabs__arrow svg{width:20px;height:20px}
+.bpx__head{display:none}
+.bpxs{display:block!important}
+.bpx{margin-top:18px}
+.bpx__nav{display:flex;justify-content:flex-end;margin-top:16px}
+.bpx__nav--back{justify-content:flex-start}
+.bpx__go--back svg{rotate:180deg}
+@media (max-width:560px){
+  .bptabs{flex-direction:column;align-items:stretch}
+  .bptabs__arrow{align-self:center;rotate:90deg}
+  .bpx__go{white-space:normal;text-align:left}
+}
 </style>
 </head>
 <body>
@@ -856,10 +877,14 @@ p{margin:0}
         <p class="lead" data-i18n="p.lead">Упрощённая BPMN-схема: кто выполняет каждый шаг, где принимается решение и чем заканчивается процесс.</p>
       </header>
 
+      <div class="bptabs" role="tablist" aria-label="Этапы процесса">
+        <button type="button" class="bptab" role="tab" id="bptab1" aria-controls="bpp1" aria-selected="true"><span class="bptab__n">1</span><span data-i18n="bp.t1">Подключение и публикация сертификата</span></button>
+        <span class="bptabs__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <button type="button" class="bptab" role="tab" id="bptab2" aria-controls="bpp2" aria-selected="false" tabindex="-1"><span class="bptab__n">2</span><span data-i18n="bp.t2">Продажа и погашение</span></button>
+      </div>
       <ul class="bp-legend" aria-hidden="true"><li><span class="bp__ev bp__ev--start"></span><span data-i18n="bp.lgStart">Начало</span></li><li><span class="bp__task"></span><span data-i18n="bp.lgTask">Действие</span></li><li><span class="bp__gw"></span><span data-i18n="bp.lgGw">Решение</span></li><li><span class="bp__ev bp__ev--end"></span><span data-i18n="bp.lgEnd">Завершение</span></li></ul>
       <div class="bpxs">
-        <div class="bpx">
-          <div class="bpx__head"><span class="bpx__n">1</span><h3 data-i18n="bp.t1">Подключение и публикация сертификата</h3></div>
+        <div class="bpx" role="tabpanel" id="bpp1" aria-labelledby="bptab1">
           <div class="bp bp--d1" data-key="d1" data-flows="s1>g1:h;g1>a1:h;g1>a2:vh;a1>a3:hv;a2>a3:h;a3>a4:hv;a4>a5:hv;a5>g2:h;g2>e1:h;g2>e2:v">
             <div class="bp__lane bp__lane--first" style="grid-row:1" aria-hidden="true"></div>
             <div class="bp__role" style="grid-row:1"><span class="pmap__ico pmap__ico--shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg></span><span><b data-i18n="pm.roleShop">Магазин</b></span></div>
@@ -882,9 +907,9 @@ p{margin:0}
             <span class="bp__flab bp__flab--no" data-flow="g2>e2" data-i18n="bp.no">Нет</span>
           </div>
           <ol class="bpm"><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__ev bp__ev--start"></span></span><span data-i18n="bp.start">Старт</span></div></li><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__gw"></span></span><b data-i18n="bp.g1">Способ подключения</b></div><div class="bpm__br"><div><span class="bp__flab" data-i18n="bp.lForm">Заявка</span><div class="bpm__task"><span class="rchip rchip--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="bp.a1">Подать заявку через форму</span></div></div><div><span class="bp__flab" data-i18n="bp.lManual">Вручную</span><div class="bpm__task"><span class="rchip rchip--tuhfa">Tuhfa</span><span data-i18n="bp.a2">Создать аккаунт партнёру</span></div></div></div></li><li><div class="bpm__task"><span class="rchip rchip--tuhfa">Tuhfa</span><span data-i18n="bp.a3">Проверить и подтвердить партнёра</span></div></li><li><div class="bpm__task"><span class="rchip rchip--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="bp.a4">Создать сертификат: сумма, описание, срок</span></div></li><li><div class="bpm__task"><span class="rchip rchip--tuhfa">Tuhfa</span><span data-i18n="bp.a5">Проверить сертификат</span></div></li><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__gw"></span></span><b data-i18n="bp.g2">Одобрен?</b></div><div class="bpm__br"><div><span class="bp__flab bp__flab--yes" data-i18n="bp.yes">Да</span><div class="bpm__end"><span class="bp__ev bp__ev--end bp__ev--ok"></span><span data-i18n="pm.r4">Опубликован в каталоге</span></div></div><div><span class="bp__flab bp__flab--no" data-i18n="bp.no">Нет</span><div class="bpm__end"><span class="bp__ev bp__ev--end bp__ev--no"></span><span data-i18n="bp.e2">Не опубликован</span></div></div></div></li></ol>
+          <div class="bpx__nav"><button type="button" class="btn btn--ghost bpx__go" data-go="2"><span data-i18n="bp.next">Следующий этап: продажа и погашение</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
         </div>
-        <div class="bpx">
-          <div class="bpx__head"><span class="bpx__n">2</span><h3 data-i18n="bp.t2">Продажа и погашение</h3></div>
+        <div class="bpx" role="tabpanel" id="bpp2" aria-labelledby="bptab2" hidden>
           <div class="bp bp--d2" data-key="d2" data-flows="s2>b1:h;b1>b2:h;b2>c1:hv;c1>g3:hv;g3>c2:h;c2>e3:h;g3>e4:v">
             <div class="bp__lane bp__lane--first" style="grid-row:1" aria-hidden="true"></div>
             <div class="bp__role" style="grid-row:1"><span class="pmap__ico pmap__ico--buyer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12"/><path d="M12 8C10.5 5 7 4.5 7 6.5S10 8 12 8zM12 8c1.5-3 5-3.5 5-1.5S14 8 12 8z"/></svg></span><span><b data-i18n="pm.roleBuyer">Покупатель</b></span></div>
@@ -905,6 +930,7 @@ p{margin:0}
             <span class="bp__flab bp__flab--no" data-flow="g3>e4" data-i18n="bp.no">Нет</span>
           </div>
           <ol class="bpm"><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__ev bp__ev--start"></span></span><span data-i18n="bp.s2">Сертификат в каталоге</span></div></li><li><div class="bpm__task"><span class="rchip rchip--buyer" data-i18n="pm.roleBuyer">Покупатель</span><span data-i18n="bp.b1">Купить через Click или Payme и подарить</span></div></li><li><div class="bpm__task"><span class="rchip rchip--buyer" data-i18n="pm.roleBuyer">Покупатель</span><span data-i18n="bp.b2">Показать QR-код на кассе</span></div></li><li><div class="bpm__task"><span class="rchip rchip--shop" data-i18n="pm.roleShop">Магазин</span><span data-i18n="bp.c1">Отсканировать QR-код</span></div></li><li><div class="bpm__row"><span class="bpm__sym"><span class="bp__gw"></span></span><b data-i18n="bp.g3">Сертификат действителен?</b></div><div class="bpm__br"><div><span class="bp__flab bp__flab--yes" data-i18n="bp.yes">Да</span><div class="bpm__task"><span class="rchip rchip--tuhfa">Tuhfa</span><span data-i18n="bp.c2">Подтвердить погашение</span></div><div class="bpm__end"><span class="bp__ev bp__ev--end bp__ev--ok"></span><span data-i18n="pm.r6">Погашен</span></div></div><div><span class="bp__flab bp__flab--no" data-i18n="bp.no">Нет</span><div class="bpm__end"><span class="bp__ev bp__ev--end bp__ev--no"></span><span data-i18n="bp.e4">Отказ: срок истёк или уже погашен</span></div></div></div></li></ol>
+          <div class="bpx__nav bpx__nav--back"><button type="button" class="btn btn--ghost bpx__go bpx__go--back" data-go="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span data-i18n="bp.prev">Предыдущий этап: подключение</span></button></div>
         </div>
       </div>
 
@@ -1307,6 +1333,8 @@ p{margin:0}
     'bp.g3': 'Sertifikat amal qiladimi?',
     'bp.c2': 'Ishlatishni tasdiqlash',
     'bp.e4': 'Rad etildi: muddati o‘tgan yoki allaqachon ishlatilgan',
+    'bp.next': 'Keyingi bosqich: savdo va ishlatish',
+    'bp.prev': 'Oldingi bosqich: ulanish',
     'pm.roleShop': 'Do‘kon',
     'pm.roleTuhfaSub': 'administrator va tizim',
     'pm.roleBuyer': 'Xaridor',
@@ -1583,6 +1611,35 @@ p{margin:0}
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
   }
 
+  /* ---------- BPMN: вкладки этапов (по одной схеме, по порядку) ---------- */
+  var bpTabs = $$('.bptab'), bpPanels = $$('.bpx[role="tabpanel"]');
+  function showBp(i, focus) {
+    bpTabs.forEach(function (t, k) { var on = k === i; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+    bpPanels.forEach(function (pn, k) { pn.hidden = k !== i; });
+    var bp = bpPanels[i] && bpPanels[i].querySelector('.bp');
+    if (bp) { drawBp(bp); if (window.__bpAnim) window.__bpAnim(bp); }
+    if (focus && bpTabs[i]) bpTabs[i].focus();
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  }
+  bpTabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showBp(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault(); showBp((i + (e.key === 'ArrowRight' ? 1 : bpTabs.length - 1)) % bpTabs.length, true);
+    });
+  });
+  $$('.bpx__go').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      showBp(+btn.getAttribute('data-go') - 1);
+      var bar = $('.bptabs'); if (!bar) return;
+      requestAnimationFrame(function () {
+        var y = Math.max(0, bar.getBoundingClientRect().top + window.scrollY - $('#nav').offsetHeight - 24);
+        if (window.__lenis) { window.__lenis.resize(); window.__lenis.scrollTo(y, { duration: 1, force: true }); }
+        else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+  });
+
   /* ---------- Без анимаций: статичные состояния ---------- */
   var scanner = $('#scanner');
   if (!animate) { if (scanner) scanner.classList.add('is-static'); return; }
@@ -1593,6 +1650,7 @@ p{margin:0}
   var lenis = null;
   if (window.Lenis) {
     lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+    window.__lenis = lenis;
     lenis.on('scroll', ST.update);
     G.ticker.add(function (time) { lenis.raf(time * 1000); });
     G.ticker.lagSmoothing(0);
@@ -1767,7 +1825,13 @@ p{margin:0}
     }
 
     /* BPMN: элементы и связи появляются по ходу процесса */
+    window.__bpAnim = function (bp) {
+      var nodes = bp.querySelectorAll('.bp__task, .bp__ev, .bp__gw, .bp__flab'), w = bp.querySelector('.bp__wires');
+      G.fromTo(nodes, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, stagger: 0.06, ease: 'back.out(1.8)', overwrite: true });
+      G.fromTo(w, { opacity: 0 }, { opacity: 1, duration: 0.8, delay: 0.2, ease: 'power1.out', overwrite: true });
+    };
     $$('.bp').forEach(function (bp) {
+      if (bp.closest('[hidden]')) return;
       var nodes = bp.querySelectorAll('.bp__task, .bp__ev, .bp__gw, .bp__flab');
       G.set(nodes, { opacity: 0, scale: 0.85 });
       G.set(bp.querySelector('.bp__wires'), { opacity: 0 });
