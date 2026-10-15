@@ -2,11 +2,15 @@
 
 Лендинг Telegram-сервиса виртуальных подарков в Узбекистане: подарочные сертификаты партнёров и анимационные подарки, оплата Click и Payme, языки RU / UZ.
 
-Один статический файл `index.html` (HTML + CSS + JS), без сборки. Библиотеки подключаются с CDN: GSAP + ScrollTrigger (cdnjs), Lenis (unpkg), шрифты Google Fonts.
+Две самодостаточные страницы (HTML + CSS + JS), без сборки:
+- `index.html` — для покупателей: подарки, путь подарка, погашение по QR, правила, FAQ;
+- `partners.html` — для магазинов: преимущества, подключение, модерация, сканирование QR, правила, FAQ, заявка.
+
+Переключатель «Покупателям | Партнёрам» в шапке ведёт между страницами. Библиотеки подключаются с CDN: GSAP + ScrollTrigger (cdnjs), Lenis (unpkg), шрифты Google Fonts.
 
 ## Что заменить перед запуском
 
-- Ссылки на бота — в начале скрипта в `index.html`:
+- Ссылки на бота — в начале скрипта в `index.html` и `partners.html`:
   ```js
   var BOT_URL = 'https://t.me/';      // https://t.me/your_bot
   var PARTNER_URL = 'https://t.me/';  // https://t.me/your_bot?start=partner

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tuhfa — подарки в Telegram</title>
+<meta name="description" content="Подарочные сертификаты магазинов Узбекистана и анимационные подарки в Telegram. Оплата через Click и Payme.">
 <meta name="theme-color" content="#140F22">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tuhfa — подарки в Telegram">
 <meta property="og:description" content="Подарочные сертификаты магазинов Узбекистана и анимационные подарки в Telegram. Оплата через Click и Payme.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta name="description" content="Tuhfa — подарочные сертификаты магазинов Узбекистана и анимационные подарки в Telegram. Оплата через Click и Payme.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap">
@@ -34,6 +34,7 @@
   --fs-lead:clamp(1.02rem,1.25vw,1.18rem);
   --ease:cubic-bezier(.22,1,.36,1);
   --spring:cubic-bezier(.34,1.56,.64,1);
+  --nav-h:72px;
   color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -76,6 +77,13 @@ p{margin:0}
 .btn--ghost{--bg:transparent;border-color:var(--ink-4)}
 .btn--lg{padding:1.1em 1.7em;font-size:1.03rem}
 .btn--sm{padding:.7em 1.05em;font-size:.86rem}
+/* «Стать партнёром»: шафран, бегущий блик и пульсирующий контур */
+.btn--partner{--bg:var(--saffron);--fg:var(--paper-ink);font-weight:700;background-image:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.65) 48%,transparent 66%);background-size:260% 100%;background-repeat:no-repeat;background-position:160% 0;animation:shine 3.6s var(--ease) infinite,pulse 2.4s ease-out infinite}
+.btn--partner::before{background:var(--anor)}
+.btn--partner:hover{color:var(--white)}
+.btn--partner:hover svg{transform:rotate(-8deg) scale(1.08)}
+@keyframes shine{0%,55%{background-position:160% 0}100%{background-position:-60% 0}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,182,72,.55)}70%,100%{box-shadow:0 0 0 14px rgba(255,182,72,0)}}
 .magnetic{will-change:transform}
 
 .ulink{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .45s var(--ease),color .3s}
@@ -94,7 +102,7 @@ p{margin:0}
 .nav__in{height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px}
 .logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 1.3rem/1 var(--f-display);letter-spacing:-.04em;color:var(--text)}
 .logo__mark{width:20px;height:20px;rotate:45deg;border-radius:5px;flex:none;background:var(--anor) var(--ikat-rich) center/26px auto;box-shadow:0 0 0 3px var(--ink),0 0 0 4.5px var(--saffron)}
-.nav__links{display:flex;gap:26px}
+.nav__links{display:flex;gap:22px}
 .nav__links a{position:relative;text-decoration:none;color:var(--muted);font-size:.92rem;font-weight:500;transition:color .3s}
 .nav__links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1.5px;background:var(--saffron);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
 .nav__links a:hover,.nav__links a.is-active{color:var(--text)}
@@ -103,11 +111,11 @@ p{margin:0}
 .lang{display:inline-flex;padding:3px;border-radius:999px;background:var(--ink-2);border:1px solid var(--line)}
 .lang button{appearance:none;border:0;background:transparent;cursor:pointer;font:600 .72rem/1 var(--f-mono);letter-spacing:.08em;padding:.6em .75em;border-radius:999px;color:var(--muted);transition:background-color .3s,color .3s}
 .lang button[aria-pressed="true"]{background:var(--text);color:var(--ink)}
-@media (max-width:980px){.nav__links{display:none}}
+@media (max-width:1259px){.nav__links{display:none}}
 @media (max-width:420px){.nav .btn--sm{padding:.68em .85em;font-size:.8rem}.logo{font-size:1.15rem}.nav__right{gap:6px}.lang button{padding:.6em .62em}}
 
 /* hero */
-.hero{position:relative;isolation:isolate;overflow:clip;padding-top:calc(72px + env(safe-area-inset-top,0px) + clamp(36px,7vh,88px));padding-bottom:clamp(48px,7vw,96px)}
+.hero{position:relative;isolation:isolate;overflow:clip;padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + clamp(36px,7vh,88px));padding-bottom:clamp(48px,7vw,96px)}
 .hero__bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .hero__bg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--ink-4) 1px,transparent 1.3px);background-size:28px 28px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 62% 42%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 62% 42%,#000 25%,transparent 75%);opacity:.55}
 .glow{position:absolute;border-radius:50%;aspect-ratio:1;filter:blur(70px)}
@@ -331,11 +339,11 @@ p{margin:0}
 .jdots i{width:8px;height:8px;border-radius:99px;background:var(--ink-4);transition:width .45s var(--ease),background-color .45s}
 .jdots i.is-on{width:28px;background:var(--saffron)}
 .steps{list-style:none;margin:0;padding:0}
-.step{min-height:68vh;display:flex;flex-direction:column;justify-content:center;gap:14px;max-width:540px;transition:opacity .5s var(--ease)}
+.step{min-height:clamp(240px,34vh,340px);display:flex;flex-direction:column;justify-content:center;gap:12px;max-width:540px;transition:opacity .5s var(--ease)}
 .step__n{font:600 .78rem/1 var(--f-mono);letter-spacing:.12em;color:var(--saffron)}
 .step h3{font-size:clamp(1.45rem,2.7vw,2.25rem);line-height:1.1}
 .step p{color:var(--muted);font-size:var(--fs-lead);max-width:30em}
-.journey-live .step{opacity:.22}
+.journey-live .step{opacity:.3}
 .journey-live .step.is-active{opacity:1}
 .step__phone{display:none;justify-content:center;margin-bottom:8px}
 .phone--mini{--pw:236px;aspect-ratio:auto;height:300px;padding:9px 9px 0;border-radius:40px 40px 0 0;-webkit-mask-image:linear-gradient(#000 68%,transparent);mask-image:linear-gradient(#000 68%,transparent)}
@@ -487,6 +495,82 @@ p{margin:0}
 /* confetti */
 .confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:80}
 
+
+/* переключатель аудитории: Покупателям | Партнёрам */
+.nav__left{display:flex;align-items:center;gap:clamp(14px,2vw,26px);min-width:0}
+.aud{display:inline-flex;gap:2px;padding:4px;border-radius:999px;background:var(--ink-2);border:1px solid var(--line)}
+.aud__item{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:.62em 1.05em;border-radius:999px;font:600 .84rem/1 var(--f-body);color:var(--muted);text-decoration:none;white-space:nowrap;transition:background-color .3s,color .3s}
+.aud__item:hover{color:var(--text)}
+.aud__item[aria-current="page"]{background:var(--text);color:var(--ink)}
+.aud__item--biz{color:var(--saffron)}
+.aud__item--biz:hover{color:var(--saffron-light)}
+.aud__item--biz[aria-current="page"]{background:var(--saffron);color:var(--paper-ink)}
+.aud__dot{width:8px;height:8px;border-radius:50%;flex:none;background:currentColor;animation:dotPulse 1.8s ease-out infinite}
+.aud__item[aria-current="page"] .aud__dot{animation:none}
+@keyframes dotPulse{0%{box-shadow:0 0 0 0 rgba(255,182,72,.7)}70%,100%{box-shadow:0 0 0 8px rgba(255,182,72,0)}}
+@media (max-width:719px){
+  :root{--nav-h:122px}
+  .nav__in{height:auto;flex-wrap:wrap;row-gap:10px;padding-block:12px 10px}
+  .nav__left{display:contents}
+  .nav__left .logo{order:1}
+  .nav__right{order:2}
+  .aud{order:3;width:100%}
+  .aud__item{flex:1;padding:.72em .5em}
+}
+
+/* партнёрский hero: кабинет и мини-сканер */
+.shop-card{display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;background:var(--paper);color:var(--paper-ink);line-height:1.25}
+.shop-card b{display:block;font-size:.74rem}
+.shop-card small{display:block;font-size:.6rem;color:var(--live-fg);font-weight:600}
+.app-btn--scan{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--saffron);color:var(--paper-ink)}
+.app-btn--scan svg{width:16px;height:16px}
+.scan-mini{position:relative;width:150px;aspect-ratio:1;padding:24px;border-radius:24px;background:rgba(28,22,48,.88);border:1px solid var(--ink-4);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 24px 50px -20px rgba(0,0,0,.75)}
+.scan-mini > i{position:absolute;width:22px;height:22px;border:3px solid var(--saffron)}
+.scan-mini > i:nth-child(1){left:10px;top:10px;border-right:0;border-bottom:0;border-radius:9px 0 0 0}
+.scan-mini > i:nth-child(2){right:10px;top:10px;border-left:0;border-bottom:0;border-radius:0 9px 0 0}
+.scan-mini > i:nth-child(3){left:10px;bottom:10px;border-right:0;border-top:0;border-radius:0 0 0 9px}
+.scan-mini > i:nth-child(4){right:10px;bottom:10px;border-left:0;border-top:0;border-radius:0 0 9px 0}
+.scan-mini .qr{padding:6px}
+.scan-mini__laser{position:absolute;left:18px;right:18px;top:22px;height:2px;border-radius:2px;background:var(--mint);box-shadow:0 0 14px 2px var(--mint-glow);animation:laser 2.2s ease-in-out infinite alternate}
+@keyframes laser{to{top:calc(100% - 24px)}}
+@media (max-width:900px){.scan-mini{width:112px;padding:18px}}
+
+/* преимущества для магазина */
+.bens{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.ben{display:grid;gap:12px;align-content:start;padding:clamp(20px,2.4vw,28px);border-radius:22px;background:var(--ink-2);border:1px solid var(--line);transition:border-color .4s,translate .5s var(--ease)}
+.ben:hover{border-color:var(--ink-4);translate:0 -4px}
+.ben__ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(255,182,72,.12);color:var(--saffron)}
+.ben__ico svg{width:24px;height:24px}
+.ben h3{font-size:1.08rem}
+.ben p{color:var(--muted);font-size:.93rem}
+@media (max-width:1060px){.bens{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.bens{grid-template-columns:minmax(0,1fr)}}
+
+/* правила для партнёров */
+.prules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.prule{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start;padding:clamp(20px,2.4vw,26px);border-radius:22px;background:var(--ink-2);border:1px solid var(--line)}
+.prule__ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(70,215,160,.12);color:var(--mint)}
+.prule__ico svg{width:22px;height:22px}
+.prule h3{font-size:1.02rem}
+.prule p{margin-top:6px;color:var(--muted);font-size:.92rem}
+@media (max-width:1000px){.prules{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.prules{grid-template-columns:minmax(0,1fr)}}
+
+/* плашка для бизнеса внизу главной */
+.cta--tight{padding-bottom:28px}
+.hero--biz .l-cert{top:55%}
+.biz{padding-block:0 clamp(72px,9vw,120px)}
+.biz__card{position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:clamp(16px,3vw,32px);align-items:center;padding:clamp(22px,3vw,34px) clamp(22px,3vw,36px) clamp(22px,3vw,34px) clamp(34px,4vw,50px);border-radius:28px;background:var(--paper);color:var(--paper-ink);text-decoration:none;transition:translate .5s var(--ease),box-shadow .5s}
+.biz__card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:12px;background:var(--anor) var(--ikat-rich) 0 0/44px auto}
+.biz__card:hover{translate:0 -4px;box-shadow:0 30px 60px -30px rgba(255,182,72,.5)}
+.biz__ico{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;background:var(--saffron);color:var(--paper-ink)}
+.biz__ico svg{width:30px;height:30px}
+.biz__txt{display:grid;gap:6px;min-width:0}
+.biz .eyebrow{margin:0;color:var(--anor-deep)}
+.biz__txt b{font:700 clamp(1.1rem,2vw,1.5rem)/1.2 var(--f-display);letter-spacing:-.02em;text-wrap:balance}
+.biz__txt small{color:var(--paper-muted);font-size:.92rem}
+@media (max-width:760px){.biz__card{grid-template-columns:minmax(0,1fr)}.biz__card .btn{justify-self:start}}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
 }
@@ -498,12 +582,17 @@ p{margin:0}
 
 <header class="nav" id="nav">
   <div class="wrap nav__in">
-    <a class="logo" href="#top" aria-label="Tuhfa"><span class="logo__mark"></span><span>tuhfa</span></a>
+    <div class="nav__left">
+      <a class="logo" href="#top" aria-label="Tuhfa"><span class="logo__mark"></span><span>tuhfa</span></a>
+      <nav class="aud" aria-label="Для кого">
+        <a class="aud__item" href="#top" aria-current="page"><span data-i18n="aud.buyers">Покупателям</span></a>
+        <a class="aud__item aud__item--biz" href="partners.html"><span class="aud__dot" aria-hidden="true"></span><span data-i18n="nav.partners">Партнёрам</span></a>
+      </nav>
+    </div>
     <nav class="nav__links" aria-label="Разделы">
       <a href="#gifts" data-i18n="nav.gifts">Подарки</a>
       <a href="#journey" data-i18n="nav.how">Как это работает</a>
       <a href="#redeem" data-i18n="nav.redeem">Погашение</a>
-      <a href="#partners" data-i18n="nav.partners">Партнёрам</a>
       <a href="#faq" data-i18n="nav.faq">Вопросы</a>
     </nav>
     <div class="nav__right">
@@ -527,7 +616,7 @@ p{margin:0}
         <p class="lead" data-i18n="hero.lead">Подарочные сертификаты магазинов Узбекистана и анимационные подарки. Выберите подарок, оплатите через Click или Payme и отправьте другу. Всё происходит внутри Telegram.</p>
         <div class="hero__actions">
           <a class="btn btn--primary btn--lg magnetic" data-bot href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="hero.cta1">Выбрать подарок</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn btn--ghost btn--lg" href="#partners"><span data-i18n="hero.cta2">Подключить магазин</span></a>
+          <a class="btn btn--ghost btn--lg" href="#journey"><span data-i18n="nav.how">Как это работает</span></a>
         </div>
         <ul class="hero__facts">
           <li data-i18n="hero.f1">Оплата через Click и Payme</li>
@@ -761,17 +850,17 @@ p{margin:0}
       <div class="redeem__copy">
         <p class="eyebrow" data-i18n="r.eyebrow">Погашение сертификата</p>
         <h2 data-i18n="r.title" data-split>Один QR-код. Одно погашение.</h2>
-        <p class="lead" data-i18n="r.lead">Партнёр сканирует код камерой телефона или кассовым сканером. Система подтверждает погашение и блокирует повторное использование.</p>
+        <p class="lead" data-i18n="r.lead">Откройте сертификат в «Моих подарках» и покажите QR-код на кассе. Магазин отсканирует его, и сертификат будет погашен.</p>
         <ol class="rsteps">
-          <li><span class="rsteps__n">01</span><span data-i18n="r.s1">Получатель показывает QR-код в магазине</span></li>
-          <li><span class="rsteps__n">02</span><span data-i18n="r.s2">Партнёр сканирует код</span></li>
-          <li><span class="rsteps__n">03</span><span data-i18n="r.s3">Система подтверждает погашение</span></li>
-          <li class="is-bad"><span class="rsteps__n">04</span><span data-i18n="r.s4">Повторная попытка отклоняется</span></li>
+          <li><span class="rsteps__n">01</span><span data-i18n="r.s1">Откройте сертификат в «Моих подарках»</span></li>
+          <li><span class="rsteps__n">02</span><span data-i18n="r.s2">Покажите QR-код на кассе магазина</span></li>
+          <li><span class="rsteps__n">03</span><span data-i18n="r.s3">Магазин сканирует код, погашение подтверждено</span></li>
+          <li class="is-bad"><span class="rsteps__n">04</span><span data-i18n="r.s4">Повторно использовать сертификат нельзя</span></li>
         </ol>
       </div>
       <div class="redeem__stage">
         <div class="scanner" id="scanner">
-          <span class="scanner__label mono"><i></i><span data-i18n="r.cam">Камера партнёра</span></span>
+          <span class="scanner__label mono"><i></i><span data-i18n="r.cam">Касса магазина</span></span>
           <div class="scanner__frame"><i></i><i></i><i></i><i></i></div>
           <div class="rcert">
             <div class="rcert__top"><span data-i18n="cert.shop">Книжная лавка</span><span data-i18n="cert.tag">Сертификат</span></div>
@@ -786,44 +875,9 @@ p{margin:0}
           <div class="result result--bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span data-i18n="r.bad">Уже погашен. Повторно нельзя</span></div>
         </div>
         <ul class="rnotes">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="12" height="12" rx="3"/><path d="M9 3h9a3 3 0 0 1 3 3v9"/></svg><span data-i18n="r.n1">Сертификат не погасить дважды, даже если QR предъявят одновременно в двух местах.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="12" height="12" rx="3"/><path d="M9 3h9a3 3 0 0 1 3 3v9"/></svg><span data-i18n="r.n1">Сертификат действует в магазине партнёра, который его выпустил.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="r.n2">Сертификат с истёкшим сроком действия погасить нельзя.</span></li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- PARTNERS -->
-  <section class="section partners" id="partners">
-    <div class="wrap partners__grid">
-      <div class="partners__copy">
-        <p class="eyebrow" data-i18n="p.eyebrow">Для магазинов</p>
-        <h2 data-i18n="p.title" data-split>Продавайте сертификаты там, где покупатели уже общаются</h2>
-        <p class="lead" data-i18n="p.lead">Подключите магазин к Tuhfa. Ваши подарочные сертификаты появятся в каталоге, а для погашения хватит телефона.</p>
-        <ol class="psteps">
-          <li class="pstep"><span class="pstep__n">1</span><div><h3 data-i18n="p.s1t">Заявка</h3><p data-i18n="p.s1p">Подайте заявку через форму или получите аккаунт от администратора сервиса.</p></div></li>
-          <li class="pstep"><span class="pstep__n">2</span><div><h3 data-i18n="p.s2t">Подтверждение</h3><p data-i18n="p.s2p">Доступ в кабинет партнёра открывается после проверки администратором.</p></div></li>
-          <li class="pstep"><span class="pstep__n">3</span><div><h3 data-i18n="p.s3t">Сертификат</h3><p data-i18n="p.s3p">Укажите магазин, сумму, описание и срок действия. Сумма бывает фиксированной или на выбор покупателя.</p></div></li>
-          <li class="pstep"><span class="pstep__n">4</span><div><h3 data-i18n="p.s4t">Модерация</h3><p data-i18n="p.s4p">Сертификат проверяет администратор. После одобрения он появляется в каталоге.</p></div></li>
-          <li class="pstep"><span class="pstep__n">5</span><div><h3 data-i18n="p.s5t">Погашение</h3><p data-i18n="p.s5p">Сканируйте QR-код покупателя камерой телефона или кассовым сканером.</p></div></li>
-        </ol>
-        <div class="partners__actions">
-          <a class="btn btn--primary btn--lg magnetic" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="p.cta">Стать партнёром</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn btn--ghost btn--lg" href="#redeem"><span data-i18n="p.cta2">Как проходит погашение</span></a>
-        </div>
-      </div>
-      <div class="partners__mock">
-        <div class="pform-sticky">
-          <div class="pform" id="pform" data-reveal>
-            <div class="pform__head"><b data-i18n="p.formTitle">Новый сертификат</b><span class="pill pill--wait" id="pStatus">На проверке</span></div>
-            <div class="pform__bar"><i></i></div>
-            <div class="field"><span data-i18n="p.fShop">Магазин</span><div class="input" data-i18n="cert.shop">Книжная лавка</div></div>
-            <div class="field"><span data-i18n="p.fAmount">Сумма</span><div class="seg"><span class="is-on" data-i18n="p.fFixed">Фиксированная</span><span data-i18n="p.fChoice">На выбор покупателя</span></div><div class="input mono">200 000 <span data-i18n="cur">сум</span></div></div>
-            <div class="field"><span data-i18n="p.fDesc">Описание</span><div class="input" data-i18n="p.fDescV">Книги, канцелярия и подарочная упаковка</div></div>
-            <div class="field"><span data-i18n="p.fValid">Срок действия</span><div class="input mono">31.12.2026</div></div>
-            <div class="pform__foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6l8-3z"/></svg><span data-i18n="p.formNote">Опубликовать сертификат без проверки нельзя</span></div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -862,14 +916,14 @@ p{margin:0}
         <div class="qa"><button type="button" class="qa__q" id="q3" aria-expanded="false" aria-controls="a3"><span data-i18n="f.q3">Что будет, если срок сертификата истёк?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a3" role="region" aria-labelledby="q3"><div><p data-i18n="f.a3">Сертификат с истёкшим сроком погасить нельзя. Срок действия указан в карточке сертификата, проверьте его перед покупкой.</p></div></div></div>
         <div class="qa"><button type="button" class="qa__q" id="q4" aria-expanded="false" aria-controls="a4"><span data-i18n="f.q4">Можно ли вернуть деньги за подарок?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a4" role="region" aria-labelledby="q4"><div><p data-i18n="f.a4">В текущей версии сервиса покупка окончательная: возврат и отмена оплаченного заказа не предусмотрены.</p></div></div></div>
         <div class="qa"><button type="button" class="qa__q" id="q5" aria-expanded="false" aria-controls="a5"><span data-i18n="f.q5">Нужно ли идти в магазин с анимационным подарком?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a5" role="region" aria-labelledby="q5"><div><p data-i18n="f.a5">Нет. Анимационный подарок открывается прямо в приложении и остаётся в вашей коллекции.</p></div></div></div>
-        <div class="qa"><button type="button" class="qa__q" id="q6" aria-expanded="false" aria-controls="a6"><span data-i18n="f.q6">Как магазину стать партнёром?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a6" role="region" aria-labelledby="q6"><div><p data-i18n="f.a6">Подайте заявку. После проверки администратором откроется кабинет партнёра, где вы создаёте сертификаты и подтверждаете их погашение.</p></div></div></div>
+        <div class="qa"><button type="button" class="qa__q" id="q6" aria-expanded="false" aria-controls="a6"><span data-i18n="f.q6">Где можно погасить сертификат?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a6" role="region" aria-labelledby="q6"><div><p data-i18n="f.a6">В магазине партнёра, который выпустил сертификат. Покажите QR-код на кассе, и сотрудник его отсканирует.</p></div></div></div>
         <div class="qa"><button type="button" class="qa__q" id="q7" aria-expanded="false" aria-controls="a7"><span data-i18n="f.q7">На каких языках работает сервис?</span><i class="qa__icon" aria-hidden="true"></i></button><div class="qa__a" id="a7" role="region" aria-labelledby="q7"><div><p data-i18n="f.a7">На узбекском и русском. Язык можно сменить в любой момент.</p></div></div></div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta" id="cta">
+  <section class="cta cta--tight" id="cta">
     <div class="wrap">
       <div class="cta__box">
         <span class="cta__rib cta__rib--v" aria-hidden="true"></span>
@@ -880,10 +934,20 @@ p{margin:0}
           <p class="lead" data-i18n="c.lead">Откройте бота, выберите подарок и отправьте его другу за пару минут.</p>
           <div class="cta__actions">
             <a class="btn btn--primary btn--lg magnetic" data-bot href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="nav.cta">Открыть бота</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="btn btn--ghost btn--lg" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="p.cta">Стать партнёром</span></a>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS TEASER -->
+  <section class="biz" aria-labelledby="bizT">
+    <div class="wrap">
+      <a class="biz__card" href="partners.html" data-reveal>
+        <span class="biz__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg></span>
+        <span class="biz__txt"><span class="eyebrow" data-i18n="biz.eyebrow">Для бизнеса</span><b id="bizT" data-i18n="biz.title">Владелец магазина? Продавайте подарочные сертификаты через Tuhfa</b><small data-i18n="biz.text">Подключение, правила и ответы на вопросы собраны на отдельной странице.</small></span>
+        <span class="btn btn--partner btn--lg"><span data-i18n="p.cta">Стать партнёром</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
     </div>
   </section>
 </main>
@@ -895,7 +959,7 @@ p{margin:0}
       <p data-i18n="ft.desc">Сервис виртуальных подарков в Telegram для Узбекистана.</p>
     </div>
     <nav class="foot__col" aria-label="Покупателям"><b data-i18n="ft.buyers">Покупателям</b><a class="ulink" href="#gifts" data-i18n="nav.gifts">Подарки</a><a class="ulink" href="#journey" data-i18n="nav.how">Как это работает</a><a class="ulink" href="#faq" data-i18n="nav.faq">Вопросы</a></nav>
-    <nav class="foot__col" aria-label="Партнёрам"><b data-i18n="nav.partners">Партнёрам</b><a class="ulink" href="#partners" data-i18n="ft.connect">Подключение</a><a class="ulink" href="#redeem" data-i18n="nav.redeem">Погашение</a></nav>
+    <nav class="foot__col" aria-label="Партнёрам"><b data-i18n="nav.partners">Партнёрам</b><a class="ulink" href="partners.html#connect" data-i18n="ft.connect">Подключение</a><a class="ulink" href="partners.html#rules" data-i18n="pp.navRules">Правила</a><a class="ulink" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener" data-i18n="pp.apply">Подать заявку</a></nav>
     <div class="foot__col"><b data-i18n="ft.pay">Оплата</b><span>Click</span><span>Payme</span></div>
   </div>
   <div class="wrap foot__bottom"><span>© 2026 Tuhfa</span><span>O‘zbekcha · Русский</span></div>
@@ -986,73 +1050,239 @@ p{margin:0}
 
   /* ---------- Тексты: русский в разметке, узбекский здесь ---------- */
   var UZ = {
-    'nav.gifts': 'Sovg‘alar', 'nav.how': 'Qanday ishlaydi', 'nav.redeem': 'Ishlatish', 'nav.partners': 'Hamkorlarga', 'nav.faq': 'Savollar', 'nav.cta': 'Botni ochish',
+    'nav.gifts': 'Sovg‘alar',
+    'nav.how': 'Qanday ishlaydi',
+    'nav.redeem': 'Ishlatish',
+    'nav.partners': 'Hamkorlarga',
+    'nav.faq': 'Savollar',
+    'nav.cta': 'Botni ochish',
     'hero.eyebrow': 'Telegramda sovg‘alar · O‘zbekiston',
     'hero.title': 'Telegramda <em class="ikat-text">quvonch</em> hadya qiling',
     'hero.lead': 'O‘zbekiston do‘konlarining sovg‘a sertifikatlari va animatsion sovg‘alar. Sovg‘ani tanlang, Click yoki Payme orqali to‘lang va do‘stingizga yuboring. Hammasi Telegram ichida.',
-    'hero.cta1': 'Sovg‘a tanlash', 'hero.cta2': 'Do‘konni ulash',
-    'hero.f1': 'Click va Payme orqali to‘lov', 'hero.f2': 'O‘zbek va rus tillarida', 'hero.f3': '24/7 ishlaydi',
-    'hero.chipPay': 'Payme orqali to‘landi', 'hero.chipFwd': 'Azizaga yuborildi',
+    'hero.cta1': 'Sovg‘a tanlash',
+    'hero.f1': 'Click va Payme orqali to‘lov',
+    'hero.f2': 'O‘zbek va rus tillarida',
+    'hero.f3': '24/7 ishlaydi',
+    'hero.chipPay': 'Payme orqali to‘landi',
+    'hero.chipFwd': 'Azizaga yuborildi',
     'cur': 'so‘m',
-    'ui.mygifts': 'Mening sovg‘alarim', 'ui.certBooks': 'Sertifikat · Kitoblar', 'ui.certFlowers': 'Sertifikat · Gullar', 'ui.anorGift': '«Anor» sovg‘asi', 'ui.animation': 'Animatsiya',
-    'ui.stActive': 'Faol', 'ui.stOpened': 'Ochilgan', 'ui.stSent': 'Yuborilgan', 'ui.stNew': 'Yangi',
-    'ui.showQr': 'QR-kodni kassada ko‘rsating', 'ui.validFull': '31.12.2026 gacha amal qiladi',
-    'ui.catalog': 'Katalog', 'ui.tabCerts': 'Sertifikatlar', 'ui.tabAnim': 'Animatsiyalar', 'ui.books': 'Kitoblar', 'ui.flowers': 'Gullar', 'ui.coffee': 'Qahvaxona', 'ui.from': '50 000 dan', 'ui.anor': '«Anor»',
-    'ui.pay': 'To‘lov', 'ui.method': 'To‘lov usuli', 'ui.payBtn': 'To‘lash',
-    'ui.bot': 'Tuhfa bot', 'ui.botMsg': 'To‘lov o‘tdi. Sovg‘a «Mening sovg‘alarim»da',
-    'ui.sendTo': 'Kimga yuborasiz?', 'ui.c1': 'Aziza', 'ui.c2': 'Temur', 'ui.c3': 'Madina', 'ui.c1i': 'A', 'ui.c2i': 'T', 'ui.c3i': 'M',
-    'ui.history': 'Tarix', 'ui.toAziza': 'Aziza uchun', 'ui.fwdBtn': 'Yuborish', 'ui.noShop': 'Ilovada ochiladi',
-    'cert.shop': 'Kitob do‘koni', 'cert.tag': 'Sertifikat', 'cert.until': '31.12.2026 gacha', 'cert.validLabel': 'Amal qilish muddati',
-    'band.1': 'Do‘kon sertifikatlari', 'band.2': 'Animatsion sovg‘alar', 'band.3': 'Click va Payme', 'band.4': 'Kassada QR-kod',
-    'g.eyebrow': 'Nima sovg‘a qilish mumkin', 'g.title': 'Boshlanishiga ikki xil sovg‘a',
+    'ui.mygifts': 'Mening sovg‘alarim',
+    'ui.certBooks': 'Sertifikat · Kitoblar',
+    'ui.certFlowers': 'Sertifikat · Gullar',
+    'ui.anorGift': '«Anor» sovg‘asi',
+    'ui.animation': 'Animatsiya',
+    'ui.stActive': 'Faol',
+    'ui.stOpened': 'Ochilgan',
+    'ui.stSent': 'Yuborilgan',
+    'ui.stNew': 'Yangi',
+    'ui.showQr': 'QR-kodni kassada ko‘rsating',
+    'ui.validFull': '31.12.2026 gacha amal qiladi',
+    'ui.catalog': 'Katalog',
+    'ui.tabCerts': 'Sertifikatlar',
+    'ui.tabAnim': 'Animatsiyalar',
+    'ui.books': 'Kitoblar',
+    'ui.flowers': 'Gullar',
+    'ui.coffee': 'Qahvaxona',
+    'ui.from': '50 000 dan',
+    'ui.anor': '«Anor»',
+    'ui.pay': 'To‘lov',
+    'ui.method': 'To‘lov usuli',
+    'ui.payBtn': 'To‘lash',
+    'ui.bot': 'Tuhfa bot',
+    'ui.botMsg': 'To‘lov o‘tdi. Sovg‘a «Mening sovg‘alarim»da',
+    'ui.sendTo': 'Kimga yuborasiz?',
+    'ui.c1': 'Aziza',
+    'ui.c2': 'Temur',
+    'ui.c3': 'Madina',
+    'ui.c1i': 'A',
+    'ui.c2i': 'T',
+    'ui.c3i': 'M',
+    'ui.history': 'Tarix',
+    'ui.toAziza': 'Aziza uchun',
+    'ui.fwdBtn': 'Yuborish',
+    'ui.noShop': 'Ilovada ochiladi',
+    'cert.shop': 'Kitob do‘koni',
+    'cert.tag': 'Sertifikat',
+    'cert.until': '31.12.2026 gacha',
+    'cert.validLabel': 'Amal qilish muddati',
+    'band.1': 'Do‘kon sertifikatlari',
+    'band.2': 'Animatsion sovg‘alar',
+    'band.3': 'Click va Payme',
+    'band.4': 'Kassada QR-kod',
+    'g.eyebrow': 'Nima sovg‘a qilish mumkin',
+    'g.title': 'Boshlanishiga ikki xil sovg‘a',
     'g.lead': 'Do‘stingiz sevimli do‘konidan sovg‘ani o‘zi tanlashi uchun sertifikat. Yoki darhol quvontiradigan animatsion sovg‘a.',
-    'g.pick': 'Nominalni tanlang', 'g.custom': 'O‘z summangiz', 'g.range': 'Xaridor tanlagan summa',
-    'g.c1label': 'Hamkor sertifikati', 'g.c1title': 'Sovg‘a sertifikati',
+    'g.pick': 'Nominalni tanlang',
+    'g.custom': 'O‘z summangiz',
+    'g.range': 'Xaridor tanlagan summa',
+    'g.c1label': 'Hamkor sertifikati',
+    'g.c1title': 'Sovg‘a sertifikati',
     'g.c1text': 'Hamkor do‘konning qat’iy summadagi yoki xaridor tanlagan summadagi sertifikati. Qabul qiluvchi kassada QR-kodni ko‘rsatadi.',
-    'g.c1b1': 'Amal qilish muddati sertifikatda ko‘rsatilgan', 'g.c1b2': 'Faqat bir marta ishlatiladi', 'g.c1b3': 'Har bir sertifikat e’lon qilinishidan oldin tekshiriladi',
+    'g.c1b1': 'Amal qilish muddati sertifikatda ko‘rsatilgan',
+    'g.c1b2': 'Faqat bir marta ishlatiladi',
+    'g.c1b3': 'Har bir sertifikat e’lon qilinishidan oldin tekshiriladi',
     'g.hint': 'Qutini bosing',
-    'g.c2label': 'Do‘konga bormasdan', 'g.c2title': 'Animatsion sovg‘a',
+    'g.c2label': 'Do‘konga bormasdan',
+    'g.c2title': 'Animatsion sovg‘a',
     'g.c2text': 'Ochilish animatsiyasiga ega raqamli sovg‘a. Qabul qiluvchi uni birinchi ko‘rganda animatsiya ijro etiladi, sovg‘a esa uning to‘plamida qoladi.',
-    'g.c2b1': 'To‘g‘ridan-to‘g‘ri Telegramda ochiladi', 'g.c2b2': 'O‘zingizga qoldirish yoki yuborish mumkin', 'g.c2b3': 'Hech narsani skanerlash shart emas',
-    'j.eyebrow': 'Sovg‘a yo‘li', 'j.title': 'Katalogdan do‘stingizgacha besh qadam',
+    'g.c2b1': 'To‘g‘ridan-to‘g‘ri Telegramda ochiladi',
+    'g.c2b2': 'O‘zingizga qoldirish yoki yuborish mumkin',
+    'g.c2b3': 'Hech narsani skanerlash shart emas',
+    'j.eyebrow': 'Sovg‘a yo‘li',
+    'j.title': 'Katalogdan do‘stingizgacha besh qadam',
     'j.lead': 'Bot bildirishnomalar yuboradi, sovg‘alarni xarid qilish va saqlash esa mini-ilovada amalga oshadi.',
-    'j.s1t': 'Sovg‘ani tanlang', 'j.s1p': 'Sertifikatlar va animatsion sovg‘alar katalogi Telegram ichidagi mini-ilovada ochiladi.',
-    'j.s2t': 'Click yoki Payme orqali to‘lang', 'j.s2p': 'O‘zbekistonda eng ko‘p ishlatiladigan ikki to‘lov usuli.',
-    'j.s3t': '«Mening sovg‘alarim»da oling', 'j.s3p': 'To‘lovdan so‘ng sovg‘a bo‘limingizda paydo bo‘ladi, bot esa bildirishnoma yuboradi.',
-    'j.s4t': 'O‘zingizga qoldiring yoki yuboring', 'j.s4p': 'Sovg‘ani Telegram orqali do‘stingizga yuboring. Do‘stingizda sovg‘a paydo bo‘ladi, sizda esa «yuborilgan» belgili yozuv qoladi.',
-    'j.s5t': 'Oching yoki ishlating', 'j.s5p': 'Animatsion sovg‘a ilovaning o‘zida ochiladi. Sertifikat hamkor do‘konida QR-kod orqali ishlatiladi.',
-    'r.eyebrow': 'Sertifikatni ishlatish', 'r.title': 'Bitta QR-kod. Bir marta ishlatish.',
-    'r.lead': 'Hamkor kodni telefon kamerasi yoki kassa skaneri bilan skanerlaydi. Tizim ishlatilganini tasdiqlaydi va qayta foydalanishni bloklaydi.',
-    'r.s1': 'Qabul qiluvchi do‘konda QR-kodni ko‘rsatadi', 'r.s2': 'Hamkor kodni skanerlaydi', 'r.s3': 'Tizim ishlatilganini tasdiqlaydi', 'r.s4': 'Qayta urinish rad etiladi',
-    'r.cam': 'Hamkor kamerasi', 'r.stamp': 'Ishlatildi', 'r.ok': 'Sertifikat ishlatildi', 'r.bad': 'Allaqachon ishlatilgan. Qayta mumkin emas',
-    'r.n1': 'QR-kod bir vaqtda ikki joyda ko‘rsatilsa ham, sertifikatni ikki marta ishlatib bo‘lmaydi.',
+    'j.s1t': 'Sovg‘ani tanlang',
+    'j.s1p': 'Sertifikatlar va animatsion sovg‘alar katalogi Telegram ichidagi mini-ilovada ochiladi.',
+    'j.s2t': 'Click yoki Payme orqali to‘lang',
+    'j.s2p': 'O‘zbekistonda eng ko‘p ishlatiladigan ikki to‘lov usuli.',
+    'j.s3t': '«Mening sovg‘alarim»da oling',
+    'j.s3p': 'To‘lovdan so‘ng sovg‘a bo‘limingizda paydo bo‘ladi, bot esa bildirishnoma yuboradi.',
+    'j.s4t': 'O‘zingizga qoldiring yoki yuboring',
+    'j.s4p': 'Sovg‘ani Telegram orqali do‘stingizga yuboring. Do‘stingizda sovg‘a paydo bo‘ladi, sizda esa «yuborilgan» belgili yozuv qoladi.',
+    'j.s5t': 'Oching yoki ishlating',
+    'j.s5p': 'Animatsion sovg‘a ilovaning o‘zida ochiladi. Sertifikat hamkor do‘konida QR-kod orqali ishlatiladi.',
+    'r.eyebrow': 'Sertifikatni ishlatish',
+    'r.title': 'Bitta QR-kod. Bir marta ishlatish.',
+    'r.lead': 'Sertifikatni «Mening sovg‘alarim»da oching va kassada QR-kodni ko‘rsating. Do‘kon uni skanerlaydi va sertifikat ishlatiladi.',
+    'r.s1': 'Sertifikatni «Mening sovg‘alarim»da oching',
+    'r.s2': 'Do‘kon kassasida QR-kodni ko‘rsating',
+    'r.s3': 'Do‘kon kodni skanerlaydi, ishlatish tasdiqlanadi',
+    'r.s4': 'Sertifikatni qayta ishlatib bo‘lmaydi',
+    'r.cam': 'Do‘kon kassasi',
+    'r.stamp': 'Ishlatildi',
+    'r.ok': 'Sertifikat ishlatildi',
+    'r.bad': 'Allaqachon ishlatilgan. Qayta mumkin emas',
+    'r.n1': 'Sertifikat uni chiqargan hamkor do‘konida amal qiladi.',
     'r.n2': 'Amal qilish muddati o‘tgan sertifikatni ishlatib bo‘lmaydi.',
-    'p.eyebrow': 'Do‘konlar uchun', 'p.title': 'Sertifikatlarni xaridorlar allaqachon muloqot qiladigan joyda soting',
-    'p.lead': 'Do‘koningizni Tuhfaga ulang. Sovg‘a sertifikatlaringiz katalogda paydo bo‘ladi, ishlatish uchun esa telefon kifoya.',
-    'p.s1t': 'Ariza', 'p.s1p': 'Shakl orqali ariza topshiring yoki servis administratoridan akkaunt oling.',
-    'p.s2t': 'Tasdiqlash', 'p.s2p': 'Hamkor kabinetiga kirish administrator tekshiruvidan so‘ng ochiladi.',
-    'p.s3t': 'Sertifikat', 'p.s3p': 'Do‘kon, summa, tavsif va amal qilish muddatini kiriting. Summa qat’iy yoki xaridor tanlovi bo‘yicha bo‘ladi.',
-    'p.s4t': 'Moderatsiya', 'p.s4p': 'Sertifikatni administrator tekshiradi. Tasdiqlangach, u katalogda paydo bo‘ladi.',
-    'p.s5t': 'Ishlatish', 'p.s5p': 'Xaridorning QR-kodini telefon kamerasi yoki kassa skaneri bilan skanerlang.',
-    'p.cta': 'Hamkor bo‘lish', 'p.cta2': 'Ishlatish qanday o‘tadi',
-    'p.formTitle': 'Yangi sertifikat', 'p.fShop': 'Do‘kon', 'p.fAmount': 'Summa', 'p.fFixed': 'Qat’iy', 'p.fChoice': 'Xaridor tanlovi',
-    'p.fDesc': 'Tavsif', 'p.fDescV': 'Kitoblar, kanselyariya va sovg‘a qadoqlari', 'p.fValid': 'Amal qilish muddati',
+    'p.eyebrow': 'Ulanish',
+    'p.title': 'Arizadan ishlatishgacha besh qadam',
+    'p.lead': 'Xaridorlar katalogga ishonishi uchun har bir sertifikat tekshiruvdan o‘tadi. Ishlatish uchun telefon kifoya.',
+    'p.s1t': 'Ariza',
+    'p.s1p': 'Shakl orqali ariza topshiring yoki servis administratoridan akkaunt oling.',
+    'p.s2t': 'Tasdiqlash',
+    'p.s2p': 'Hamkor kabinetiga kirish administrator tekshiruvidan so‘ng ochiladi.',
+    'p.s3t': 'Sertifikat',
+    'p.s3p': 'Do‘kon, summa, tavsif va amal qilish muddatini kiriting. Summa qat’iy yoki xaridor tanlovi bo‘yicha bo‘ladi.',
+    'p.s4t': 'Moderatsiya',
+    'p.s4p': 'Sertifikatni administrator tekshiradi. Tasdiqlangach, u katalogda paydo bo‘ladi.',
+    'p.s5t': 'Ishlatish',
+    'p.s5p': 'Xaridorning QR-kodini telefon kamerasi yoki kassa skaneri bilan skanerlang.',
+    'p.cta': 'Hamkor bo‘lish',
+    'p.cta2': 'Ishlatish qanday o‘tadi',
+    'p.formTitle': 'Yangi sertifikat',
+    'p.fShop': 'Do‘kon',
+    'p.fAmount': 'Summa',
+    'p.fFixed': 'Qat’iy',
+    'p.fChoice': 'Xaridor tanlovi',
+    'p.fDesc': 'Tavsif',
+    'p.fDescV': 'Kitoblar, kanselyariya va sovg‘a qadoqlari',
+    'p.fValid': 'Amal qilish muddati',
     'p.formNote': 'Sertifikatni tekshiruvsiz e’lon qilib bo‘lmaydi',
-    's.eyebrow': 'Servis qoidalari', 's.title': 'Hammani himoya qiladigan qoidalar',
-    's.1': 'Bot va servis kecha-kunduz ishlaydi', 's.2': 'sertifikatlar e’lon qilinishidan oldin moderatsiyadan o‘tadi',
-    's.3': 'Har bir QR-kod faqat bir marta ishlatiladi', 's.4': 'interfeys tili: o‘zbek va rus',
+    's.eyebrow': 'Servis qoidalari',
+    's.title': 'Hammani himoya qiladigan qoidalar',
+    's.1': 'Bot va servis kecha-kunduz ishlaydi',
+    's.2': 'sertifikatlar e’lon qilinishidan oldin moderatsiyadan o‘tadi',
+    's.3': 'Har bir QR-kod faqat bir marta ishlatiladi',
+    's.4': 'interfeys tili: o‘zbek va rus',
     's.gt': 'Sotib olingan sertifikat amal qilishda davom etadi',
     's.gp': 'Do‘kon savdosi to‘xtatilsa ham, sotib olingan va hali ishlatilmagan sertifikatlar bekor qilinmaydi. Cheklov faqat yangi savdolarga tegishli.',
-    'f.eyebrow': 'Savollar', 'f.title': 'Ko‘p beriladigan savollar', 'f.lead': 'Birinchi xariddan oldin eng muhimlari.',
-    'f.q1': 'Sovg‘ani do‘stimga qanday yuboraman?', 'f.a1': '«Mening sovg‘alarim» bo‘limida sovg‘ani oching va uni Telegram orqali do‘stingizga yuboring. Sovg‘a darhol qabul qiluvchida paydo bo‘ladi.',
-    'f.q2': 'Yuborganimdan keyin sovg‘adan foydalana olamanmi?', 'f.a2': 'Yo‘q. Sovg‘aga bo‘lgan huquq qabul qiluvchiga o‘tadi, sizda esa tarixda «yuborilgan» belgili yozuv qoladi.',
-    'f.q3': 'Sertifikat muddati o‘tib ketsa nima bo‘ladi?', 'f.a3': 'Muddati o‘tgan sertifikatni ishlatib bo‘lmaydi. Amal qilish muddati sertifikat kartasida ko‘rsatilgan, xariddan oldin tekshiring.',
-    'f.q4': 'Sovg‘a uchun pulni qaytarish mumkinmi?', 'f.a4': 'Servisning joriy versiyasida xarid yakuniy hisoblanadi: to‘langan buyurtmani qaytarish yoki bekor qilish ko‘zda tutilmagan.',
-    'f.q5': 'Animatsion sovg‘a bilan do‘konga borish kerakmi?', 'f.a5': 'Yo‘q. Animatsion sovg‘a ilovaning o‘zida ochiladi va to‘plamingizda qoladi.',
-    'f.q6': 'Do‘kon qanday qilib hamkor bo‘ladi?', 'f.a6': 'Ariza topshiring. Administrator tekshiruvidan so‘ng hamkor kabineti ochiladi, unda sertifikatlar yaratasiz va ularning ishlatilishini tasdiqlaysiz.',
-    'f.q7': 'Servis qaysi tillarda ishlaydi?', 'f.a7': 'O‘zbek va rus tillarida. Tilni istalgan vaqtda almashtirish mumkin.',
-    'c.title': 'Bugun yoqimli sovg‘a qiling', 'c.lead': 'Botni oching, sovg‘a tanlang va bir necha daqiqada do‘stingizga yuboring.',
-    'ft.desc': 'O‘zbekiston uchun Telegramdagi virtual sovg‘alar servisi.', 'ft.buyers': 'Xaridorlarga', 'ft.connect': 'Ulanish', 'ft.pay': 'To‘lov'
+    'f.eyebrow': 'Savollar',
+    'f.title': 'Ko‘p beriladigan savollar',
+    'f.lead': 'Birinchi xariddan oldin eng muhimlari.',
+    'f.q1': 'Sovg‘ani do‘stimga qanday yuboraman?',
+    'f.a1': '«Mening sovg‘alarim» bo‘limida sovg‘ani oching va uni Telegram orqali do‘stingizga yuboring. Sovg‘a darhol qabul qiluvchida paydo bo‘ladi.',
+    'f.q2': 'Yuborganimdan keyin sovg‘adan foydalana olamanmi?',
+    'f.a2': 'Yo‘q. Sovg‘aga bo‘lgan huquq qabul qiluvchiga o‘tadi, sizda esa tarixda «yuborilgan» belgili yozuv qoladi.',
+    'f.q3': 'Sertifikat muddati o‘tib ketsa nima bo‘ladi?',
+    'f.a3': 'Muddati o‘tgan sertifikatni ishlatib bo‘lmaydi. Amal qilish muddati sertifikat kartasida ko‘rsatilgan, xariddan oldin tekshiring.',
+    'f.q4': 'Sovg‘a uchun pulni qaytarish mumkinmi?',
+    'f.a4': 'Servisning joriy versiyasida xarid yakuniy hisoblanadi: to‘langan buyurtmani qaytarish yoki bekor qilish ko‘zda tutilmagan.',
+    'f.q5': 'Animatsion sovg‘a bilan do‘konga borish kerakmi?',
+    'f.a5': 'Yo‘q. Animatsion sovg‘a ilovaning o‘zida ochiladi va to‘plamingizda qoladi.',
+    'f.q6': 'Sertifikatni qayerda ishlatish mumkin?',
+    'f.a6': 'Sertifikatni chiqargan hamkor do‘konida. Kassada QR-kodni ko‘rsating, xodim uni skanerlaydi.',
+    'f.q7': 'Servis qaysi tillarda ishlaydi?',
+    'f.a7': 'O‘zbek va rus tillarida. Tilni istalgan vaqtda almashtirish mumkin.',
+    'c.title': 'Bugun yoqimli sovg‘a qiling',
+    'c.lead': 'Botni oching, sovg‘a tanlang va bir necha daqiqada do‘stingizga yuboring.',
+    'ft.desc': 'O‘zbekiston uchun Telegramdagi virtual sovg‘alar servisi.',
+    'ft.buyers': 'Xaridorlarga',
+    'ft.connect': 'Ulanish',
+    'ft.pay': 'To‘lov',
+    'aud.buyers': 'Xaridorlarga',
+    'biz.eyebrow': 'Biznes uchun',
+    'biz.title': 'Do‘kon egasimisiz? Sovg‘a sertifikatlarini Tuhfa orqali soting',
+    'biz.text': 'Ulanish, qoidalar va savollarga javoblar alohida sahifada jamlangan.',
+    'band.p1': 'Telegramdagi katalog',
+    'band.p2': 'Sertifikatlar moderatsiyasi',
+    'pp.navBen': 'Afzalliklar',
+    'pp.navRules': 'Qoidalar',
+    'pp.apply': 'Ariza topshirish',
+    'pp.how': 'Qanday ulanish mumkin',
+    'pp.eyebrow': 'Biznes uchun Tuhfa',
+    'pp.title': 'Telegramda <em class="ikat-text">sovg‘alar</em> soting',
+    'pp.lead': 'Do‘koningizni Tuhfaga ulang. Sovg‘a sertifikatlaringiz mini-ilova katalogida paydo bo‘ladi, xaridorlar ularni Click yoki Payme orqali to‘lab, do‘stlariga sovg‘a qiladi. Ishlatish uchun telefon kifoya.',
+    'pp.f1': 'Har bir sertifikat tekshiriladi',
+    'pp.f2': 'Kamera yoki kassa skaneri bilan skanerlash',
+    'pp.uiCabinet': 'Hamkor kabineti',
+    'pp.uiVerified': 'Akkaunt tasdiqlangan',
+    'pp.uiMyCerts': 'Mening sertifikatlarim',
+    'pp.uiFixed': 'Qat’iy',
+    'pp.uiChoice': 'Tanlov bo‘yicha',
+    'pp.uiFrom': '50 000 dan',
+    'pp.uiScan': 'QR-kodni skanerlash',
+    'pp.stLive': 'E’lon qilingan',
+    'pp.stWait': 'Tekshiruvda',
+    'pp.chipOk': 'Sertifikat tasdiqlandi',
+    'pp.chipRedeemed': 'Ishlatildi',
+    'pp.bEyebrow': 'Do‘kon nimaga ega bo‘ladi',
+    'pp.bTitle': 'Ortiqcha ishsiz sovg‘a sertifikatlari',
+    'pp.b1t': 'Yangi savdo kanali',
+    'pp.b1p': 'Do‘koningiz sertifikatlari Telegram ichidagi mini-ilova katalogiga tushadi, xaridorlar sovg‘ani aynan shu yerda tanlaydi.',
+    'pp.b2t': 'Click va Payme orqali to‘lov',
+    'pp.b2p': 'Xaridorlar odatiy usullarda to‘laydi, sotib olingan sertifikat esa darhol ularning «Mening sovg‘alarim» bo‘limida paydo bo‘ladi.',
+    'pp.b3t': 'Bir necha soniyada ishlatish',
+    'pp.b3p': 'QR-kodni telefon kamerasi yoki kassa skaneri bilan skanerlang, tizim ishlatilganini tasdiqlaydi.',
+    'pp.b4t': 'Takrorlanishdan himoya',
+    'pp.b4p': 'QR-kod bir vaqtda ikki joyda ko‘rsatilsa ham, sertifikat faqat bir marta ishlatiladi.',
+    'pr.eyebrow': 'Ishlatish',
+    'pr.lead': 'Kodni telefon kamerasi yoki kassa skaneri bilan skanerlaysiz. Tizim ishlatilganini tasdiqlaydi va qayta foydalanishni bloklaydi.',
+    'pr.s1': 'Xaridor kassada QR-kodni ko‘rsatadi',
+    'pr.s2': 'Siz kodni skanerlaysiz',
+    'pr.s3': 'Tizim ishlatilganini tasdiqlaydi',
+    'pr.s4': 'Qayta urinish rad etiladi',
+    'pr.cam': 'Sizning kamerangiz',
+    'pr.n1': 'QR-kod bir vaqtda ikki joyda ko‘rsatilsa ham, sertifikatni ikki marta ishlatib bo‘lmaydi.',
+    'pp.rEyebrow': 'Hamkorlar uchun qoidalar',
+    'pp.rTitle': 'Do‘kon va xaridor uchun shaffof qoidalar',
+    'pp.r1t': 'Tekshiruvdan keyin e’lon qilish',
+    'pp.r1p': 'Sertifikat katalogda faqat administrator tasdiqlaganidan keyin paydo bo‘ladi. Uni mustaqil e’lon qilib bo‘lmaydi.',
+    'pp.r2t': 'Savdodan olish',
+    'pp.r2p': 'Sertifikatni savdodan olish yoki hamkor faoliyatini to‘xtatish faqat servis administratori qo‘lida.',
+    'pp.r3t': 'Sotilganlar kuchda qoladi',
+    'pp.r3p': 'Savdo to‘xtatilsa ham, sotib olingan va hali ishlatilmagan sertifikatlar bekor qilinmaydi. Cheklov faqat yangi savdolarga tegishli.',
+    'pp.r4t': 'Amal qilish muddati',
+    'pp.r4p': 'Muddatni sertifikat yaratishda belgilaysiz. Muddati o‘tgan sertifikatni ishlatib bo‘lmaydi.',
+    'pp.r5t': 'Xarid yakuniy',
+    'pp.r5p': 'Joriy versiyada to‘langan buyurtmani qaytarish yoki bekor qilish ko‘zda tutilmagan.',
+    'pp.r6t': 'Kecha-kunduz',
+    'pf.title': 'Hamkorlar savollari',
+    'pf.lead': 'Ulanish va ishlatish haqida qisqacha.',
+    'pf.q1': 'Arizani qanday topshiraman?',
+    'pf.a1': '«Ariza topshirish» tugmasini bosing va shaklni to‘ldiring. Akkauntni servis administratori ham yaratishi mumkin. Kabinetga kirish tekshiruvdan so‘ng ochiladi.',
+    'pf.q2': 'Sertifikatni darhol e’lon qilsa bo‘ladimi?',
+    'pf.a2': 'Yo‘q. Har bir sertifikatni administrator tekshiradi va faqat tasdiqlangach u katalogda paydo bo‘ladi.',
+    'pf.q3': 'Qanday summani ko‘rsatish mumkin?',
+    'pf.a3': 'Qat’iy, masalan 200 000 so‘m, yoki xaridor tanlovi bo‘yicha. Shuningdek tavsif va amal qilish muddatini kiriting.',
+    'pf.q4': 'QR-kodni nima bilan skanerlash kerak?',
+    'pf.a4': 'Telefon kamerasi yoki kassa skaneri bilan. Tizim ishlatilganini darhol tasdiqlaydi.',
+    'pf.q5': 'QR-kod qayta ko‘rsatilsa nima bo‘ladi?',
+    'pf.a5': 'Ishlatish amalga oshmaydi. Sertifikat bir vaqtda ikki joyda urinilsa ham faqat bir marta ishlatiladi.',
+    'pf.q6': 'Savdo to‘xtatilsa, sotilgan sertifikatlar nima bo‘ladi?',
+    'pf.a6': 'Ular amal qilishda davom etadi. Cheklov faqat yangi savdolarga tegishli.',
+    'pc.title': 'Do‘koningizni Tuhfaga ulang',
+    'pc.lead': 'Ariza topshiring, tekshiruvdan so‘ng hamkor kabinetida sertifikatlar yarata olasiz.',
+    'pc.back': 'Xaridorlar sahifasi'
   };
   var DYN = {
     ru: { open: 'Открыть подарок', close: 'Упаковать снова', status: '«Анор» сохранён в «Моих подарках»', wait: 'На проверке', live: 'Опубликован', boxAria: 'Открыть подарок' },
@@ -1090,6 +1320,7 @@ p{margin:0}
   var demoBox = $('#demoBox'), heroBox = $('#heroBox'), openBtn = $('#openBtn'), openLabel = $('#openLabel'), boxStatus = $('#boxStatus');
   var pform = $('#pform'), pStatus = $('#pStatus'), pState = 'wait';
   function renderBox() {
+    if (!demoBox) return;
     var open = demoBox.classList.contains('is-open');
     openLabel.textContent = open ? t('close') : t('open');
     boxStatus.textContent = open ? t('status') : '';
@@ -1097,6 +1328,7 @@ p{margin:0}
     demoBox.setAttribute('aria-pressed', String(open));
   }
   function renderP() {
+    if (!pform) return;
     pStatus.textContent = pState === 'live' ? t('live') : t('wait');
     pStatus.className = 'pill ' + (pState === 'live' ? 'pill--live' : 'pill--wait');
     pform.classList.toggle('is-live', pState === 'live');
@@ -1157,10 +1389,10 @@ p{margin:0}
     if (open) setTimeout(function () { burst(box); }, 180);
     if (box === demoBox) renderBox();
   }
-  demoBox.addEventListener('click', function () { toggleBox(demoBox); });
-  demoBox.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleBox(demoBox); } });
-  openBtn.addEventListener('click', function () { toggleBox(demoBox); });
-  heroBox.addEventListener('click', function () { toggleBox(heroBox); });
+  if (demoBox) demoBox.addEventListener('click', function () { toggleBox(demoBox); });
+  if (demoBox) demoBox.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleBox(demoBox); } });
+  if (openBtn) openBtn.addEventListener('click', function () { toggleBox(demoBox); });
+  if (heroBox) heroBox.addEventListener('click', function () { toggleBox(heroBox); });
 
   /* ---------- Номинал сертификата ---------- */
   var amtEl = $('#certAmt'), range = $('#amtRange'), customBox = $('#customBox'), proxy = { v: 200000 };
@@ -1178,7 +1410,7 @@ p{margin:0}
       if (ST) ST.refresh();
     });
   });
-  range.addEventListener('input', function () { setAmt(+range.value, false); });
+  if (range) range.addEventListener('input', function () { setAmt(+range.value, false); });
 
   /* ---------- FAQ ---------- */
   $$('.qa__q').forEach(function (q) {
@@ -1204,12 +1436,12 @@ p{margin:0}
     var pio = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting && pState === 'wait') { setTimeout(function () { pState = 'live'; renderP(); }, reduce ? 0 : 1500); pio.disconnect(); } });
     }, { threshold: 0.6 });
-    pio.observe(pform);
+    if (pform) pio.observe(pform);
   }
 
   /* ---------- Без анимаций: статичные состояния ---------- */
   var scanner = $('#scanner');
-  if (!animate) { scanner.classList.add('is-static'); return; }
+  if (!animate) { if (scanner) scanner.classList.add('is-static'); return; }
 
   /* ================= Анимации ================= */
   G.registerPlugin(ST);
@@ -1226,7 +1458,7 @@ p{margin:0}
       var id = a.getAttribute('href'); if (id.length < 2) return;
       var target = document.querySelector(id); if (!target) return;
       e.preventDefault();
-      if (lenis) lenis.scrollTo(target, { offset: id === '#top' ? 0 : -72, duration: 1.5 });
+      if (lenis) lenis.scrollTo(target, { offset: id === '#top' ? 0 : -$('#nav').offsetHeight, duration: 1.5 });
       else target.scrollIntoView({ behavior: 'smooth' });
     });
   });
@@ -1362,19 +1594,19 @@ p{margin:0}
         .to({}, { duration: 0.9 });
       return tl;
     }
-    mm.add('(min-width: 881px) and (min-height: 760px)', function () {
+    if (scanner) mm.add('(min-width: 881px) and (min-height: 760px)', function () {
       var sec = $('.redeem'); sec.classList.add('is-pinnable');
       var tl = buildScan();
       ST.create({ trigger: sec, start: 'top top', end: '+=1700', pin: true, scrub: 0.6, animation: tl, anticipatePin: 1 });
       return function () { sec.classList.remove('is-pinnable'); };
     });
-    mm.add('not all and (min-width: 881px) and (min-height: 760px)', function () {
+    if (scanner) mm.add('not all and (min-width: 881px) and (min-height: 760px)', function () {
       var tl = buildScan(); tl.pause(0); tl.repeat(-1).repeatDelay(1.4);
       ST.create({ trigger: scanner, start: 'top 80%', once: true, onEnter: function () { tl.play(); } });
     });
 
     /* партнёры: линия шагов */
-    G.fromTo('.psteps', { '--p': 0 }, { '--p': 1, ease: 'none', scrollTrigger: { trigger: '.psteps', start: 'top 70%', end: 'bottom 60%', scrub: true } });
+    if ($('.psteps')) G.fromTo('.psteps', { '--p': 0 }, { '--p': 1, ease: 'none', scrollTrigger: { trigger: '.psteps', start: 'top 70%', end: 'bottom 60%', scrub: true } });
     $$('.pstep').forEach(function (p) {
       ST.create({ trigger: p, start: 'top 68%', onEnter: function () { p.classList.add('is-on'); }, onLeaveBack: function () { p.classList.remove('is-on'); } });
     });
@@ -1393,9 +1625,10 @@ p{margin:0}
       .from('.cta__bow', { scale: 0, rotation: -60, duration: 0.9, ease: 'back.out(2.2)' }, 0.95);
 
     /* активный пункт меню */
-    ['gifts', 'journey', 'redeem', 'partners', 'faq'].forEach(function (id) {
-      var link = $('.nav__links a[href="#' + id + '"]');
-      ST.create({ trigger: '#' + id, start: 'top 50%', end: 'bottom 50%', onToggle: function (self) { link.classList.toggle('is-active', self.isActive); } });
+    $$('.nav__links a[href^="#"]').forEach(function (link) {
+      var sec = $(link.getAttribute('href'));
+      if (!sec) return;
+      ST.create({ trigger: sec, start: 'top 50%', end: 'bottom 50%', onToggle: function (self) { link.classList.toggle('is-active', self.isActive); } });
     });
 
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ST.refresh(); });
