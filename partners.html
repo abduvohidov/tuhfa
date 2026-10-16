@@ -10,6 +10,11 @@
 <meta property="og:title" content="Tuhfa для бизнеса — подключите магазин">
 <meta property="og:description" content="Продавайте подарочные сертификаты своего магазина в Telegram: модерация, оплата через Click и Payme, погашение по QR-коду.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:url" content="https://tuhfa-uz.netlify.app/partners">
+<meta property="og:image" content="https://tuhfa-uz.netlify.app/og-partners.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap">
@@ -757,6 +762,64 @@ p{margin:0}
   .bptabs__arrow{align-self:center;rotate:90deg}
   .bpx__go{white-space:normal;text-align:left}
 }
+
+/* v9: получателям */
+.rcp__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,96px);align-items:center}
+.rcp__copy{min-width:0}
+.rcp__steps{list-style:none;display:grid;gap:12px;margin:32px 0 0;padding:0}
+.rcp__steps > li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:16px;padding:18px 20px;border-radius:18px;border:1px solid var(--line);background:var(--ink-2)}
+.rcp__n{width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:var(--ink-3);color:var(--saffron);font:700 .85rem/1 var(--f-mono)}
+.rcp__steps h3{font-size:1.08rem;margin-top:7px}
+.rcp__steps p{margin-top:6px;color:var(--muted);font-size:.94rem}
+.rcp__split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.rcp__split > div{padding:12px 14px;border-radius:14px;background:var(--ink-3)}
+.rcp__split b{font-size:.88rem}
+.rcp__split p{margin-top:4px;font-size:.86rem}
+.chat{display:grid;gap:12px;max-width:400px;margin-inline:auto;padding:16px;border-radius:28px;background:var(--ink-2);border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(0,0,0,.7)}
+.chat__head{display:flex;align-items:center;gap:12px;padding:4px 4px 14px;border-bottom:1px solid var(--line)}
+.chat__ava{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--saffron);color:var(--ink);font:700 .9rem/1 var(--f-display)}
+.chat__head b{display:block;font-size:.95rem}
+.chat__head small{color:var(--muted);font-size:.75rem}
+.chat__msg{justify-self:start;max-width:86%;padding:10px 14px;border-radius:18px 18px 18px 6px;background:var(--ink-3);font-size:.92rem;line-height:1.45}
+.chat__time{margin-left:8px;font:400 .68rem/1 var(--f-mono);color:var(--muted)}
+.chat__gift{justify-self:start;width:88%;overflow:hidden;border-radius:18px 18px 18px 6px;background:var(--ink-3)}
+.chat__gift-top{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.chat__gift-top .gi{width:44px;height:44px}
+.chat__gift-top b{display:block;font-size:.88rem}
+.chat__gift-top small{display:block;margin-top:2px;font-size:.74rem;color:var(--muted)}
+.chat__btn{display:block;padding:11px;border-top:1px solid var(--line);text-align:center;color:var(--saffron);font-weight:600;font-size:.9rem}
+.chat__note{justify-self:center;padding:6px 12px;border-radius:99px;background:var(--ink-3);color:var(--muted);font-size:.75rem;text-align:center}
+@media (max-width:880px){.rcp__grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.rcp__split{grid-template-columns:minmax(0,1fr)}}
+
+/* v9: заявка партнёра */
+.apply__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,6vw,96px);align-items:start}
+.apply__copy{min-width:0}
+.apply__next{list-style:none;display:grid;gap:12px;margin:28px 0 0;padding:0}
+.apply__next li{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.apply__next li > span:first-child{width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--ink-3);color:var(--saffron);font:700 .76rem/1 var(--f-mono)}
+.apply__ask{display:inline-block;margin-top:28px;color:var(--text);font-weight:600}
+.apply__card{padding:clamp(20px,3vw,32px);border-radius:26px;background:var(--paper);color:var(--paper-ink);color-scheme:light}
+.aform{display:grid;gap:14px}
+.aform__row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.af{display:grid;gap:6px;min-width:0}
+.af > span{font:600 .66rem/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--paper-muted)}
+.af > span i{font-style:normal;color:var(--anor-deep)}
+.af input,.af select,.af textarea{width:100%;min-width:0;padding:.8em .9em;border-radius:12px;border:1.5px solid var(--paper-line);background:var(--white);color:var(--paper-ink);font:500 .95rem/1.4 var(--f-body);transition:border-color .2s,box-shadow .2s}
+.af textarea{min-height:84px;resize:vertical}
+.af input:focus,.af select:focus,.af textarea:focus{outline:none;border-color:var(--paper-ink);box-shadow:0 0 0 3px rgba(26,20,48,.1)}
+.af.is-bad input,.af.is-bad select,.af.is-bad textarea{border-color:var(--anor)}
+.aform__err{color:var(--anor-deep);font-size:.9rem;font-weight:600}
+.aform__submit{justify-self:start}
+.aform__submit.is-loading{opacity:.6;pointer-events:none}
+.aform__note{color:var(--paper-muted);font-size:.78rem}
+.aform__ok{display:grid;justify-items:start;gap:10px;padding:20px 4px}
+.aform__ok-ico{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:var(--live-bg);color:var(--live-fg)}
+.aform__ok-ico svg{width:26px;height:26px}
+.aform__ok h3{font-size:1.3rem}
+.aform__ok p{color:var(--paper-muted)}
+@media (max-width:880px){.apply__grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.aform__row{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -783,7 +846,7 @@ p{margin:0}
         <button type="button" data-lang="ru" aria-pressed="true">RU</button>
         <button type="button" data-lang="uz" aria-pressed="false">UZ</button>
       </div>
-      <a class="btn btn--partner btn--sm" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="pp.apply">Подать заявку</span></a>
+      <a class="btn btn--partner btn--sm" href="#apply"><span data-i18n="pp.apply">Подать заявку</span></a>
     </div>
   </div>
 </header>
@@ -798,7 +861,7 @@ p{margin:0}
         <h1 class="hero__title" data-i18n="pp.title" data-split>Продавайте <em class="ikat-text">подарки</em> в&nbsp;Telegram</h1>
         <p class="lead" data-i18n="pp.lead">Подключите магазин к Tuhfa. Ваши подарочные сертификаты появятся в каталоге мини-приложения, покупатели оплатят их через Click или Payme и подарят друзьям. Для погашения хватит телефона.</p>
         <div class="hero__actions">
-          <a class="btn btn--partner btn--lg magnetic" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="pp.apply">Подать заявку</span></a>
+          <a class="btn btn--partner btn--lg magnetic" href="#apply"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="pp.apply">Подать заявку</span></a>
           <a class="btn btn--ghost btn--lg" href="#connect"><span data-i18n="pp.how">Как подключиться</span></a>
         </div>
         <ul class="facts"><li><span class="facts__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><span><b data-i18n="fx.modT">Модерация</b><small data-i18n="fx.modS">каждого сертификата</small></span></li><li><span class="facts__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M7 12h10"/></svg></span><span><b data-i18n="fx.scanT">Камера или сканер</b><small data-i18n="fx.scanS">для погашения QR</small></span></li><li><span class="facts__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><b>24/7</b><small data-i18n="fx.time">без выходных</small></span></li></ul>
@@ -945,7 +1008,7 @@ p{margin:0}
           </dl>
           <p class="pdetail__note" data-i18n="pm.dNote">После отправки сертификат уходит на проверку и появляется в каталоге только после одобрения.</p>
           <div class="partners__actions">
-            <a class="btn btn--partner btn--lg magnetic" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="pp.apply">Подать заявку</span></a>
+            <a class="btn btn--partner btn--lg magnetic" href="#apply"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="pp.apply">Подать заявку</span></a>
             <a class="btn btn--ghost btn--lg" href="#redeem"><span data-i18n="pp.howRedeem">Как проходит погашение</span></a>
           </div>
         </div>
@@ -1039,20 +1102,45 @@ p{margin:0}
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta" id="apply">
-    <div class="wrap">
-      <div class="cta__box">
-        <span class="cta__rib cta__rib--v" aria-hidden="true"></span>
-        <span class="cta__rib cta__rib--h" aria-hidden="true"></span>
-        <span class="cta__bow" aria-hidden="true"><span class="bow"><i></i><i></i></span></span>
-        <div class="cta__content">
-          <h2 data-i18n="pc.title" data-split>Подключите магазин к Tuhfa</h2>
-          <p class="lead" data-i18n="pc.lead">Подайте заявку, и после проверки вы сможете создавать сертификаты в кабинете партнёра.</p>
-          <div class="cta__actions">
-            <a class="btn btn--partner btn--lg magnetic" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="pp.apply">Подать заявку</span></a>
-            <a class="btn btn--ghost btn--lg" href="./"><span data-i18n="pc.back">Страница для покупателей</span></a>
+  <!-- APPLY -->
+  <section class="section apply" id="apply">
+    <div class="wrap apply__grid">
+      <div class="apply__copy">
+        <p class="eyebrow" data-i18n="ap.eyebrow">Заявка</p>
+        <h2 data-i18n="pc.title" data-split>Подключите магазин к Tuhfa</h2>
+        <p class="lead" data-i18n="ap.lead">Оставьте контакты. После проверки администратор откроет доступ в кабинет партнёра, где вы создадите первый сертификат.</p>
+        <ol class="apply__next">
+          <li><span>1</span><span data-i18n="ap.n1">Вы отправляете заявку</span></li>
+          <li><span>2</span><span data-i18n="ap.n2">Администратор проверяет магазин</span></li>
+          <li><span>3</span><span data-i18n="ap.n3">Открывается кабинет партнёра</span></li>
+        </ol>
+        <a class="apply__ask ulink" data-bot href="https://t.me/" target="_blank" rel="noopener"><span data-i18n="ap.ask">Есть вопросы? Напишите в бот</span> →</a>
+      </div>
+      <div class="apply__card">
+        <form class="aform" id="aform" name="partner" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="partner">
+          <p hidden><label for="af-bot">Не заполняйте это поле <input id="af-bot" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="aform__row">
+            <label class="af" for="af-shop"><span><span data-i18n="ap.fShop">Название магазина</span> <i>*</i></span><input id="af-shop" name="shop" required autocomplete="organization"></label>
+            <label class="af" for="af-cat"><span data-i18n="ap.fCat">Категория</span><select id="af-cat" name="category"><option value="" data-i18n="ap.c0">Выберите</option><option value="Книги и канцтовары" data-i18n="ap.c1">Книги и канцтовары</option><option value="Цветы и подарки" data-i18n="ap.c2">Цветы и подарки</option><option value="Кафе и рестораны" data-i18n="ap.c3">Кафе и рестораны</option><option value="Одежда и обувь" data-i18n="ap.c4">Одежда и обувь</option><option value="Красота и здоровье" data-i18n="ap.c5">Красота и здоровье</option><option value="Электроника" data-i18n="ap.c6">Электроника</option><option value="Развлечения" data-i18n="ap.c7">Развлечения</option><option value="Другое" data-i18n="ap.c8">Другое</option></select></label>
           </div>
+          <div class="aform__row">
+            <label class="af" for="af-city"><span data-i18n="ap.fCity">Город</span><input id="af-city" name="city" autocomplete="address-level2"></label>
+            <label class="af" for="af-name"><span><span data-i18n="ap.fName">Контактное лицо</span> <i>*</i></span><input id="af-name" name="name" required autocomplete="name"></label>
+          </div>
+          <div class="aform__row">
+            <label class="af" for="af-phone"><span><span data-i18n="ap.fPhone">Телефон</span> <i>*</i></span><input id="af-phone" name="phone" type="tel" inputmode="tel" required placeholder="+998" autocomplete="tel"></label>
+            <label class="af" for="af-tg"><span>Telegram</span><input id="af-tg" name="telegram" placeholder="@username" autocomplete="off"></label>
+          </div>
+          <label class="af" for="af-msg"><span data-i18n="ap.fMsg">Комментарий</span><textarea id="af-msg" name="message" rows="3"></textarea></label>
+          <p class="aform__err" id="af-err" role="alert" hidden></p>
+          <button class="btn btn--partner btn--lg aform__submit" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v1.2a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v7h13v-7"/><path d="M10 20v-4.5h4V20"/></svg><span data-i18n="ap.send">Отправить заявку</span></button>
+          <p class="aform__note" data-i18n="ap.note">Нажимая кнопку, вы соглашаетесь, что мы свяжемся с вами по указанным контактам.</p>
+        </form>
+        <div class="aform__ok" id="af-ok" role="status" hidden>
+          <span class="aform__ok-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+          <h3 data-i18n="ap.okT">Заявка отправлена</h3>
+          <p data-i18n="ap.okP">Мы проверим магазин и свяжемся с вами по указанным контактам.</p>
         </div>
       </div>
     </div>
@@ -1065,8 +1153,8 @@ p{margin:0}
       <a class="logo" href="./" aria-label="Tuhfa"><span class="logo__mark"></span><span>tuhfa</span></a>
       <p data-i18n="ft.desc">Сервис виртуальных подарков в Telegram для Узбекистана.</p>
     </div>
-    <nav class="foot__col" aria-label="Покупателям"><b data-i18n="ft.buyers">Покупателям</b><a class="ulink" href="./#gifts" data-i18n="nav.gifts">Подарки</a><a class="ulink" href="./#journey" data-i18n="nav.how">Как это работает</a><a class="ulink" href="./#faq" data-i18n="nav.faq">Вопросы</a></nav>
-    <nav class="foot__col" aria-label="Партнёрам"><b data-i18n="nav.partners">Партнёрам</b><a class="ulink" href="#connect" data-i18n="ft.connect">Подключение</a><a class="ulink" href="#rules" data-i18n="pp.navRules">Правила</a><a class="ulink" data-bot="partner" href="https://t.me/" target="_blank" rel="noopener" data-i18n="pp.apply">Подать заявку</a></nav>
+    <nav class="foot__col" aria-label="Покупателям"><b data-i18n="ft.buyers">Покупателям</b><a class="ulink" href="./#gifts" data-i18n="nav.gifts">Подарки</a><a class="ulink" href="./#journey" data-i18n="nav.how">Как это работает</a><a class="ulink" href="./#recipient" data-i18n="rc.eyebrow">Получателям</a><a class="ulink" href="./#faq" data-i18n="nav.faq">Вопросы</a></nav>
+    <nav class="foot__col" aria-label="Партнёрам"><b data-i18n="nav.partners">Партнёрам</b><a class="ulink" href="#connect" data-i18n="ft.connect">Подключение</a><a class="ulink" href="#rules" data-i18n="pp.navRules">Правила</a><a class="ulink" href="#apply" data-i18n="pp.apply">Подать заявку</a></nav>
     <div class="foot__col"><b data-i18n="ft.pay">Оплата</b><span>Click</span><span>Payme</span></div>
   </div>
   <div class="wrap foot__bottom"><span>© 2026 Tuhfa</span><span>O‘zbekcha · Русский</span></div>
@@ -1335,6 +1423,47 @@ p{margin:0}
     'bp.e4': 'Rad etildi: muddati o‘tgan yoki allaqachon ishlatilgan',
     'bp.next': 'Keyingi bosqich: savdo va ishlatish',
     'bp.prev': 'Oldingi bosqich: ulanish',
+    'rc.eyebrow': 'Qabul qiluvchilarga',
+    'rc.title': 'Sizga sovg‘a qilishdimi?',
+    'rc.lead': 'Sovg‘a Telegram orqali keladi. U bilan nima qilish kerakligi quyida.',
+    'rc.s1t': 'Sovg‘a xabarini oching',
+    'rc.s1p': 'Do‘stingiz sovg‘ani Telegram orqali yuboradi. Uni oching, Tuhfa boti sizga nima sovg‘a qilinganini ko‘rsatadi.',
+    'rc.s2t': 'Sovg‘a sizda saqlanadi',
+    'rc.s2p': '«Mening sovg‘alarim» bo‘limida sovg‘adan foydalanish huquqi bilan yozuvingiz paydo bo‘ladi.',
+    'rc.s3t': 'Oching yoki ishlating',
+    'rc.animT': 'Animatsion sovg‘a',
+    'rc.animP': 'Animatsiya birinchi ko‘rishda ochiladi, sovg‘a to‘plamingizda qoladi.',
+    'rc.certT': 'Sertifikat',
+    'rc.certP': 'Amal qilish muddati tugashidan oldin hamkor do‘kon kassasida QR-kodni ko‘rsating.',
+    'rc.online': 'tarmoqda',
+    'rc.msg': 'Tug‘ilgan kuning bilan! Senga kichik sovg‘a',
+    'rc.open': 'Sovg‘ani ochish',
+    'rc.saved': 'Sovg‘a «Mening sovg‘alarim»ga saqlandi',
+    'ap.eyebrow': 'Ariza',
+    'ap.lead': 'Kontaktlaringizni qoldiring. Tekshiruvdan so‘ng administrator hamkor kabinetiga kirishni ochadi, u yerda birinchi sertifikatni yaratasiz.',
+    'ap.n1': 'Siz ariza yuborasiz',
+    'ap.n2': 'Administrator do‘konni tekshiradi',
+    'ap.n3': 'Hamkor kabineti ochiladi',
+    'ap.ask': 'Savollar bormi? Botga yozing',
+    'ap.fShop': 'Do‘kon nomi',
+    'ap.fCat': 'Toifa',
+    'ap.fCity': 'Shahar',
+    'ap.fName': 'Aloqa uchun shaxs',
+    'ap.fPhone': 'Telefon',
+    'ap.fMsg': 'Izoh',
+    'ap.c0': 'Tanlang',
+    'ap.c1': 'Kitoblar va kanselyariya',
+    'ap.c2': 'Gullar va sovg‘alar',
+    'ap.c3': 'Kafe va restoranlar',
+    'ap.c4': 'Kiyim va poyabzal',
+    'ap.c5': 'Go‘zallik va salomatlik',
+    'ap.c6': 'Elektronika',
+    'ap.c7': 'Ko‘ngilochar',
+    'ap.c8': 'Boshqa',
+    'ap.send': 'Arizani yuborish',
+    'ap.note': 'Tugmani bosish orqali siz ko‘rsatilgan kontaktlar orqali siz bilan bog‘lanishimizga rozilik bildirasiz.',
+    'ap.okT': 'Ariza yuborildi',
+    'ap.okP': 'Do‘konni tekshirib, ko‘rsatilgan kontaktlar orqali siz bilan bog‘lanamiz.',
     'pm.roleShop': 'Do‘kon',
     'pm.roleTuhfaSub': 'administrator va tizim',
     'pm.roleBuyer': 'Xaridor',
@@ -1415,13 +1544,11 @@ p{margin:0}
     'pf.a5': 'Ishlatish amalga oshmaydi. Sertifikat bir vaqtda ikki joyda urinilsa ham faqat bir marta ishlatiladi.',
     'pf.q6': 'Savdo to‘xtatilsa, sotilgan sertifikatlar nima bo‘ladi?',
     'pf.a6': 'Ular amal qilishda davom etadi. Cheklov faqat yangi savdolarga tegishli.',
-    'pc.title': 'Do‘koningizni Tuhfaga ulang',
-    'pc.lead': 'Ariza topshiring, tekshiruvdan so‘ng hamkor kabinetida sertifikatlar yarata olasiz.',
-    'pc.back': 'Xaridorlar sahifasi'
+    'pc.title': 'Do‘koningizni Tuhfaga ulang'
   };
   var DYN = {
-    ru: { open: 'Открыть подарок', close: 'Упаковать снова', status: '«Анор» сохранён в «Моих подарках»', wait: 'На проверке', live: 'Опубликован', boxAria: 'Открыть подарок' },
-    uz: { open: 'Sovg‘ani ochish', close: 'Qayta o‘rash', status: '«Anor» «Mening sovg‘alarim»ga saqlandi', wait: 'Tekshiruvda', live: 'E’lon qilindi', boxAria: 'Sovg‘ani ochish' }
+    ru: { open: 'Открыть подарок', close: 'Упаковать снова', status: '«Анор» сохранён в «Моих подарках»', wait: 'На проверке', live: 'Опубликован', boxAria: 'Открыть подарок', apErrFields: 'Заполните отмеченные поля.', apErrSend: 'Не удалось отправить заявку. Попробуйте ещё раз или напишите в бот.' },
+    uz: { open: 'Sovg‘ani ochish', close: 'Qayta o‘rash', status: '«Anor» «Mening sovg‘alarim»ga saqlandi', wait: 'Tekshiruvda', live: 'E’lon qilindi', boxAria: 'Sovg‘ani ochish', apErrFields: 'Belgilangan maydonlarni to‘ldiring.', apErrSend: 'Arizani yuborib bo‘lmadi. Qayta urinib ko‘ring yoki botga yozing.' }
   };
   var RU = {};
   $$('[data-i18n]').forEach(function (el) { var k = el.getAttribute('data-i18n'); if (!(k in RU)) RU[k] = el.innerHTML.trim(); });
@@ -1639,6 +1766,28 @@ p{margin:0}
       });
     });
   });
+
+  /* ---------- Заявка партнёра: отправка в Netlify Forms ---------- */
+  var aform = $('#aform');
+  if (aform) {
+    aform.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var err = $('#af-err'), ok = $('#af-ok'), btn = aform.querySelector('.aform__submit');
+      err.hidden = true;
+      $$('.af', aform).forEach(function (l) { l.classList.remove('is-bad'); });
+      var bad = $$('[required]', aform).filter(function (f) { return !f.value.trim(); });
+      var phone = $('#af-phone');
+      if (phone.value.trim() && phone.value.replace(/\D/g, '').length < 9) bad.push(phone);
+      bad.forEach(function (f) { f.closest('.af').classList.add('is-bad'); });
+      if (bad.length) { err.textContent = t('apErrFields'); err.hidden = false; bad[0].focus(); return; }
+      btn.disabled = true; btn.classList.add('is-loading');
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(aform)).toString() })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); aform.hidden = true; ok.hidden = false; if (window.ScrollTrigger) ScrollTrigger.refresh(); })
+        .catch(function () { err.textContent = t('apErrSend'); err.hidden = false; })
+        .then(function () { btn.disabled = false; btn.classList.remove('is-loading'); });
+    });
+    $$('input, select, textarea', aform).forEach(function (f) { f.addEventListener('input', function () { var l = f.closest('.af'); if (l) l.classList.remove('is-bad'); }); });
+  }
 
   /* ---------- Без анимаций: статичные состояния ---------- */
   var scanner = $('#scanner');
@@ -1864,6 +2013,9 @@ p{margin:0}
       });
     }
 
+    /* получатели: сообщения в чате появляются по очереди */
+    if ($('.chat')) G.from('.chat > *', { y: 18, opacity: 0, duration: 0.6, stagger: 0.28, ease: 'expo.out', scrollTrigger: { trigger: '.chat', start: 'top 78%', once: true } });
+
     /* счётчики */
     $$('[data-count]').forEach(function (el) {
       var end = +el.getAttribute('data-count'), o = { v: 0 };
@@ -1872,8 +2024,8 @@ p{margin:0}
     });
 
     /* финальный блок: ленты обвязывают «коробку» */
-    var cta = G.timeline({ scrollTrigger: { trigger: '.cta__box', start: 'top 75%', once: true } });
-    cta.from('.cta__rib--v', { scaleY: 0, transformOrigin: 'top center', duration: 1.2, ease: 'expo.inOut' })
+    if ($('.cta__box')) G.timeline({ scrollTrigger: { trigger: '.cta__box', start: 'top 75%', once: true } })
+      .from('.cta__rib--v', { scaleY: 0, transformOrigin: 'top center', duration: 1.2, ease: 'expo.inOut' })
       .from('.cta__rib--h', { scaleX: 0, transformOrigin: 'left center', duration: 1.2, ease: 'expo.inOut' }, 0.15)
       .from('.cta__bow', { scale: 0, rotation: -60, duration: 0.9, ease: 'back.out(2.2)' }, 0.95);
 
